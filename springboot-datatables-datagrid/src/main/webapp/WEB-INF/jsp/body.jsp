@@ -24,12 +24,13 @@
 <body>
 <script>
 </script>
-
-<jsp:include page="./header.jsp"></jsp:include>
-<jsp:include page="./left.jsp"></jsp:include>
-<jsp:include page="./body.jsp"></jsp:include>
-<%-- <%@ include file="./header.jsp" %>
-<%@ include file="./left.jsp" %>
-<%@ include file="./body.jsp" %> --%>
+<div id="content" class="row-fluid">
+    <div class="col-md-9">
+        <h2>Main Content Section</h2>
+    </div>
+<!--     <div class="col-md-3">
+        <h2>Sidebar</h2>  
+    </div> -->
+</div>
 </body>
 </html>

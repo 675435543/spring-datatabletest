@@ -24,12 +24,20 @@
 <body>
 <script>
 </script>
-
-<jsp:include page="./header.jsp"></jsp:include>
-<jsp:include page="./left.jsp"></jsp:include>
-<jsp:include page="./body.jsp"></jsp:include>
-<%-- <%@ include file="./header.jsp" %>
-<%@ include file="./left.jsp" %>
-<%@ include file="./body.jsp" %> --%>
+<div class="col-md-3" class="row-fluid">
+    <h2>Sidebar</h2>
+    <ul class="nav nav-tabs nav-stacked">
+        <li><a href='#'>Another Link 1</a></li>
+        <li><a href='#'>Another Link 2</a></li>
+        <li><a href='#'>Another Link 3</a></li>
+        <li><a href='#'>Another Link 4</a></li>
+        <li><a href='#'>Another Link 5</a></li>
+        <li><a href='#'>Another Link 6</a></li>
+        <li><a href='#'>Another Link 7</a></li>
+        <li><a href='#'>Another Link 8</a></li>
+        <li><a href='#'>Another Link 9</a></li>
+        
+    </ul>    
+</div>
 </body>
 </html>

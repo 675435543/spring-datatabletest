@@ -24,12 +24,31 @@
 <body>
 <script>
 </script>
+<style>
+.navbar-nav {
+  float: none;
+  text-align:center;
+}
+ul.nav.navbar-nav  li {
+    float:none;
+    display: inline-block;
+    margin: 0em;
+}
+</style>
+<div class="navbar-collapse collapse">
+  <ul class="nav navbar-nav">
+    <li class="">
+        <a href="#">首页</a>
+    </li>
+    <li class="">
+        <a href="#">加入我们</a>
+    </li>
+    <li class="">
+        <a href="#">联系我们</a>
+    </li>
+  </ul>
+</div>
 
-<jsp:include page="./header.jsp"></jsp:include>
-<jsp:include page="./left.jsp"></jsp:include>
-<jsp:include page="./body.jsp"></jsp:include>
-<%-- <%@ include file="./header.jsp" %>
-<%@ include file="./left.jsp" %>
-<%@ include file="./body.jsp" %> --%>
+
 </body>
 </html>

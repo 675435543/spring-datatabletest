@@ -23,13 +23,57 @@
 </head>
 <body>
 <script>
+<!--第三步：初始化Datatables-->
+$(document).ready( function () {
+    $('#table_id_example').DataTable();
+    $("#tableid").DataTable({
+        //"ajax":"http://localhost:8080/account/findAccountInfoDatatable",
+        //"ajax":"/account/findAccountInfoDatatable",
+        "ajax":"findAccountInfoDatatable",
+        "columns":[
+        	{data:"id"},
+        	{data:"name"},
+            {data:"money"},
+        	{data:"money"}
+        ]
+    });
+} );
+
 </script>
 
-<jsp:include page="./header.jsp"></jsp:include>
-<jsp:include page="./left.jsp"></jsp:include>
-<jsp:include page="./body.jsp"></jsp:include>
-<%-- <%@ include file="./header.jsp" %>
-<%@ include file="./left.jsp" %>
-<%@ include file="./body.jsp" %> --%>
+<!--第二步：添加如下 HTML 代码-->
+<!-- <table id="table_id_example" class="display">
+    <thead>
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Row 1 Data 1</td>
+            <td>Row 1 Data 2</td>
+        </tr>
+        <tr>
+            <td>Row 2 Data 1</td>
+            <td>Row 2 Data 2</td>
+        </tr>
+    </tbody>
+</table> -->
+<h>-----------------123</h>
+<table id="tableid" class="display">
+    <thead>
+        <tr>
+        	<th>全选</th>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
+            <th>Column 3</th>
+            <th>Column 3</th>
+            <th>Column 3</th>
+            <th>Column 3</th>
+        </tr>
+    </thead>
+</table>
 </body>
 </html>
