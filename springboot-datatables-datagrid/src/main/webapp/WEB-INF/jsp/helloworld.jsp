@@ -17,6 +17,9 @@
 <%-- <%@ include file="./header.jsp" %>
 <%@ include file="./left.jsp" %>
 <%@ include file="./body.jsp" %> --%>
+
+<!-- <input type="text" id="content1"/>&nbsp;&nbsp;<input type="button" id="actionButton1" value="获取内容" />
+<input type="text" id="content2"/>&nbsp;&nbsp;<input type="button" id="actionButton2" value="获取内容" /> -->
 <div id="content" class="row-fluid">
 <div class="col-md-8">
 	<table id="tableid" class="display">
@@ -33,5 +36,5 @@
 </div>
 </body>
 <script src="${pageContext.request.contextPath}/static/resources/js/account/account.js?0.0.0"></script>
-
+<script src="${pageContext.request.contextPath}/static/resources/js/test/test.js?0.0.0"></script>
 </html>

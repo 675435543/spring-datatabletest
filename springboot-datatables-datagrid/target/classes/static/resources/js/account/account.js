@@ -1,5 +1,5 @@
 <!--第三步：初始化Datatables-->
-$(document).ready( function () {
+$(function(){
     $('#table_id_example').DataTable();
     $("#tableid").DataTable({
         //"ajax":"http://localhost:8080/account/findAccountInfoDatatable",
@@ -36,4 +36,4 @@ $(document).ready( function () {
             }
         }
     });
-} );
+});

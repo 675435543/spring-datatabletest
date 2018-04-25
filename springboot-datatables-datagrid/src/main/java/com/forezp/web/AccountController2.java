@@ -56,5 +56,20 @@ public class AccountController2 {
         // 跳转到 /WEB-INF/views/hello 下的 myTest.jsp 文件；
     	ModelAndView mv = new ModelAndView("helloworld");     
     	return mv;
-    }  
+    }
+    
+    @RequestMapping(value = "/test1")  
+    public JSONObject test1() {  
+    	JSONObject jsonObject = new JSONObject();
+    	jsonObject.put("name", "liuxuan1");
+    	return jsonObject;
+    }
+    
+    @RequestMapping(value = "/test2")  
+    public JSONObject test2() {  
+    	JSONObject jsonObject = new JSONObject();
+    	jsonObject.put("name", "liuxuan2");
+    	return jsonObject;
+    }
+    
 }
