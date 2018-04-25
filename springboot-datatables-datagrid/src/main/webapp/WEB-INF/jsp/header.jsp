@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/resources/thirdparty/bootstrap/css/bootstrap-theme.min.css">
 <%-- <script src="${pageContext.request.contextPath}/bootstrap3/js/jquery-1.11.2.min.js"></script> --%>
 <script src="${pageContext.request.contextPath}/static/resources/thirdparty/bootstrap/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/resources/css/account/account.css">
 </head>
 <body>
 <script>
@@ -57,7 +57,6 @@
     </div>
     </div>
 </nav>
-
 
 </body>
 </html>

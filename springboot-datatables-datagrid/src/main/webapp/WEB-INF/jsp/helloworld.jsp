@@ -5,20 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
-<!--第一步：引入Javascript / CSS （CDN）-->
-<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/resources/thirdparty/DataTables/media/css/jquery.dataTables.css">
-
-<!-- jQuery -->
-<script type="text/javascript" charset="utf8" src="${pageContext.request.contextPath}/static/resources/thirdparty/DataTables/media/js/jquery.js"></script>
-
-<!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="${pageContext.request.contextPath}/static/resources/thirdparty/DataTables/media/js/jquery.dataTables.js"></script>
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/resources/thirdparty/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/resources/thirdparty/bootstrap/css/bootstrap-theme.min.css">
-<%-- <script src="${pageContext.request.contextPath}/bootstrap3/js/jquery-1.11.2.min.js"></script> --%>
-<script src="${pageContext.request.contextPath}/static/resources/thirdparty/bootstrap/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -27,9 +13,25 @@
 
 <jsp:include page="./header.jsp"></jsp:include>
 <jsp:include page="./left.jsp"></jsp:include>
-<jsp:include page="./body.jsp"></jsp:include>
+<%-- <jsp:include page="./body.jsp"></jsp:include> --%>
 <%-- <%@ include file="./header.jsp" %>
 <%@ include file="./left.jsp" %>
 <%@ include file="./body.jsp" %> --%>
+<div id="content" class="row-fluid">
+<div class="col-md-8">
+	<table id="tableid" class="display">
+	   <thead>
+	       <tr>
+	       	<th>全选</th>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
+	       </tr>
+	   </thead>
+	</table>
+</div>
+</div>
 </body>
+<script src="${pageContext.request.contextPath}/static/resources/js/account/account.js?0.0.0"></script>
+
 </html>
