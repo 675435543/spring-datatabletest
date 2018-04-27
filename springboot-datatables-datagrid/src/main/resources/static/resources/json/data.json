@@ -1,0 +1,14 @@
+{
+    "data": [
+        {
+        	"id": 1,
+            "name": "DataTables中文网",
+            "money": 2
+        },
+        {
+        	"id": 1,
+            "name": "DataTables中文网2",
+            "age": 3
+        }
+    ]
+}

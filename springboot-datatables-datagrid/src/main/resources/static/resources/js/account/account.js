@@ -4,7 +4,8 @@ $(function(){
     $("#tableid").DataTable({
         //"ajax":"http://localhost:8080/account/findAccountInfoDatatable",
         //"ajax":"/account/findAccountInfoDatatable",
-        "ajax":"findAccountInfoDatatable",
+        //"ajax":"findAccountInfoDatatable",
+        "ajax":"/static/resources/json/data.json",
         "columns":[
         	{data:"id"},
         	{data:"name"},

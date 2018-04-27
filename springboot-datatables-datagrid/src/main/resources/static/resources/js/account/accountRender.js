@@ -1,16 +1,27 @@
-<!--第三步：初始化Datatables-->
 $(function(){
-    $('#table_id_example').DataTable();
     $("#tableid").DataTable({
         //"ajax":"http://localhost:8080/account/findAccountInfoDatatable",
         //"ajax":"/account/findAccountInfoDatatable",
         //"ajax":"findAccountInfoDatatable",
-        "ajax":"/static/resources/json/data.json",
+        "ajax":"/static/resources/json/dataRender.json",
         "columns":[
-        	{data:"id"},
-        	{data:"name"},
-            {data:"money"},
-        	{data:"money"}
+            {"data":"name",title:"姓名"},
+            {"data":"content",title:"描述"},
+            {"data":null,title:"操作"}
+        ],
+        "columnDefs":[
+            {
+                "targets":2,
+                "render":function(data,type,row,meta){
+                    return '<a href="javascript:void(0)" '+
+                        'onclick="show("'+row.name+'","'+row.content+'")" >查看详情</a>';
+                }
+            },{
+                "targets":1,
+                "render":function(data,type,row,meta){
+                    return data.length > 10 ? data.substr(0,10)+"..." : data;
+                }
+            }
         ],
         language: {
             "sProcessing": "处理中...",
@@ -38,3 +49,9 @@ $(function(){
         }
     });
 });
+
+function show(name,content){
+    //用alert模拟弹框的效果
+    alert(name+" "+content);
+}
+

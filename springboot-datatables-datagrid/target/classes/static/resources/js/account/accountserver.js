@@ -5,13 +5,16 @@ $(function(){
         //"ajax":"http://localhost:8080/account/findAccountInfoDatatable",
         //"ajax":"/account/findAccountInfoDatatable",
         //"ajax":"findAccountInfoDatatable",
-        "ajax":"/static/resources/json/data.json",
+        "ajax":"/static/resources/json/dataserver.json",
         "columns":[
-        	{data:"id"},
         	{data:"name"},
-            {data:"money"},
-        	{data:"money"}
+        	{data:"age"},
+            {data:"office"},
+        	{data:"address"},
+        	{data:"date"},
+        	{data:"salary"}
         ],
+        serverSide: true,
         language: {
             "sProcessing": "处理中...",
             "sLengthMenu": "显示 _MENU_ 项结果",

@@ -1,17 +1,18 @@
-<!--第三步：初始化Datatables-->
 $(function(){
-    $('#table_id_example').DataTable();
     $("#tableid").DataTable({
         //"ajax":"http://localhost:8080/account/findAccountInfoDatatable",
         //"ajax":"/account/findAccountInfoDatatable",
         //"ajax":"findAccountInfoDatatable",
-        "ajax":"/static/resources/json/data.json",
+        "ajax":"/static/resources/json/dataserverRowIdRowData.json",
         "columns":[
-        	{data:"id"},
-        	{data:"name"},
-            {data:"money"},
-        	{data:"money"}
+        	{data:"first_name"},
+        	{data:"last_name"},
+            {data:"position"},
+        	{data:"office"},
+        	{data:"start_date"},
+        	{data:"salary"}
         ],
+        serverSide: true,
         language: {
             "sProcessing": "处理中...",
             "sLengthMenu": "显示 _MENU_ 项结果",
