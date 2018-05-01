@@ -42,7 +42,8 @@ $(function(){
             }
         }
     });
-    $('#example').on('click', function () {
+    
+    $('#tableid').on('click', 'a', function () {
         //如果有多个按钮，根据class名称区分
 
         if($(this).hasClass("view-detail")){
@@ -57,7 +58,6 @@ $(function(){
             show(name,content);
         }
     });
-    
 });
 
 

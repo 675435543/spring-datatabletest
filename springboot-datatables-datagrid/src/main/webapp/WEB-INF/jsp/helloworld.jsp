@@ -23,13 +23,13 @@
 <div id="content" class="row-fluid">
 <div class="col-md-8">
 	<table id="tableid" class="display">
-	   <thead>
+<!-- 	   <thead>
 	       <tr>
 	       	<th>全选232</th>
             <th>姓名</th>
             <th>年龄</th>
 	       </tr>
-	   </thead>
+	   </thead> -->
 	</table>
 </div>
 </div>
