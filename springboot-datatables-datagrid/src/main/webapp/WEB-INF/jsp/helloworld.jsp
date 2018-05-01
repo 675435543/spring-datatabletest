@@ -30,17 +30,10 @@
             <th>年龄</th>
 	       </tr>
 	   </thead>
-        <tfoot>
-           <tr>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Position</th>
-           </tr>
-       </tfoot>
 	</table>
 </div>
 </div>
 </body>
-<script src="${pageContext.request.contextPath}/static/resources/js/account/accountRender.js?0.0.0"></script>
+<script src="${pageContext.request.contextPath}/static/resources/js/account/accountDTRowData.js?0.0.0"></script>
 <script src="${pageContext.request.contextPath}/static/resources/js/test/test.js?0.0.0"></script>
 </html>

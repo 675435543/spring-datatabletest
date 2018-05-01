@@ -1,0 +1,8 @@
+com\forezp\web\AccountController.class
+com\forezp\SpringbootMybatisApplication.class
+com\forezp\dao\AccountMapper.class
+com\forezp\web\AccountController2.class
+com\forezp\dao\AccountMapper2.class
+com\forezp\service\AccountService2.class
+com\forezp\service\AccountService.class
+com\forezp\entity\Account.class
