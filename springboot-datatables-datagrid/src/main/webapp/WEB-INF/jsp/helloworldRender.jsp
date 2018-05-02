@@ -28,12 +28,14 @@
 	       	<th>全选232</th>
             <th>姓名</th>
             <th>年龄</th>
+            <th>年龄</th>
 	       </tr>
 	   </thead>
         <tfoot>
            <tr>
             <th>First name</th>
             <th>Last name</th>
+            <th>Position</th>
             <th>Position</th>
            </tr>
        </tfoot>

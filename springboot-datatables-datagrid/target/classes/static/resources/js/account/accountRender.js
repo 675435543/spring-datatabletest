@@ -4,10 +4,13 @@ $(function(){
         //"ajax":"/account/findAccountInfoDatatable",
         //"ajax":"findAccountInfoDatatable",
         "ajax":"/static/resources/json/dataRender.json",
+/*        dom: 'B<"clear">lfrtip',*/
+        buttons: [ 'copy', 'csv', 'excel' ],
         "columns":[
             {"data":"name",title:"姓名"},
             {"data":"content",title:"描述"},
-            {"data":null,title:"操作"}
+            {"data":null,title:"操作"},
+            {"data":null,title:"操作2"}
         ],
         "columnDefs":[
             {
@@ -17,6 +20,11 @@ $(function(){
                         'onclick="show("'+row.name+'","'+row.content+'")" >查看详情</a>';*/
                 	/*return "<a href='javascript:void(0);' onclick='show("+row.name+","+row.content+")'>查看详情</a>";*/
                 	/*return '<a href="javascript:void(0);" onclick="show("'+row.name+'","'+row.name+'")" >查看详情</a>';*/
+                	return '<a href="javascript:void(0);" onclick=show("'+row.name+'","'+row.content+'") >查看详情</a>';
+                }
+            },{
+                "targets":3,
+                "render":function(data,type,row,meta){
                 	return '<a href="javascript:void(0);" onclick=show("'+row.name+'","'+row.content+'") >查看详情</a>';
                 }
             },{
