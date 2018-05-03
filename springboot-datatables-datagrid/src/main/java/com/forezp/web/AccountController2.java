@@ -54,7 +54,7 @@ public class AccountController2 {
     @RequestMapping(value = "/helloworld",method = RequestMethod.GET)  
     public ModelAndView helloworld() {  
         // 跳转到 /WEB-INF/views/hello 下的 myTest.jsp 文件；
-    	ModelAndView mv = new ModelAndView("helloworldRender");     
+    	ModelAndView mv = new ModelAndView("helloworld");   
     	return mv;
     }
     

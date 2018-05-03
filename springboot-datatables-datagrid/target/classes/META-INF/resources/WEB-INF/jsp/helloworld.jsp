@@ -8,8 +8,6 @@
 
 </head>
 <body>
-<script>
-</script>
 
 <jsp:include page="./header.jsp"></jsp:include>
 <jsp:include page="./left.jsp"></jsp:include>
@@ -22,6 +20,10 @@
 <input type="text" id="content2"/>&nbsp;&nbsp;<input type="button" id="actionButton2" value="获取内容" /> -->
 <div id="content" class="row-fluid">
 <div class="col-md-8">
+<button id="btn1">把数据添加到 div 元素</button><br />
+<button id="btn2">获取已添加到 div 元素的数据</button>
+<div></div>
+
 	<table id="tableid" class="display">
 <!-- 	   <thead>
 	       <tr>
@@ -33,7 +35,19 @@
 	</table>
 </div>
 </div>
+
+<script>
+
+$(document).ready(function(){
+	  $("#btn1").click(function(){
+	    $("div").data("greeting", "Hello World");
+	  });
+	  $("#btn2").click(function(){
+	    alert($("div").data("greeting"));
+	  });
+	});
+</script>
 </body>
-<script src="${pageContext.request.contextPath}/static/resources/js/account/accountDTRowData.js?0.0.0"></script>
+<script src="${pageContext.request.contextPath}/static/resources/js/account/accountDTRowData.js?0.0.2"></script>
 <script src="${pageContext.request.contextPath}/static/resources/js/test/test.js?0.0.0"></script>
 </html>

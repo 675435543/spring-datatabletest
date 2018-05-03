@@ -50,12 +50,14 @@ $(function(){
             // a标签在td，td 在tr
 
             // 这里要获取tr的对象，所以是 a标签的父级的父级
-
+        	alert("nimei");
+        	debugger;
+        	var trObj = $(this).parent().parent();
             var trObjData = $(this).parent().parent().data("DT_RowData");
-            var id = trObjData.id;
+/*            var id = trObjData.id;
             var name = trObjData.name;
             var content = trObjData.content;
-            show(name,content);
+            show(name,content);*/
         }
     });
 });
