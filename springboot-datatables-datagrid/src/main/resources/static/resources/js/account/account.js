@@ -1,13 +1,14 @@
 <!--第三步：初始化Datatables-->
 $(function(){
-    $('#table_id_example').DataTable();
+
     $("#tableid").DataTable({
         //"ajax":"http://localhost:8080/account/findAccountInfoDatatable",
         //"ajax":"/account/findAccountInfoDatatable",
         //"ajax":"findAccountInfoDatatable",
         "ajax":"/static/resources/json/data.json",
+        "order": [[ 1, 'asc' ]],
         "columns":[
-        	{data:"id"},
+        	{data:"id","orderable":false},
         	{data:"name"},
             {data:"money"},
         	{data:"money"}
@@ -37,4 +38,5 @@ $(function(){
             }
         }
     });
+
 });

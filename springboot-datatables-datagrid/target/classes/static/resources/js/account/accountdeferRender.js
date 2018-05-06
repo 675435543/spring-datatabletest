@@ -5,8 +5,9 @@ $(function(){
         //"ajax":"http://localhost:8080/account/findAccountInfoDatatable",
         //"ajax":"/account/findAccountInfoDatatable",
         //"ajax":"findAccountInfoDatatable",
-        "ajax":"/static/resources/json/data.json",
+        "ajax":"/static/resources/json/datadeferRender.json",
         "order": [[ 1, 'asc' ]],
+        "deferRender": true,
         "columns":[
         	{data:"id","orderable":false},
         	{data:"name"},
@@ -39,4 +40,11 @@ $(function(){
         }
     });
 
+	$('#tableid tbody').on( 'click', 'td', function () {
+	    alert('Clicked on: '+this.innerHTML);
+	    debugger;
+	    var trObj = $(this).parent();
+	    var trObjData = trObj.data("DT_RowData");
+	    
+	});
 });

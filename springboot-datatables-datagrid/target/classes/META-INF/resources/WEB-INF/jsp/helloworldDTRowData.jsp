@@ -48,6 +48,6 @@ $(document).ready(function(){
 	});
 </script>
 </body>
-<script src="${pageContext.request.contextPath}/static/resources/js/account/accountDTRowData.js?0.0.2"></script>
+<script src="${pageContext.request.contextPath}/static/resources/js/account/accountDTRowData.js?0.0.3"></script>
 <script src="${pageContext.request.contextPath}/static/resources/js/test/test.js?0.0.0"></script>
 </html>

@@ -8,8 +8,7 @@
 
 </head>
 <body>
-<script>
-</script>
+
 
 <jsp:include page="./header.jsp"></jsp:include>
 <jsp:include page="./left.jsp"></jsp:include>
@@ -34,7 +33,11 @@
 	</table>
 </div>
 </div>
+
+<script>
+
+</script>
 </body>
-<script src="${pageContext.request.contextPath}/static/resources/js/account/account.js?0.0.0"></script>
+<script src="${pageContext.request.contextPath}/static/resources/js/account/account.js?0.0.3"></script>
 <script src="${pageContext.request.contextPath}/static/resources/js/test/test.js?0.0.0"></script>
 </html>

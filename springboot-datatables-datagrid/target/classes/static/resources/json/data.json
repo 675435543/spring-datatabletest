@@ -6,9 +6,14 @@
             "money": 2
         },
         {
-        	"id": 1,
-            "name": "DataTables中文网2",
-            "age": 3
+        	"id": 2,
+            "name": "BootStrap中文网2",
+            "money": 3
+        },
+        {
+        	"id": 3,
+            "name": "vue中文网2",
+            "money": 4
         }
     ]
 }

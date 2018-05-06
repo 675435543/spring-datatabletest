@@ -8,8 +8,7 @@
 
 </head>
 <body>
-<script>
-</script>
+
 
 <jsp:include page="./header.jsp"></jsp:include>
 <jsp:include page="./left.jsp"></jsp:include>
@@ -26,27 +25,19 @@
 	   <thead>
 	       <tr>
 	       	<th>全选</th>
-            <th>姓名</th>
-            <th>年龄</th>
-            <th>工作</th>
-            <th>地址</th>
-            <th>日期</th>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
 	       </tr>
 	   </thead>
-        <tfoot>
-           <tr>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Start date</th>
-            <th>Salary</th>
-           </tr>
-       </tfoot>
 	</table>
 </div>
 </div>
+
+<script>
+
+</script>
 </body>
-<script src="${pageContext.request.contextPath}/static/resources/js/account/accountRowIdRowData.js?0.0.1"></script>
+<script src="${pageContext.request.contextPath}/static/resources/js/account/accountdeferRender.js?0.0.3"></script>
 <script src="${pageContext.request.contextPath}/static/resources/js/test/test.js?0.0.0"></script>
 </html>
