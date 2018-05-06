@@ -8,37 +8,18 @@ $(function(){
         //"ajax":"http://localhost:8080/account/findAccountInfoDatatable",
         //"ajax":"/account/findAccountInfoDatatable",
         //"ajax":"findAccountInfoDatatable",
-        "ajax":"/static/resources/json/dataOptions.json",
-        dom: 'B<"clear">lfrtip',
-        /*"dom": '<"top"fli>rt<"bottom"p><"clear">',*/
-        /*"dom": '<"wrapper"flipt>',*/
-        /*"dom": '<lf<t>ip>',*/
+        "ajax":"/static/resources/json/dataExternal.json",
+/*        dom: 'B<"clear">lfrtip',*/
         buttons: [ 'copy', 'csv', 'excel' ],
         searching: true,
         scrollY: 700,
-        "scrollX": "100%",
-        "scrollXInner": "40%",
-        "scrollCollapse": true,
+        "bPaginate":true,
         /*paging: false,*/
-        /*"bAutoWidth": true,*/
         "columns":[
-            {"data":"name",width:"5%",title:"姓名"},
-            {"data":"content",width:"5%",title:"描述"},
-            {"data":null,width:"5%",title:"操作"},
-            {"data":null,width:"5%",title:"操作2"},
-            {"data":"id",width:"5%",title:"描述"},
-            {"data":"name",width:"5%",title:"姓名"},
-            {"data":"content",width:"5%",title:"描述"},
-            {"data":"name",width:"5%",title:"姓名"},
-            {"data":"content",width:"5%",title:"描述"},
-            {"data":"name",width:"5%",title:"姓名"},
-            {"data":"content",width:"5%",title:"描述"},
-            {"data":"name",width:"5%",title:"姓名"},
-            {"data":"content",width:"5%",title:"描述"},
-            {"data":"name",width:"5%",title:"姓名"},
-            {"data":"content",width:"5%",title:"描述"},
-            {"data":"name",width:"5%",title:"姓名"},
-            {"data":"content",width:"5%",title:"描述"}
+            {"data":"name",width:"25%",title:"姓名",},
+            {"data":"content",width:"25%",title:"描述"},
+            {"data":null,width:"25%",title:"操作"},
+            {"data":null,width:"25%",title:"操作2"}
         ],
         "columnDefs":[
             {
@@ -52,7 +33,6 @@ $(function(){
                 }
             },{
                 "targets":3,
-                "visible":false,
                 "render":function(data,type,row,meta){
                 	return '<a href="javascript:void(0);" onclick=show("'+row.name+'","'+row.content+'") >查看详情</a>';
                 }
