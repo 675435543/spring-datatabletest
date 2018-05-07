@@ -22,6 +22,7 @@
 <input type="text" id="content2"/>&nbsp;&nbsp;<input type="button" id="actionButton2" value="获取内容" /> -->
 <div id="content" class="row-fluid">
 <div class="col-md-8">
+	<div class="datatableSide">
 	<table id="tableid" class="display">
 	<!--    <thead>
 	       <tr>
@@ -66,9 +67,10 @@
            </tr>
        </tfoot> -->
 	</table>
+	</div>
 </div>
 </div>
 </body>
-<script src="${pageContext.request.contextPath}/static/resources/js/account/accountOptions.js?0.0.12"></script>
+<script src="${pageContext.request.contextPath}/static/resources/js/account/accountOptions.js?0.0.16"></script>
 <script src="${pageContext.request.contextPath}/static/resources/js/test/test.js?0.0.0"></script>
 </html>

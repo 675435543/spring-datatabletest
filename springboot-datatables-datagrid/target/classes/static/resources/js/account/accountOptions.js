@@ -9,18 +9,29 @@ $(function(){
         //"ajax":"/account/findAccountInfoDatatable",
         //"ajax":"findAccountInfoDatatable",
         "ajax":"/static/resources/json/dataOptions.json",
-        dom: 'B<"clear">lfrtip',
-        /*"dom": '<"top"fli>rt<"bottom"p><"clear">',*/
-        /*"dom": '<"wrapper"flipt>',*/
-        /*"dom": '<lf<t>ip>',*/
-        buttons: [ 'copy', 'csv', 'excel' ],
+        dom: 'Bfrtlip',
+        /*buttons: [ 'copy', 'csv', 'excel' ],*/
+        buttons:[
+	        	{
+	           		"text":"按钮1",
+	        		"action":function(){
+	        			console.log("我是按钮1");
+	        		}
+	        	},
+	        	{
+	           		"text":"按钮2",
+	        		"action":function(){
+	        			console.log("我是按钮2");
+	        		}
+	        	}
+        	],
+        autowidth:false,
         searching: true,
-        scrollY: 700,
-        "scrollX": "100%",
-        "scrollXInner": "40%",
+        /*scrollY: "400px",*/
         "scrollCollapse": true,
-        /*paging: false,*/
-        /*"bAutoWidth": true,*/
+        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+        
+        /*scrollXInner: "300px",*/
         "columns":[
             {"data":"name",width:"5%",title:"姓名"},
             {"data":"content",width:"5%",title:"描述"},
@@ -40,6 +51,25 @@ $(function(){
             {"data":"name",width:"5%",title:"姓名"},
             {"data":"content",width:"5%",title:"描述"}
         ],
+/*        "columns":[
+            {"data":"name",width:"30px",title:"姓名"},
+            {"data":"content",width:"30px",title:"描述"},
+            {"data":null,width:"30px",title:"操作"},
+            {"data":null,width:"30px",title:"操作2"},
+            {"data":"id",width:"30px",title:"描述"},
+            {"data":"name",width:"30px",title:"姓名"},
+            {"data":"content",width:"30px",title:"描述"},
+            {"data":"name",width:"30px",title:"姓名"},
+            {"data":"content",width:"30px",title:"描述"},
+            {"data":"name",width:"30px",title:"姓名"},
+            {"data":"content",width:"30px",title:"描述"},
+            {"data":"name",width:"30px",title:"姓名"},
+            {"data":"content",width:"30px",title:"描述"},
+            {"data":"name",width:"30px",title:"姓名"},
+            {"data":"content",width:"30px",title:"描述"},
+            {"data":"name",width:"30px",title:"姓名"},
+            {"data":"content",width:"30px",title:"描述"}
+        ],*/
         "columnDefs":[
             {
                 "targets":2,
