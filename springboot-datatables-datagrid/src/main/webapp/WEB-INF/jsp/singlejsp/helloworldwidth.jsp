@@ -26,22 +26,22 @@
 
 <style>  
     .dataTable {  
-        width: 100%;  
-        border: none;  
-        border-collapse: collapse;  
-        border-spacing: 0px !important;  
-        display: table;  
-        table-layout:fixed;  
+        width: 100%;
+        border: none;
+        border-collapse: collapse;
+        border-spacing: 0px !important;
+        display: table;
+        table-layout:fixed;
     }  
   
     .dataTable th,.dataTable td {  
-        padding: 0px;  
-        margin: 0px;  
+        padding: 0px;
+        margin: 0px;
         border: 1px solid #BEBFD3;  
-        overflow: hidden;  
-        white-space: nowrap;  
-        text-overflow: ellipsis;  
-    }  
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
       
     #col1 {  
         width: 70px;  
@@ -68,6 +68,9 @@
 <script>
 </script>
 <div class="widthTest">
+<div style="width:30%;height:100%;"><p class="left">文本1</p></div>
+<div style="width:30%;height:100%;"><p class="left">文本2</p></div>
+<div style="width:40%;height:100%;"><p class="left">文本3</p></div>
     <table class="dataTable">  
         <thead>  
             <tr>  
