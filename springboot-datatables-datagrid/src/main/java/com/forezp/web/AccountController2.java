@@ -55,7 +55,7 @@ public class AccountController2 {
     public ModelAndView helloworld() {  
         // 跳转到 /WEB-INF/views/hello 下的 myTest.jsp 文件；
     	ModelAndView mv = new ModelAndView("helloworldOptions");
-    	//ModelAndView mv = new ModelAndView("singlejsp/helloworldwidth");
+    	//ModelAndView mv = new ModelAndView("singlejsp/helloworldjspingjie");
     	return mv;
     }
     

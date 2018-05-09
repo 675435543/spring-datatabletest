@@ -3,8 +3,26 @@ $(function(){
         searching: false,
         ordering:  false,
     });
-    
-    $("#tableid").DataTable({
+/*    var columns = "[
+            {"data":"name",width:"5%",title:"姓名"},
+            {"data":"content",width:"5%",title:"描述"},
+            {"data":null,width:"5%",title:"操作"},
+            {"data":null,width:"5%",title:"操作2"},
+            {"data":"id",width:"5%",title:"描述"},
+            {"data":"name",width:"5%",title:"姓名"},
+            {"data":"content",width:"5%",title:"描述"},
+            {"data":"name",width:"5%",title:"姓名"},
+            {"data":"content",width:"5%",title:"描述"},
+            {"data":"name",width:"5%",title:"姓名"},
+            {"data":"content",width:"5%",title:"描述"},
+            {"data":"name",width:"5%",title:"姓名"},
+            {"data":"content",width:"5%",title:"描述"},
+            {"data":"name",width:"5%",title:"姓名"},
+            {"data":"content",width:"5%",title:"描述"},
+            {"data":"name",width:"5%",title:"姓名"},
+            {"data":"content",width:"5%",title:"描述"}
+        ]";
+*/    $("#tableid").DataTable({
         //"ajax":"http://localhost:8080/account/findAccountInfoDatatable",
         //"ajax":"/account/findAccountInfoDatatable",
         //"ajax":"findAccountInfoDatatable",
@@ -32,26 +50,8 @@ $(function(){
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
         
         /*scrollXInner: "300px",*/
+        /*"columns":columns,*/
         "columns":[
-            {"data":"name",width:"5%",title:"姓名"},
-            {"data":"content",width:"5%",title:"描述"},
-            {"data":null,width:"5%",title:"操作"},
-            {"data":null,width:"5%",title:"操作2"},
-            {"data":"id",width:"5%",title:"描述"},
-            {"data":"name",width:"5%",title:"姓名"},
-            {"data":"content",width:"5%",title:"描述"},
-            {"data":"name",width:"5%",title:"姓名"},
-            {"data":"content",width:"5%",title:"描述"},
-            {"data":"name",width:"5%",title:"姓名"},
-            {"data":"content",width:"5%",title:"描述"},
-            {"data":"name",width:"5%",title:"姓名"},
-            {"data":"content",width:"5%",title:"描述"},
-            {"data":"name",width:"5%",title:"姓名"},
-            {"data":"content",width:"5%",title:"描述"},
-            {"data":"name",width:"5%",title:"姓名"},
-            {"data":"content",width:"5%",title:"描述"}
-        ],
-/*        "columns":[
             {"data":"name",width:"30px",title:"姓名"},
             {"data":"content",width:"30px",title:"描述"},
             {"data":null,width:"30px",title:"操作"},
@@ -63,13 +63,13 @@ $(function(){
             {"data":"content",width:"30px",title:"描述"},
             {"data":"name",width:"30px",title:"姓名"},
             {"data":"content",width:"30px",title:"描述"},
-            {"data":"name",width:"30px",title:"姓名"},
-            {"data":"content",width:"30px",title:"描述"},
-            {"data":"name",width:"30px",title:"姓名"},
-            {"data":"content",width:"30px",title:"描述"},
-            {"data":"name",width:"30px",title:"姓名"},
-            {"data":"content",width:"30px",title:"描述"}
-        ],*/
+            {"data":"name",width:"30px",title:"姓名123345"},
+            {"data":"content",width:"30px",title:"描述123678"},
+            {"data":"name",width:"30px",class:"hiddenCol",title:"姓名"},
+            {"data":"content",width:"30px",class:"hiddenCol",title:"描述"},
+            {"data":"name",width:"30px",class:"hiddenCol",title:"姓名"},
+            {"data":"content",width:"30px",class:"hiddenCol",title:"描述"}
+        ],
         "columnDefs":[
             {
                 "targets":2,
@@ -116,6 +116,10 @@ $(function(){
                 "sSortAscending": ": 以升序排列此列",
                 "sSortDescending": ": 以降序排列此列"
             }
+        },
+        "initComplete": function( settings, json ) {
+        	$(".hiddenCol").css("display","none");
+            console.log("initComplete");
         }
     });
     

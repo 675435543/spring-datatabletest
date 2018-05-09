@@ -24,6 +24,7 @@
 <div class="col-md-8">
 	<div class="datatableSide">
 	<table id="tableid" class="display">
+	<!-- 表格格式设置 -->
 	<!--    <thead>
 	       <tr>
 	       	<th>全选232</th>
