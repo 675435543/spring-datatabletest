@@ -7,12 +7,13 @@ import java.util.List;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Service;
 
+import com.forezp.entity.P2pLoanTasklog;
 import com.forezp.utils.ExportExcel;
 
 @Service
 public class ExportExcelService {
 	public static void main(String[] args) {
-		//表头
+/*		//表头
 		String[] headers = {  "项目ID","贷款名称","借款人ID","用户名","借款人名称/企业名称","信用等级","客服id","客服名称","年利率","借款期限","借款期限类型","申请日期","成标日期","借款状态","最后修改时间","创建日期"};  
 		//数据键名或者MODEL类字段名
 		String[] Col = {"tasklogId","loanName","custId","userName","realName","creditGrade","serviceId","serviceName","profitInterest","loanDeadline","loanDeadlineType","createTime","finishTime","status","updateTime","createTime"};
@@ -28,6 +29,6 @@ public class ExportExcelService {
 		OutputStream ouputStream = response.getOutputStream();   
 		workbook.write(ouputStream);   
 		ouputStream.flush();   
-		ouputStream.close();
+		ouputStream.close();*/
 	}
 }
