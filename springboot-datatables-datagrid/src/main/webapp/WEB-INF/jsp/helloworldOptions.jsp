@@ -22,6 +22,8 @@
 <input type="text" id="content2"/>&nbsp;&nbsp;<input type="button" id="actionButton2" value="获取内容" /> -->
 <div id="content" class="row-fluid">
 <div class="col-md-8">
+<%-- ${mydiv} --%>
+	<div id="mydiv" name="mydiv" value="123445">我是div</div>
 	<div class="datatableSide">
 	<table id="tableid" class="display">
 	<!-- 表格格式设置 -->

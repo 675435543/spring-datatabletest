@@ -47,8 +47,8 @@ $(function(){
         searching: true,
         /*scrollY: "400px",*/
         "scrollCollapse": true,
-        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-        
+        "lengthMenu": [[2, 10, 25, 50, 100, -1], [2, 10, 25, 50, 100, "All"]],
+        "pageLength": 2,
         /*scrollXInner: "300px",*/
         /*"columns":columns,*/
         "columns":[
@@ -68,7 +68,8 @@ $(function(){
             {"data":"name",width:"30px",class:"hiddenCol",title:"姓名"},
             {"data":"content",width:"30px",class:"hiddenCol",title:"描述"},
             {"data":"name",width:"30px",class:"hiddenCol",title:"姓名"},
-            {"data":"content",width:"30px",class:"hiddenCol",title:"描述"}
+            {"data":"content",width:"30px",class:"hiddenCol",title:"描述"},
+            {"data":"id",width:"30px",title:"描述"}
         ],
         "columnDefs":[
             {
@@ -90,6 +91,13 @@ $(function(){
                 "targets":1,
                 "render":function(data,type,row,meta){
                     return data.length > 10 ? data.substr(0,10)+"..." : data;
+                }
+            },{
+                "targets":17,
+                "render":function(data,type,row,meta){
+                	var operate = "<a href='javascript:void(0);' onclick=\"show('"+row.id+"')\">查看id</a>";
+                	var operate2 = '<a href="javascript:void(0);" onclick=show("'+row.id+'")>查看id</a>';
+                	return operate;
                 }
             }
         ],
@@ -126,8 +134,11 @@ $(function(){
 
 });
 
-function show(name,content){
+function show(id){
     //用alert模拟弹框的效果
-    alert(name+" "+content);
+    alert("id="+id);
+    $("#mydiv").val("id"+id);
+/*    debugger;
+    window.location.href="/account/helloworld";*/
 }
 
