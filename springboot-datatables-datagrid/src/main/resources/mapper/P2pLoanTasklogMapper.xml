@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forezp.dao.P2pLoanTasklogMapper">
+<!-- List<P2pLoanTasklog> findAccountInfo(); -->
+	<resultMap type="P2pLoanTasklog" id="P2pLoanTasklog">
+		<id property="tasklogId" column="tasklogId"/>
+		<result property="loanName" column="loanName"/>
+		<result property="custId" column="custId"/>
+		<result property="userName" column="userName"/>
+		<result property="realName" column="realName"/>
+		<result property="creditGrade" column="creditGrade"/>
+		<result property="serviceId" column="serviceId"/>
+		<result property="serviceName" column="serviceName"/>
+		<result property="profitInterest" column="profitInterest"/>
+		<result property="loanDeadline" column="loanDeadline"/>
+		<result property="loanDeadlineType" column="loanDeadlineType"/>
+		<result property="createTime" column="createTime"/>
+		<result property="finishTime" column="finishTime"/>
+		<result property="status" column="status"/>
+		<result property="updateTime" column="updateTime"/>
+	</resultMap>
+
+	<select id="findP2pLoanTasklog"  resultMap="P2pLoanTasklog">
+		select * from P2pLoanTasklog
+	</select>
+</mapper>
