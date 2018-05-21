@@ -44,9 +44,9 @@ $(document).ready(function () {
     //全选或全不选
     $("#all").click(function () {
         if (this.checked) {
-            $("#list :checkbox").attr("checked", true);
+            $("#list :checkbox").prop("checked", true);
         } else {
-            $("#list :checkbox").attr("checked", false);
+            $("#list :checkbox").prop("checked", false);
         }
     });
     //设置全选复选框
@@ -57,14 +57,14 @@ $(document).ready(function () {
         var chknum = $("#list :checkbox").size();//选项总个数
         var chk = 0;
         $("#list :checkbox").each(function () {
-            if ($(this).attr("checked")) {
+            if ($(this).prop("checked")) {
                 chk++;
             }
         });
         if (chknum == chk) {//全选
-            $("#all").attr("checked", true);
+            $("#all").prop("checked", true);
         } else {//不全选
-            $("#all").attr("checked", false);
+            $("#all").prop("checked", false);
         }
     }
     //显示时执行一次
