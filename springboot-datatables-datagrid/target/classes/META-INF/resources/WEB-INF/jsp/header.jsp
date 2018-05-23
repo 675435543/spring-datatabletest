@@ -25,8 +25,8 @@
 
 <%-- <script src="${pageContext.request.contextPath}/static/resources/js/common/common.js?0.0.0"></script> --%>
 <script src="${pageContext.request.contextPath}/static/resources/js/common/modal.js?0.0.0"></script>
-<script src="${pageContext.request.contextPath}/static/resources/js/common/jquery.selectall.extend.js?0.0.0"></script>
-<script src="${pageContext.request.contextPath}/static/resources/js/common/SelectAllObject.js?0.0.0"></script>
+<script src="${pageContext.request.contextPath}/static/resources/js/common/jquery.selectall.extend.js?0.0.2"></script>
+<script src="${pageContext.request.contextPath}/static/resources/js/common/SelectAllObject.js?0.0.1"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/resources/css/common/common.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/resources/css/common/modal.css">

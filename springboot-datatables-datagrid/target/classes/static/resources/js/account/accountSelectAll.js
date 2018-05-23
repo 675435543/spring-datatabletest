@@ -1,8 +1,22 @@
+var selectAllObject = null;
 $(function(){
     $.extend( $.fn.dataTable.defaults, {
         searching: false,
         ordering:  false,
     });
+	var oSelect = {
+		sBaseDir : "",
+		sUrl : "",
+		sTableName : "tableid",
+		sAllSelectCheckbox : "allcheckboxColumn",
+		sSelectCheckbox : "checkboxColumn",
+		oAllSelectParam : "",
+		bIsAllSelected : "false",
+		oSelectedDatas : {
+			"ids":""
+		}
+	};
+    selectAllObject = new SelectAllObject(oSelect);
 /*    var columns = "[
             {"data":"name",width:"5%",title:"姓名"},
             {"data":"content",width:"5%",title:"描述"},
@@ -33,7 +47,8 @@ $(function(){
 	        	{
 	           		"text":"按钮1",
 	        		"action":function(){
-	        			console.log("我是按钮1");
+	        			creatModal("messegeDialog","liuxuanTestMessegeDialogId","420","","btnLiuxuanTestMessegeDialog","提示","知道了");
+	        			/*creatModal("modalDialog","liuxuanTestModalDialogId","420","liuxuanTestModalDialogContentId","btnLiuxuanTestModalDialog","提示信息","确定吗？");*/
 	        		}
 	        	},
 	        	{
@@ -74,7 +89,7 @@ $(function(){
             {
                 "targets":0,
                 "render":function(data,type,row,meta){
-                	return '<a href="javascript:void(0);" onclick=show("'+row.name+'","'+row.content+'") >查看详情</a>';
+                	return "<input type='checkbox' name='checkboxColumn' onclick=\"selectAllObject.selectCheckboxClick(this)\">";
                 }
             }
         ],

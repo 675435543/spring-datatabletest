@@ -8,11 +8,13 @@
 
 </head>
 <body>
-<script>
-</script>
-
 <jsp:include page="./header.jsp"></jsp:include>
 <jsp:include page="./left.jsp"></jsp:include>
+<script src="${pageContext.request.contextPath}/static/resources/js/account/accountSelectAll.js?0.0.19"></script>
+<script src="${pageContext.request.contextPath}/static/resources/js/test/test.js?0.0.0"></script>
+
+
+
 <%-- <jsp:include page="./body.jsp"></jsp:include> --%>
 <%-- <%@ include file="./header.jsp" %>
 <%@ include file="./left.jsp" %>
@@ -29,7 +31,7 @@
 	<!-- 表格格式设置 -->
 	     <thead>
 	       <tr>
-	       	<th>全选232</th>
+	       	<th><input type='checkbox' id='allcheckboxColumn' onclick='selectAllObject.allSelectCheckboxClick()'></th>
             <th>姓名</th>
             <th>年龄</th>
             <th>年龄</th>
@@ -74,6 +76,5 @@
 </div>
 </div>
 </body>
-<script src="${pageContext.request.contextPath}/static/resources/js/account/accountSelectAll.js?0.0.16"></script>
-<script src="${pageContext.request.contextPath}/static/resources/js/test/test.js?0.0.0"></script>
+
 </html>
