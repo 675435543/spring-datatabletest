@@ -76,7 +76,7 @@
 		var chks = $("[name=" + oSelect.selectCheckbox + "]:checkbox");
 		var selectedChks = 0;
 		var tempid = $(element).prop("value");
-		if ($(element).prop("checked") != "checked") {
+		if ($(element).prop("checked") != true) {
 			for (var x in element.attributes) {
 				oSelect.selectedDatas[element.attributes[x].name + "s"] = oSelect.selectedDatas[element.attributes[x].name + "s"].replace(element.attributes[x].value + ",", '');
 				oSelect.selectedDatas[element.attributes[x].name + "s"]  = oSelect.selectedDatas[element.attributes[x].name + "s"].replace("undefined", '');
