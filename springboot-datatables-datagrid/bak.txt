@@ -633,4 +633,144 @@ public class AppendHtmlMail
     }
 }
 
+controller
+@RequestMapping(value = "sendWeeklyTemplet", method = RequestMethod.POST)
+public ResultData<String> sendWeeklyTemplet(@Validated ProblemList problemList, BindingResult bindingResult,
+	@RequestParam("problemScreenshot") List<MultipartFile> problemScreenshot, @RequestParam("mailTo") String mailTo,
+	@RequestParam("mailCc") String mailCc, @RequestParam("subject") String subject,
+	@RequestParam("selectedEmailIds") String selectedEmailIds, HttpServletRequest request)
+{
+	
+	String[] toMails = null;
+	if(StringUtils.isNotEmpty(mailTo))
+	{
+		toMails = mailTo.split(",");
+	}
+	String mergeStr = "";
+	String[] toMailsProcess = null;
+	List<String> toMailslist = new ArrayList<String>(); 
+	List<UserSearchItem> UserSearchItemlist = null;
+	if(toMails != null && toMails.length >= 1)
+	{
+		for(int i = 0; i < toMails.length; i++)
+		{
+			mergeStr = RegexUtils.mergeBlank(toMails[i]);
+			if(mergeStr.lastIndexOf(" ") != -1 && mergeStr.indexOf(" ") != mergeStr.lastIndexOf(" "))
+			{
+				UserSearchItemlist  = UserSeacher.search(mergeStr.substring(0, mergeStr.lastIndexOf(" ")));
+				if(CollectionUtils.isNotEmpty(UserSearchItemlist))
+				{
+					if(!toMailslist.contains(UserSearchItemlist.get(0).getMail()))
+					{
+						toMailslist.add(UserSearchItemlist.get(0).getMail());
+					}
+				}
+			}
+		}
+	}
+	toMailsProcess = (String[])toMailslist.toArray(new String[toMailslist.size()]);
+	
+	String[] ccMails = null;
+	if(StringUtils.isNotEmpty(mailCc))
+	{
+		ccMails = mailCc.split(",");
+	}
+	String[] ccMailsProcess = null;
+	List<String> ccMailslist = new ArrayList<String>(); 
+	if(ccMails != null && ccMails.length >= 1)
+	{
+		for(int i = 0; i < ccMails.length; i++)
+		{
+			mergeStr = RegexUtils.mergeBlank(ccMails[i]);
+			if(mergeStr.lastIndexOf(" ") != -1 && mergeStr.indexOf(" ") != mergeStr.lastIndexOf(" "))
+			{
+				UserSearchItemlist  = UserSeacher.search(mergeStr.substring(0, mergeStr.lastIndexOf(" ")));
+				if(CollectionUtils.isNotEmpty(UserSearchItemlist))
+				{
+					if(!ccMailslist.contains(UserSearchItemlist.get(0).getMail()))
+					{
+						ccMailslist.add(UserSearchItemlist.get(0).getMail());
+					}
+				}
+			}
+		}
+	}
+	ccMailsProcess = (String[])ccMailslist.toArray(new String[ccMailslist.size()]);
+	
+	String[] selectedEmailIdArry = null;
+	if(StringUtils.isNotEmpty(selectedEmailIds))
+	{
+		selectedEmailIdArry = selectedEmailIds.trim().split(",");
+	}
+	List<String> selectedEmailIdList = new ArrayList<String>();
+	for (String selectedEmailId : selectedEmailIdArry)
+	{
+		if (!selectedEmailIdList.contains(selectedEmailId))
+		{
+			selectedEmailIdList.add(selectedEmailId);
+		}
+	}
+	//选中的数据列表
+	List<ProblemList> problemListSelected = problemListService.findProblemListSelected(selectedEmailIdList);
 
+	String emailContentDetail = "测试邮件的正文";
+	boolean sendResult = false;
+	ResultData<String> result = new ResultData<>();
+	
+	if(toMailsProcess==null || (toMailsProcess!=null && toMailsProcess.length==0))
+	{
+		result.setStatus(CommonsConstants.RESULT_ERROR);
+		result.setMassage("查询不到收件人信息 !");
+	}
+	else
+	{
+		sendResult = problemListService
+			.problemListSendEmail(toMailsProcess, ccMailsProcess, subject, emailContentDetail, problemListSelected,null,WEEKLY_TEMPLET);
+		if (true == sendResult)
+		{
+			result.setStatus(CommonsConstants.RESULT_SUCCESS);
+		}
+		else
+		{
+			result.setStatus(CommonsConstants.RESULT_ERROR);
+		}
+	}
+	return result;
+}
+
+service
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+    @Override
+    public boolean problemListSendEmail(String[] mailToArry, String[] mailCcArry, String subject,
+        String emailContentDetail, List<ProblemList> problemListSelected, String url,String emailType)
+    {
+        boolean sendResult = false;
+        //发邮件
+        //这个类主要是设置邮件   
+        MailSenderInfo mailInfo = new MailSenderInfo();
+        if (mailCcArry != null)
+        {
+            mailInfo.setCcAddress(mailCcArry);
+        }
+        if(mailToArry != null)
+        {
+            mailInfo.setToAddress(mailToArry);
+            mailInfo.setSubject(subject);
+            mailInfo.setContent(AppendHtmlMail.getHtmlMail(emailContentDetail, problemListSelected, url, null,emailType));
+            sendResult = SimpleMailSender.sendHtmlMail(mailInfo);//发送html格式 的邮件
+        }
+        else
+        {
+            sendResult = false;
+        }
+        return sendResult;
+
+    }
+	
