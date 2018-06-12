@@ -399,4 +399,238 @@ public class SimpleMailSender
             return false;
         }
     }
+        /** */
+    /**   
+    * 以HTML格式发送邮件   
+    * @param mailInfo mailInfo
+    * @return boolean boolean   
+    */
+    public static boolean sendHtmlMail(MailSenderInfo mailInfo)
+    {
+		final String username = PropertiesUtils.getConfig(CommonsConstants.USER_NAME);
+		final String password = PropertiesUtils.getConfig(CommonsConstants.PASSWORD);
+
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.host", PropertiesUtils.getConfig(CommonsConstants.HOST));
+		props.put("mail.smtp.port", PropertiesUtils.getConfig(CommonsConstants.PORT));
+
+		Session session = Session.getInstance(props,
+				new javax.mail.Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(username, password);
+				}
+		});
+        try
+        {
+            // 根据session创建一个邮件消息    
+            Message mailMessage = new MimeMessage(session);
+            // 创建邮件发送者地址    
+            Address from = new InternetAddress(PropertiesUtils.getConfig(CommonsConstants.USER_EMAIL));
+            // 设置邮件消息的发送者    
+            mailMessage.setFrom(from);
+            // 创建邮件的接收者地址，并设置到邮件消息中    
+            if (mailInfo.getToAddress() != null)
+            {
+                InternetAddress[] sendTo = new InternetAddress[mailInfo.getToAddress().length];
+                for (int i = 0; i < mailInfo.getToAddress().length; i++)
+                {
+                    sendTo[i] = new InternetAddress(mailInfo.getToAddress()[i]);
+                }
+                mailMessage.setRecipients(Message.RecipientType.TO, sendTo);
+            }
+            
+            // 创建邮件的抄送者地址，并设置到邮件消息中    
+            if (mailInfo.getCcAddress() != null)
+            {
+                InternetAddress[] sendCc = new InternetAddress[mailInfo.getCcAddress().length];
+                for (int i = 0; i < mailInfo.getCcAddress().length; i++)
+                {
+                    sendCc[i] = new InternetAddress(mailInfo.getCcAddress()[i]);
+                }
+                mailMessage.setRecipients(Message.RecipientType.CC, sendCc);
+            }
+            // 设置邮件消息的主题    
+            mailMessage.setSubject(mailInfo.getSubject());
+            // 设置邮件消息发送的时间    
+            mailMessage.setSentDate(new Date());
+            // MiniMultipart类是一个容器类，包含MimeBodyPart类型的对象    
+            Multipart mainPart = new MimeMultipart();
+            // 创建一个包含HTML内容的MimeBodyPart    
+            BodyPart html = new MimeBodyPart();
+            // 设置HTML内容    
+            html.setContent(mailInfo.getContent(), "text/html; charset=utf-8");
+            mainPart.addBodyPart(html);
+            // 将MiniMultipart对象设置为邮件内容    
+            mailMessage.setContent(mainPart);
+            // 发送邮件    
+            Transport.send(mailMessage);
+            return true;
+        }
+        catch (MessagingException ex)
+        {
+            LOGGER.error(ex.toString(), ex);
+            return false;
+        }
+    }
+}
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
+@Component
+public class SpringContext implements ApplicationContextAware
+{
+    private static ApplicationContext context;
     
+    public static void setContext(ApplicationContext context)
+    {
+        SpringContext.context = context;
+    }
+
+    /**
+     * 设置上下文对象
+     * @param arg0 上下文对象
+     */
+    @Override
+    public void setApplicationContext(ApplicationContext arg0)
+    {
+        setContext(arg0);
+    }
+    
+    /**
+     * 获得spring对象
+     * @param cls 类对象
+     * @return T 对象
+     */
+    public static <T> T getBean(Class<T> cls)
+    {
+        return context.getBean(cls);
+    }
+    
+    public static ApplicationContext getContext()
+    {
+        return context;
+    }
+}
+
+import org.springframework.core.env.Environment;
+public final class PropertiesUtils
+{
+    /**
+     * 同步锁
+     */
+    private static final Object LOCK = new Object();
+    
+    private static final Environment ENVIRONMENT = SpringContext.getBean(Environment.class);
+    
+    private PropertiesUtils()
+    {
+    }
+    
+    /**
+     * 获取系统配置文件的键值
+     * @param key key
+     * @return key对应的配置内容
+     */
+    public static String getConfig(String key)
+    {
+        synchronized (LOCK)
+        {
+            if (ENVIRONMENT != null)
+            {
+                return ENVIRONMENT.getProperty(key);
+            }
+            return null;
+        }
+    } 
+}
+
+
+import java.util.List;
+import org.apache.commons.lang.StringUtils;
+
+public class AppendHtmlMail
+{
+    public static String getHtmlMail(String emailContentDetail, List<ProblemList> problemList, String url, String filePath, String emailType)
+    {
+        /*String explanation = "这是一封测试邮件<br/>";*/
+        StringBuffer theMessage = new StringBuffer();
+        String emailContent = null;
+        theMessage.append(
+            "<!DOCTYPE html><html lang='zh-CN'><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
+        theMessage.append("<title></title><style>table tr td{text-align: center;line-height: 25px;vertical-align: middle;}table thead tr{background: #224B7F;background: #224B7F;color: white;height:40px;font-size: 15px;}table tbody tr{height: 80px;font-size: 15px;}</style>");
+        theMessage.append("</head><body>");
+        /*theMessage.append("<span><strong>说明：</strong><span>" + explanation + "</span></span>");*/
+        /*theMessage.append("<div><div><span><h3>" + emailContentDetail + "</h3></span>");*/
+        theMessage.append("</div><div>");
+        theMessage.append("<table border='1' bordercolor='#9C9C9C' cellspacing='0' width='1100'><thead><tr><th style='width:10%'>提出时间</th><th style='width:8%'>区域/国家</th><th style='width:8%'>提出人</th><th style='width:20%'>问题</th><th style='width:10%'>诉求关闭时间</th><th style='background: #0170BF; width:8%'>责任部门</th><th style='background: #0170BF; width:8%'>责任人</th><th style='background: #0170BF; width:8%'>状态</th><th style='background: #0170BF; width:20%'>当前进展</th></tr></thead><tbody>");
+        for (ProblemList problem : problemList)
+        {
+            if(problem.getStatus().toLowerCase().equals("close")) {
+                if(StringUtils.isNotEmpty(url) && emailType.equals("toDoRemind"))
+                {
+/*                    theMessage.append("<tr><td>" + problem.getDiscoverTime()+ "</td>"
+                        + "<td>" + problem.getTarget() + "</td>"
+                        + "<td>" + problem.getIntroducer() + "</td>"
+                        + "<td style='text-align:left;'><a href='"+url+"' target='_blank'>" + problem.getProblemSketch() + "</a></td>"
+                        + "<td>" + problem.getFinishTime() + "</td>"
+                        + "<td>" + problem.getResponsibleField() + "</td>"
+                        + "<td>" + problem.getResponsiblePerson() + "</td>"
+                        + "<td style='color: white;background: gray'>" + problem.getStatus() + "</td>"
+                        + "<td style='text-align:left;'>" + (problem.getAttachList()!=null?"【"+problem.getAttachList().get(0).getCreateTime().split(" ")[0]+"进展】"+"<br/>"+problem.getAttachList().get(0).getAttachDesc():"") + "</td></tr>");*/
+                }
+                else
+                {
+                    theMessage.append("<tr><td>" + problem.getDiscoverTime()+ "</td>"
+                        + "<td>" + problem.getTarget() + "</td>"
+                        + "<td>" + problem.getIntroducer() + "</td>"
+                        + "<td style='text-align:left;'>" + problem.getProblemSketch() + "</td>"
+                        + "<td>" + problem.getFinishTime() + "</td>"
+                        + "<td>" + problem.getResponsibleField() + "</td>"
+                        + "<td>" + problem.getResponsiblePerson() + "</td>"
+                        + "<td style='color: white;background: gray'>" + problem.getStatus() + "</td>"
+                        + "<td style='text-align:left;'>" + (problem.getAttachList()!=null?"【"+problem.getAttachList().get(0).getCreateTime().split(" ")[0]+"进展】"+"<br/>"+problem.getAttachList().get(0).getAttachDesc():"") + "</td></tr>");
+                }
+            }
+            else
+            {
+                if(StringUtils.isNotEmpty(url) && emailType.equals("toDoRemind"))
+                {
+                    theMessage.append("<tr><td>" + problem.getDiscoverTime()+ "</td>"
+                        + "<td>" + problem.getTarget() + "</td>"
+                        + "<td>" + problem.getIntroducer() + "</td>"
+                        + "<td style='text-align:left;'><a href='"+url+"' target='_blank'>" + problem.getProblemSketch() + "</a></td>"
+                        + "<td>" + problem.getFinishTime() + "</td>"
+                        + "<td>" + problem.getResponsibleField() + "</td>"
+                        + "<td>" + problem.getResponsiblePerson() + "</td>"
+                        + "<td style='background: yellow'>" + problem.getStatus() + "</td>"
+                        + "<td style='text-align:left;'>" + (problem.getAttachList()!=null?"【"+problem.getAttachList().get(0).getCreateTime().split(" ")[0]+"进展】"+"<br/>"+problem.getAttachList().get(0).getAttachDesc():"") + "</td></tr>");
+                }
+                else
+                {
+                    theMessage.append("<tr><td>" + problem.getDiscoverTime()+ "</td>"
+                        + "<td>" + problem.getTarget() + "</td>"
+                        + "<td>" + problem.getIntroducer() + "</td>"
+                        + "<td style='text-align:left;'>" + problem.getProblemSketch() + "</td>"
+                        + "<td>" + problem.getFinishTime() + "</td>"
+                        + "<td>" + problem.getResponsibleField() + "</td>"
+                        + "<td>" + problem.getResponsiblePerson() + "</td>"
+                        + "<td style='background: yellow'>" + problem.getStatus() + "</td>"
+                        + "<td style='text-align:left;'>" + (problem.getAttachList()!=null?"【"+problem.getAttachList().get(0).getCreateTime().split(" ")[0]+"进展】"+"<br/>"+problem.getAttachList().get(0).getAttachDesc():"") + "</td></tr>");
+                }
+
+            }
+
+        }
+        theMessage.append("</tbody></table></div><br/>");
+        /*theMessage.append("<strong>附件信息</strong>:" + filePath);*/
+        /*theMessage.append("<br/><br/><span><strong>一线舆情页面地址：</strong></span><a href='" + url + "' target='blank'>" + url + " </a></div>");*/
+        theMessage.append("</body>");
+        theMessage.append("</html>");
+        emailContent = theMessage.toString();
+        return emailContent;
+    }
+}
+
+
