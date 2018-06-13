@@ -73,11 +73,11 @@ public class AccountController2 {
     	String emailContentDetail = "haha";
     	
     	boolean sendResult = true;
-    	sendResult = sendEmailService.problemListSendEmail(toMailsProcess, ccMailsProcess, subject, emailContentDetail, problemListSelected,null,"toDoRemind");
+/*    	sendResult = sendEmailService.problemListSendEmail(toMailsProcess, ccMailsProcess, subject, emailContentDetail, problemListSelected,null,"toDoRemind");
     	if (true == sendResult)
     	{
     		System.out.println("邮件发送成功！");
-    	}
+    	}*/
 
     	return mv;
     }

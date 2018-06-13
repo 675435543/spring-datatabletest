@@ -2,12 +2,14 @@ package com.forezp.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.forezp.email.MailSenderInfo;
 import com.forezp.email.SimpleMailSender;
 import com.forezp.entity.ProblemList;
 import com.forezp.service.SendEmailService;
 import com.forezp.utils.AppendHtmlMail;
-
+@Service
 public class SendEmailServiceImpl implements SendEmailService{
 	
     @Override
