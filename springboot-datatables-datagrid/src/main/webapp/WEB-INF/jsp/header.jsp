@@ -30,6 +30,7 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/resources/css/common/common.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/resources/css/common/modal.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/resources/css/common/datatableModify.css">
 
 
 </head>

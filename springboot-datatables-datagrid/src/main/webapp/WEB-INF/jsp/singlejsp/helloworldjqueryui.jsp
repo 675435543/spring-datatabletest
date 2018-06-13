@@ -47,6 +47,10 @@ onfocus="this.placeholder=''" onblur="this.placeholder='请输入域账号'" sty
 
 <script>
 
+function split(val)
+{
+	return val.split(/,\s*/);
+}
 $(function() {
 
     var availableTags = [
@@ -82,7 +86,7 @@ $(function() {
     		var strs = $("#addAdminUser").val().split(",");
     		$.ajax({
     			type: "GET",
-    			url: "/account/helloworld",
+    			url: "/account/helloworldjqueryui",
      			data: {
     				"userId": strs[strs.length - 1]
 /*     				"access_token": accessToken */
@@ -94,8 +98,8 @@ $(function() {
     					$("#adminUsersDiv").css("display", "block");
     					$("#ui-id-1").css("z-index", "1050");
     					return {
-    						domainAccount: item.name1,
-    						label: item.name1 + " " + item.departName
+    						domainAccount: item.name,
+    						label: item.name + " " + item.departName
     					};
     				}));
     			}
@@ -127,6 +131,8 @@ $(function() {
     	autoFocus: false,
     	delay: 200
     });
+    
+
   });
 </script>
 

@@ -1,13 +1,22 @@
 package com.forezp.entity;
 
 public class UserInfo {
-	private String name1;
+	private Integer id;
+	private String name;
 	private String departName;
-	public String getName1() {
-		return name1;
+	
+
+	public Integer getId() {
+		return id;
 	}
-	public void setName1(String name1) {
-		this.name1 = name1;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getDepartName() {
 		return departName;
@@ -15,11 +24,13 @@ public class UserInfo {
 	public void setDepartName(String departName) {
 		this.departName = departName;
 	}
+
 	public UserInfo() {
+		
 	}
 	@Override
 	public String toString() {
-		return "UserInfo [name1=" + name1 + ", departName=" + departName + "]";
+		return "UserInfo [id=" + id + ", name=" + name + ", departName=" + departName + "]";
 	}
 	
 }
