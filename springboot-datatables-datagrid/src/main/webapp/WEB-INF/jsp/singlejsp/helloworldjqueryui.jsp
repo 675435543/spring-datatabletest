@@ -47,10 +47,67 @@ onfocus="this.placeholder=''" onblur="this.placeholder='请输入域账号'" sty
 
 <script>
 
+
 function split(val)
 {
 	return val.split(/,\s*/);
 }
+
+
+function AutoCompleteAssociation(inputId,tooltipId,url){
+	$("#"+inputId).autocomplete({
+	source: function(request, response) {
+		var strs = $("#"+inputId).val().split(",");
+		$.ajax({
+			type: "GET",
+			url: url,
+			data: {
+				"userId": strs[strs.length - 1]
+/*     				"access_token": accessToken */
+			},
+			dataType: "json",
+			success: function(data) {
+				response($.map(data.userInfoList, function(item) {
+					$("#"+tooltipId).appendTo($("#"+inputId+"Div"));
+					$("#"+inputId+"Div").css("display", "block");
+					$("#"+tooltipId).css("z-index", "1050");
+					return {
+						domainAccount: item.name,
+						label: item.name + " " + item.departName
+					};
+				}));
+			}
+		});
+	},
+	focus: function(event, ui) {
+		return false;
+	},
+	select: function(event, ui) {
+		var terms = split(ui.item.domainAccount);
+		var currentInput = "";
+		if ($("#"+inputId).val().lastIndexOf(',') >= 0) {
+			currentInput = $("#"+inputId).val().substring(0, $("#"+inputId).val().lastIndexOf(','));
+		}
+		// 移除当前输入
+		terms.pop();
+		// 添加被选项
+		terms.push(ui.item.value);
+		// 添加占位符，在结尾添加逗号+空格
+		terms.push("");
+		if (currentInput != "") {
+			this.value = currentInput + "," + terms.join(", ");
+		} else {
+			this.value = terms.join(", ");
+		}
+		return false;
+	},
+	minLength: 3,
+	autoFocus: false,
+	delay: 200
+});
+}
+
+
 $(function() {
 
     var availableTags = [
@@ -80,7 +137,7 @@ $(function() {
     $( "#tags" ).autocomplete({
       source: availableTags
     });
-    
+/*     
     $("#addAdminUser").autocomplete({
     	source: function(request, response) {
     		var strs = $("#addAdminUser").val().split(",");
@@ -89,7 +146,6 @@ $(function() {
     			url: "/account/helloworldjqueryui",
      			data: {
     				"userId": strs[strs.length - 1]
-/*     				"access_token": accessToken */
     			},
     			dataType: "json",
     			success: function(data) {
@@ -130,9 +186,9 @@ $(function() {
     	minLength: 3,
     	autoFocus: false,
     	delay: 200
-    });
-    
-
+    }); 
+     */
+    AutoCompleteAssociation("addAdminUser","ui-id-1","/account/helloworldjqueryui");
   });
 </script>
 
