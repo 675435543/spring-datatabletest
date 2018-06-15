@@ -1,2 +1,87 @@
 发送邮件的网址
+https://blog.csdn.net/smok56888/article/details/50070453
 弹出框使用方法
+
+modal.js后面再研究
+$(‘#btnId’).click(function(){
+  creatModal(
+'modalDialog',   //参数1：类型（modalDialog弹窗；messegeDialog提示框）
+'modalId',           //参数2：弹窗id  //不要相同，这个窗口由creatModal创造
+600,               //参数3：弹窗宽度
+'mainContentId',     //参数4：主要内容id，自己写在页面上（如下）
+'btnConfirmId',      //参数5：确认按钮id，已绑定方法fun
+'弹窗title写在这里哦',  //参数6：弹窗title
+'提示信息！',         //参数7：定义提示信息
+fun                 //参数8：确定按钮方法
+);
+})
+
+只有这两种情况
+1, 'messegeDialog'，弹框id不同，弹框宽度，内容id为空，确认按钮为空（使用时其他人明显没有思考就写了），弹框title，提示信息自己写
+2, 'modalDialog'， 弹框id不同，弹框宽度，内容id不同，确认按钮id不同，  			      		 弹框title，提示信息为空
+
+第1种
+creatModal('messegeDialog','messegeModalIdrecover',350,'','btnConfirmId','提示','提交设备恢复成功!'+data.msg);
+应该这样写
+creatModal('messegeDialog','messegeModalIdrecover',350,'','','提示','提交设备恢复成功!'+data.msg);
+
+第2种
+creatModal('modalDialog','outFactoryMessageModal',350,'outFactoryMessage','submitOutFactoryMessage','提示','确认出厂?');
+应该这样写
+creatModal('modalDialog','outFactoryMessageModal',350,'outFactoryMessage','submitOutFactoryMessage','提示','');
+<!-- 删除数据提示框 -->
+<div class='msCon' id="outFactoryMessage" style="display:none;">
+	<i class='icon-notification'></i><label style='padding-left: 0px;'>
+		确认出厂?
+	</label>
+</div>
+	
+$("#submitOutFactoryMessage").unbind("click").click(function(){
+	//加入业务逻辑代码
+	$('#outFactoryMessageModal').modal('hide');
+});
+
+绑定click事件
+$("#submitOutFactoryMessage").unbind("click").click(function(){});
+注意配合它使用
+$('#outFactoryMessageModal').modal('hide');
+
+示例
+function functioncode(accessToken){
+	creatModal('modalDialog','versionListExportMessageModal',350,'versionListExportMessage','submitVersionListExportMessage','提示','');
+	//绑定删除操作
+	$("#submitVersionListExportMessage").unbind("click").click(function(){
+		window.location.href= basePath + "/versionmanage/versionmanage/ExportVersionList?access_token="+accessToken;
+		//其他业务逻辑代码
+		$('#versionListExportMessageModal').modal('hide');
+	});
+}
+
+第2种另外一种用法
+对于    'modalDialog'， 弹框id不同，弹框宽度，内容id不同，确认按钮id不同，  			      		 弹框title，提示信息为空
+creatModal('modalDialog','transferModal',460,'transferModalBody','transferSubmit','设备转移','');
+
+    <div id="transferModalBody" class="iInputEnvMgr" style="display: none;">
+        <div style="margin-left:20px;margin-top:20px" >
+		    <label style="font-size:18px;font-weight: normal" >转移方式:</label></br>
+	    </div>
+	    <div style="margin-bottom:36px; " class="iInputCon" style="display: block;"  >
+	       <div id="transferDiv" style="padding-left:60px;line-height:36px;width:110px;height:36px;background:url(../resources/images/resource/transfer1.png)"   >转移</div>
+	       <div id="removeDiv" style="margin-left:30px;float: left;padding-left:60px;line-height:36px;width:110px;height:36px;background:url(../resources/images/resource/remove.png)"   >移除</div>
+	    </div>
+	    <div class="" style="height:30px;margin-left:20px;margin-bottom:20px">
+	    <label style="font-size:18px ;font-weight: normal;margin-right: 10px;" width="60px">资源池</label>
+	    </div>
+    	<div class="" style="height:80px;margin-left:20px;margin-right:20px">
+		    <input id="resoucePool" name="resoucePool" style="width:100%;line-height: 30px;font-size:18px "  placeholder="请输入资源池"  onfocus="this.placeholder=''" onblur="this.placeholder='请输入资源池'" >
+		    <div id="resoucePoolDiv" style="display: none;font-size:18px "></div>
+		    <input id="mynewResourceId" type="hidden">
+	    </div>
+    </div>
+绑定click事件
+$("#transferSubmit").unbind("click").bind("click", function(){
+	业务逻辑代码
+	$('#transferModal').modal('hide');
+});
+
+
