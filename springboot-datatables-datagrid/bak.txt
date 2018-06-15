@@ -84,4 +84,4 @@ $("#transferSubmit").unbind("click").bind("click", function(){
 	$('#transferModal').modal('hide');
 });
 
-
+http://www.cnblogs.com/hooray/archive/2012/09/05/2672133.html
