@@ -1,0 +1,14 @@
+https://blog.csdn.net/jlh912008548/article/details/72782241
+
+CREATE TABLE `sys_user_log` (
+  `log_id` varchar(32) NOT NULL COMMENT '日志表id，uuid',
+  `user_id` varchar(32) DEFAULT NULL COMMENT '用户id,记录操作用户',
+  `module_name` varchar(225) NOT NULL COMMENT '模块名称',
+  `operate` varchar(225) NOT NULL COMMENT '操作名称',
+  `time` datetime NOT NULL COMMENT '操作时间',
+  `class_name` varchar(225) NOT NULL COMMENT '类名称',
+  `method_name` varchar(225) NOT NULL COMMENT '方法名称',
+  `params` longtext COMMENT '传入参数',
+  `ip` varchar(225) NOT NULL COMMENT '操作ip',
+  PRIMARY KEY (`log_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

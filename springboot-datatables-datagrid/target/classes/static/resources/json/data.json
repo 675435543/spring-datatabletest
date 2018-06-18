@@ -1,18 +1,18 @@
-{
+ï»¿{
     "data": [
         {
         	"id": 1,
-            "name": "DataTablesÖĞÎÄÍø",
+            "name": "DataTablesä¸­æ–‡ç½‘",
             "money": 2
         },
         {
         	"id": 2,
-            "name": "BootStrapÖĞÎÄÍø2",
+            "name": "BootStrapä¸­æ–‡ç½‘2",
             "money": 3
         },
         {
         	"id": 3,
-            "name": "vueÖĞÎÄÍø2",
+            "name": "vueä¸­æ–‡ç½‘2",
             "money": 4
         }
     ]

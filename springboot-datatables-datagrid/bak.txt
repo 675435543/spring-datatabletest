@@ -1,3 +1,14 @@
 http://www.cnblogs.com/hooray/archive/2012/09/05/2672133.html
 https://www.cnblogs.com/sz-zzm/p/5218696.html
+	
+java 项目日志管理设计方案
+https://blog.csdn.net/jlh912008548/article/details/72782241
+
+springboot整合Quartz实现动态配置定时任务,不用了
+https://blog.csdn.net/liuchuanhong1/article/details/60873295
+
+Spring Boot配置定时任务（实例）
+https://blog.csdn.net/m0_37885618/article/details/77196691
+
 联想功能添加div
+导入导出功能

@@ -3,6 +3,8 @@ package com.forezp.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.forezp.dao.UserInfoDao;
+import com.forezp.email.SimpleMailSender;
 import com.forezp.entity.Account;
+import com.forezp.entity.ProblemList;
 import com.forezp.entity.UserInfo;
 import com.forezp.service.AccountService2;
 import com.forezp.service.SendEmailService;
@@ -28,6 +32,9 @@ import net.sf.json.JSONObject;
 @RestController
 @RequestMapping("/account")
 public class AccountController2 {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(AccountController2.class);
+	
     @Autowired
     AccountService2 accountService;
     
@@ -67,17 +74,24 @@ public class AccountController2 {
     	//ModelAndView mv = new ModelAndView("helloworldSelectAll");
     	/*mv.addObject("mydiv", "liuxuandediv");*/
     	ModelAndView mv = new ModelAndView("singlejsp/helloworldjqueryui");
-    	String toMailsProcess[] = {"675435543@qq.com","516412893@qq.com"};
-    	String ccMailsProcess[] = {"675435543@qq.com","516412893@qq.com"};
-    	String subject = "小宝你好，这是一封测试邮件！";
-    	String emailContentDetail = "haha";
+    	String toMailsProcess[] = {"47528033@qq.com"};
+    	String ccMailsProcess[] = {"516412897@qq.com"};
+    	String subject = "芬姐，这是一封测试邮件！";
+    	String emailContentDetail = "java开发";
+    	
+    	List<ProblemList> list = new ArrayList<ProblemList>();
+    	ProblemList problemList = new ProblemList("2018-06-16", "北美", "刘玄", "bug修复", "2018-07-03", "终端工具部", "刘玄", "open", "");
+    	for(int i = 0; i<5; i++)
+    	{
+    		list.add(problemList);
+    	}
     	
     	boolean sendResult = true;
-/*    	sendResult = sendEmailService.problemListSendEmail(toMailsProcess, ccMailsProcess, subject, emailContentDetail, problemListSelected,null,"toDoRemind");
+    	/*sendResult = sendEmailService.problemListSendEmail(toMailsProcess, ccMailsProcess, subject, emailContentDetail, list,null,"toDoRemind");*/
     	if (true == sendResult)
     	{
-    		System.out.println("邮件发送成功！");
-    	}*/
+    		LOGGER.info("邮件发送成功!");
+    	}
 
     	return mv;
     }

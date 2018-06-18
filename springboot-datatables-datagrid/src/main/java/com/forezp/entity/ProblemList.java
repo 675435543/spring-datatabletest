@@ -66,4 +66,21 @@ public class ProblemList {
 		this.attachList = attachList;
 	}
 	
+	public ProblemList() {
+	}
+	
+	public ProblemList(String discoverTime, String target, String introducer, String problemSketch, String finishTime,
+			String responsibleField, String responsiblePerson, String status, String attachList) {
+		super();
+		this.discoverTime = discoverTime;
+		this.target = target;
+		this.introducer = introducer;
+		this.problemSketch = problemSketch;
+		this.finishTime = finishTime;
+		this.responsibleField = responsibleField;
+		this.responsiblePerson = responsiblePerson;
+		this.status = status;
+		this.attachList = attachList;
+	}
+	
 }
