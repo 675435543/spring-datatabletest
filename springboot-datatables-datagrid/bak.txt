@@ -520,4 +520,530 @@ VersionListServiceImpl.java
     }
 	
 
+    /**
+     * 导入第3个sheet页数据
+     * @param pathFile
+     * @return [参数说明]
+     * 
+     * @return JSONObject [返回类型说明]
+     * @exception throws [违例类型] [违例说明]
+     * @see [类、类#方法、类#成员]
+     */
+    private JSONObject matchAndImportVersionListInfoSheet3(String pathFile, int sheetNumber)
+    {
+        JSONObject rsJson = new JSONObject();
+        try
+        {
+            //读取文件返回二维数组
+            String[][] arr = ExcelDataUtils.getArrFromFileXlsx(pathFile, sheetNumber);
+            if (arr != null)
+            {
+                String[] regular = {};//匹配正则表达式
+                String[] errMsg = {};//错误信息
+                // 创建map集合存储不合法的单元格所在位置及其提示信息
+                Map<String, Map<String, String>> errorMap = new HashMap<>();
+                rsJson = matchVersionListInfo(arr, regular, errMsg, errorMap);//校验导入信息
+                if (errorMap != null && errorMap.size() > 0)
+                {
+                    rsJson.put(STATUS, FAIL);
+                    rsJson.put(REASON, "第" + (sheetNumber + 1) + "个sheet页导入数据不合法，请修改正确，并重新导入");
+                    return rsJson;
+                }
+                else
+                {
+                    try
+                    {
+                        //校验成功,没有错误
+                        //将值传入对象
+                        VersionList versionList = null;
+                        int listSize = 50;//list的容量
+                        if (arr.length > 50)
+                        {
+                            listSize = 1000;//扩大初始化容量
+                        }
+                        List<VersionList> versionLists = new ArrayList<VersionList>(listSize);
+                        for (int i = 0; i < arr.length; i++)
+                        {
+                            versionList = new VersionList();
+                            versionList.setProBelongBmt(arr[i][0]);
+                            versionList.setRegion(arr[i][1]);
+                            versionList.setOrNumber(arr[i][2]);
+                            versionList.setProduct(arr[i][3]);
+                            versionList.setNation(arr[i][4]);
+                            versionList.setOperators(arr[i][5]);
+                            versionList.setTarget(arr[i][1] + "/" + arr[i][4] + "/" + arr[i][5]);
+                            versionList.setEmuiAndAndroidVersion(arr[i][6]);
+                            versionList.setProjectType(filterProjectType(arr[i][7]));
+                            versionList.setProjectStatus(arr[i][8]);
+                            versionList.setProjectProgress(arr[i][9]);
+                            versionList.setVersionNumber(arr[i][10]);
+                            versionList.setVersionSendTimePlan(arr[i][11]);
+                            versionList
+                                .setVersionSendTimePlanDateFormat(filterDateFormat(arr[i][11].split("\n|\r")[0]));
+                            versionList.setVersionSendTimeActual(arr[i][12]);
+                            versionList
+                                .setVersionSendTimeActualDateFormat(filterDateFormat(arr[i][12].split("\n|\r")[0]));
+                            versionList.setVersionSendTimePlanAndActual(filterDateDisplay(arr[i][11].split("\n|\r")[0])
+                                + "||" + filterDateDisplay(arr[i][12].split("\n|\r")[0]));
+                            versionList.setFeedbackTimePlan(arr[i][13]);
+                            versionList.setFeedbackTimePlanDateFormat(filterDateFormat(arr[i][13].split("\n|\r")[0]));
+                            versionList.setFeedbackTimeActual(arr[i][14]);
+                            versionList.setFeedbackTimeActualDateFormat(filterDateFormat(arr[i][14].split("\n|\r")[0]));
+                            versionList.setFeedbackTimePlanAndActual(filterDateDisplay(arr[i][13].split("\n|\r")[0])
+                                + "||" + filterDateDisplay(arr[i][14].split("\n|\r")[0]));
+                            versionList.setFilingTimePlan(arr[i][15]);
+                            versionList.setFilingTimePlanDateFormat(filterDateFormat(arr[i][15].split("\n|\r")[0]));
+                            versionList.setFilingTimeActual(arr[i][16]);
+                            versionList.setFilingTimeActualDateFormat(filterDateFormat(arr[i][16].split("\n|\r")[0]));
+                            versionList.setFilingTimePlanAndActual(filterDateDisplay(arr[i][15].split("\n|\r")[0])
+                                + "||" + filterDateDisplay(arr[i][16].split("\n|\r")[0]));
+                            versionList.setProvideVersionNumber(PROVIDEVERSIONNUMBER_MR);//表格没有相关数据
+                            versionList.setDelayOrNot(arr[i][17]);
+                            versionList.setDelayResponsibilityField(arr[i][18]);
+                            versionList.setDelayReason(arr[i][20]);//一线延迟根因和延迟原因需不需要合并
+                            versionList.setVersionListType(MR);
+                            versionLists.add(versionList);
+                            if ((i % 1000 == 0 && i != 0) || i == (arr.length - 1)) //当数量为1000或遍历完到末尾的时候执行保存数据操作,缓存条数最大为1000
+                            {
+                                importVersionListInfo(versionLists);//
+                            }
+                        }
+                        rsJson.put(STATUS, SUCCESS);
+                        rsJson.put(REASON, "第" + (sheetNumber + 1) + "个sheet页导入数据成功,导入数据" + arr.length + "条");
+                    }
+                    catch (Exception e)
+                    {
+                        LOGGER.error(e.getMessage(), e);
+                        rsJson.put(STATUS, FAIL);
+                        rsJson.put(REASON, "第" + (sheetNumber + 1) + "个sheet页数据保存数据库失败,请重试");
+                    }
+                }
+                
+            }
+            else
+            {
+                rsJson.put(STATUS, FAIL);
+                rsJson.put(REASON, "上传的Excel表第" + (sheetNumber + 1) + "个sheet页没有数据");
+                return rsJson;
+            }
+        }
+        catch (Exception e)
+        {
+            LOGGER.error(e.getMessage());
+            rsJson.put(STATUS, FAIL);
+            rsJson.put(REASON, "请检查第" + (sheetNumber + 1) + "个sheet页模板是否正确");
+            return rsJson;
+        }
+        return rsJson;
+    }
+	
+	
+    /**
+     * 导入第4个sheet页数据
+     * @param pathFile
+     * @return [参数说明]
+     * 
+     * @return JSONObject [返回类型说明]
+     * @exception throws [违例类型] [违例说明]
+     * @see [类、类#方法、类#成员]
+     */
+    private JSONObject matchAndImportVersionListInfoSheet4(String pathFile, int sheetNumber)
+    {
+        JSONObject rsJson = new JSONObject();
+        try
+        {
+            //读取文件返回二维数组
+            String[][] arr = ExcelDataUtils.getArrFromFileXlsx(pathFile, sheetNumber);
+            if (arr != null)
+            {
+                String[] regular = {};//匹配正则表达式
+                String[] errMsg = {};//错误信息
+                // 创建map集合存储不合法的单元格所在位置及其提示信息
+                Map<String, Map<String, String>> errorMap = new HashMap<>();
+                rsJson = matchVersionListInfo(arr, regular, errMsg, errorMap);//校验导入信息
+                if (errorMap != null && errorMap.size() > 0)
+                {
+                    rsJson.put(STATUS, FAIL);
+                    rsJson.put(REASON, "第" + (sheetNumber + 1) + "个sheet页导入数据不合法，请修改正确，并重新导入");
+                    return rsJson;
+                }
+                else
+                {
+                    try
+                    {
+                        //校验成功,没有错误
+                        //将值传入对象
+                        VersionList versionList = null;
+                        int listSize = 50;//list的容量
+                        if (arr.length > 50)
+                        {
+                            listSize = 1000;//扩大初始化容量
+                        }
+                        List<VersionList> versionLists = new ArrayList<VersionList>(listSize);
+                        for (int i = 0; i < arr.length; i++)
+                        {
+                            versionList = new VersionList();
+                            versionList.setProBelongBmt(arr[i][0]);
+                            versionList.setRegion(arr[i][1]);
+                            versionList.setOrNumber(arr[i][2]);
+                            versionList.setProduct(arr[i][3]);
+                            versionList.setNation(arr[i][4]);
+                            versionList.setOperators(arr[i][5]);
+                            versionList.setTarget(arr[i][1] + "/" + arr[i][4] + "/" + arr[i][5]);
+                            versionList.setEmuiAndAndroidVersion(arr[i][6]);
+                            versionList.setProjectType("");//未提供项目类型
+                            versionList.setProjectStatus(arr[i][7]);
+                            versionList.setProjectProgress(arr[i][8]);
+                            versionList.setVersionNumberBeforeUpgrade(arr[i][9]);
+                            versionList.setVersionNumber(arr[i][10]);
+                            versionList.setVersionProvideTimeFirst(arr[i][11]);
+                            versionList
+                                .setVersionProvideTimeFirstDateFormat(filterDateFormat(arr[i][11].split("\n|\r")[0]));
+                            versionList.setFutStartTimePlan(arr[i][12]);
+                            versionList.setFutStartTimePlanDateFormat(filterDateFormat(arr[i][12].split("\n|\r")[0]));
+                            versionList.setFutStartTimeActual(arr[i][13]);
+                            versionList.setFutStartTimeActualDateFormat(filterDateFormat(arr[i][13].split("\n|\r")[0]));
+                            versionList.setVersionSendTimePlan(arr[i][14]);
+                            versionList
+                                .setVersionSendTimePlanDateFormat(filterDateFormat(arr[i][14].split("\n|\r")[0]));
+                            versionList.setVersionSendTimeActual(arr[i][15]);
+                            versionList
+                                .setVersionSendTimeActualDateFormat(filterDateFormat(arr[i][15].split("\n|\r")[0]));
+                            versionList.setVersionSendTimePlanAndActual(filterDateDisplay(arr[i][14].split("\n|\r")[0])
+                                + "||" + filterDateDisplay(arr[i][15].split("\n|\r")[0]));
+                            versionList.setFeedbackTimePlan(arr[i][16]);
+                            versionList.setFeedbackTimePlanDateFormat(filterDateFormat(arr[i][16].split("\n|\r")[0]));
+                            versionList.setFeedbackTimeActual(arr[i][17]);
+                            versionList.setFeedbackTimeActualDateFormat(filterDateFormat(arr[i][17].split("\n|\r")[0]));
+                            versionList.setFeedbackTimePlanAndActual(filterDateDisplay(arr[i][16].split("\n|\r")[0])
+                                + "||" + filterDateDisplay(arr[i][17].split("\n|\r")[0]));
+                            versionList.setFilingTimePlan(arr[i][18]);
+                            versionList.setFilingTimePlanDateFormat(filterDateFormat(arr[i][18].split("\n|\r")[0]));
+                            versionList.setFilingTimeActual(arr[i][19]);
+                            versionList.setFilingTimeActualDateFormat(filterDateFormat(arr[i][19].split("\n|\r")[0]));
+                            versionList.setFilingTimePlanAndActual(filterDateDisplay(arr[i][18].split("\n|\r")[0])
+                                + "||" + filterDateDisplay(arr[i][19].split("\n|\r")[0]));
+                            versionList.setCClassBetaTime(arr[i][20]);
+                            versionList.setFullNetTransmitStrategy(arr[i][21]);
+                            versionList.setFullNetCompleteTime(arr[i][22]);
+                            versionList.setProvideVersionNumber(arr[i][23]);
+                            versionList.setDelayOrNot(arr[i][24]);
+                            versionList.setDelayResponsibilityField(arr[i][25]);
+                            versionList.setDelayReason(arr[i][26]);//备注
+                            versionList.setVersionListType(ROM);
+                            versionLists.add(versionList);
+                            if ((i % 1000 == 0 && i != 0) || i == (arr.length - 1)) //当数量为1000或遍历完到末尾的时候执行保存数据操作,缓存条数最大为1000
+                            {
+                                importVersionListInfo(versionLists);//
+                            }
+                        }
+                        rsJson.put(STATUS, SUCCESS);
+                        rsJson.put(REASON, "第" + (sheetNumber + 1) + "个sheet页导入数据成功,导入数据" + arr.length + "条");
+                    }
+                    catch (Exception e)
+                    {
+                        LOGGER.error(e.getMessage(), e);
+                        rsJson.put(STATUS, FAIL);
+                        rsJson.put(REASON, "第" + (sheetNumber + 1) + "个sheet页数据保存数据库失败,请重试");
+                    }
+                }
+                
+            }
+            else
+            {
+                rsJson.put(STATUS, FAIL);
+                rsJson.put(REASON, "上传的Excel表第" + (sheetNumber + 1) + "个sheet页没有数据");
+                return rsJson;
+            }
+        }
+        catch (Exception e)
+        {
+            LOGGER.error(e.getMessage());
+            rsJson.put(STATUS, FAIL);
+            rsJson.put(REASON, "请检查第" + (sheetNumber + 1) + "个sheet页模板是否正确");
+            return rsJson;
+        }
+        return rsJson;
+    }
+	
+    @Override
+    public void importVersionListInfo(List<VersionList> versionLists)
+    {
+        versionListDao.importVersionListInfo(versionLists);
+    }
+	
+	<insert id="importVersionListInfo" parameterType="VersionList">
+		REPLACE INTO version_manage_version_list
+		(
+		`proBelongBmt`,
+		`region`,
+		`orNumber`,
+		`product`,
+		`nation`,
+		`operators`,
+		`target`,
+		`emuiAndAndroidVersion`,
+		`projectType`,
+		`projectStatus`,
+		`projectProgress`,
+		`versionNumberBeforeUpgrade`,
+		`versionNumber`,
+		`versionProvideTimeFirst`,
+		`versionProvideTimeFirstDateFormat`,
+		`futStartTimePlan`,
+		`futStartTimePlanDateFormat`,
+		`futStartTimeActual`,
+		`futStartTimeActualDateFormat`,
+		`versionSendTimePlan`,
+		`versionSendTimePlanDateFormat`,
+		`versionSendTimeActual`,
+		`versionSendTimeActualDateFormat`,
+		`versionSendTimePlanAndActual`,
+		`feedbackTimePlan`,
+		`feedbackTimePlanDateFormat`,
+		`feedbackTimeActual`,
+		`feedbackTimeActualDateFormat`,
+		`feedbackTimePlanAndActual`,
+		`filingTimePlan`,
+		`filingTimePlanDateFormat`,
+		`filingTimeActual`,
+		`filingTimeActualDateFormat`,
+		`filingTimePlanAndActual`,
+		`cClassBetaTime`,
+		`fullNetTransmitStrategy`,
+		`fullNetCompleteTime`,
+		`provideVersionNumber`,
+		`delayOrNot`,
+		`delayResponsibilityField`,
+		`delayReason`,
+		`versionListType`
+		)
+		VALUES
+		<foreach collection="list" index="index" item="item"
+			separator=",">
+			(
+			#{item.proBelongBmt},
+			#{item.region},
+			#{item.orNumber},
+			#{item.product},
+			#{item.nation},
+			#{item.operators},
+			#{item.target},
+			#{item.emuiAndAndroidVersion},
+			#{item.projectType},
+			#{item.projectStatus},
+			#{item.projectProgress},
+			#{item.versionNumberBeforeUpgrade},
+			#{item.versionNumber},
+			#{item.versionProvideTimeFirst},
+			#{item.versionProvideTimeFirstDateFormat},
+			#{item.futStartTimePlan},
+			#{item.futStartTimePlanDateFormat},
+			#{item.futStartTimeActual},
+			#{item.futStartTimeActualDateFormat},
+			#{item.versionSendTimePlan},
+			#{item.versionSendTimePlanDateFormat},
+			#{item.versionSendTimeActual},
+			#{item.versionSendTimeActualDateFormat},
+			#{item.versionSendTimePlanAndActual},
+			#{item.feedbackTimePlan},
+			#{item.feedbackTimePlanDateFormat},
+			#{item.feedbackTimeActual},
+			#{item.feedbackTimeActualDateFormat},
+			#{item.feedbackTimePlanAndActual},
+			#{item.filingTimePlan},
+			#{item.filingTimePlanDateFormat},
+			#{item.filingTimeActual},
+			#{item.filingTimeActualDateFormat},
+			#{item.filingTimePlanAndActual},
+			#{item.cClassBetaTime},
+			#{item.fullNetTransmitStrategy},
+			#{item.fullNetCompleteTime},
+			#{item.provideVersionNumber},
+			#{item.delayOrNot},
+			#{item.delayResponsibilityField},
+			#{item.delayReason},
+			#{item.versionListType}
+			)
+		</foreach>
+	</insert>
+	
+	
+   /**
+     * 匹配列表信息
+     * @param source
+     * @param reg
+     * @param errMsg
+     * @param resultmap
+     * @return [参数说明] 
+     * @return JSONObject [返回类型说明]
+     * @exception throws [违例类型] [违例说明]
+     * @see [类、类#方法、类#成员]
+     */
+    private JSONObject matchVersionListInfo(final String[][] source, final String[] reg, final String[] errMsg,
+        Map<String, Map<String, String>> resultmap)
+    {
+        JSONObject rsJson = new JSONObject();
+        rsJson.put(STATUS, SUCCESS);
+        rsJson.put(REASON, "");
+        return rsJson;
+    }
+	
+ExcelDataUtils.java
+package com.huawei.authplatform.versionmanage.utils;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Method;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFRichTextString;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+/**
+ * 处理excel文档
+ * @author  lWX458995
+ * @version  [版本号, 2018年4月23日]
+ * @see  [相关类/方法]
+ * @since  [产品/模块版本]
+ */
+public class ExcelDataUtils<T>
+{
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelDataUtils.class);
+    
+    /**
+     * 通过Excel文档获取值返回二维数组
+     * 
+     * @param pathFile
+     *            文件路径
+     * @return String[][] 二维数组
+     */
+    public static String[][] getArrFromFileXls(String pathFile, int sheetNumber)
+    {
+        // 读取字段内容
+        /*POIFSFileSystem fs;*/
+        XSSFWorkbook wb;
+        XSSFSheet sheet;
+        XSSFRow row;
+        String[][] rs = null;
+        InputStream is = null;
+        Map<Integer, String> map = new HashMap<Integer, String>();
+        String str = "";
+        try
+        {
+            is = new FileInputStream(pathFile);
+            /*fs = new POIFSFileSystem(is);*/
+            wb = new XSSFWorkbook(is);
+            sheet = wb.getSheetAt(sheetNumber);
+            int rowNum = sheet.getLastRowNum();
+            row = sheet.getRow(0);
+            int colNum = row.getPhysicalNumberOfCells();
+            // 空数据
+            if (rowNum == 0)
+            {
+                return null;
+            }
+            
+            for (int i = 1; i <= rowNum; i++)
+            {
+                int a = 0;
+                row = sheet.getRow(i);
+                while (a < colNum)
+                {
+                    str += String.valueOf(getCellValue(row.getCell(a)));
+                    a++;
+                }
+                map.put(i, str);
+                str = "";
+            }
+            for (int m = 1; m <= map.size(); m++)
+            {
+                if (StringUtils.isBlank(map.get(m)))
+                {
+                    rowNum--;
+                }
+            }
+            rs = new String[rowNum][];
+            
+            for (int i = 1; i <= rowNum; i++)
+            {
+                row = sheet.getRow(i);
+                rs[i - 1] = new String[colNum];
+                
+                for (int j = 0; j < colNum; j++)
+                {
+                    if (!"null".equals(String.valueOf(getCellValue(row.getCell(j))))
+                        && !"".equals(String.valueOf(getCellValue(row.getCell(j)))))
+                    {
+                        rs[i - 1][j] = String.valueOf(getCellValue(row.getCell(j))).trim();
+                    }
+                    else
+                    {
+                        rs[i - 1][j] = "";
+                    }
+                }
+            }
+        }
+        
+        catch (FileNotFoundException e)
+        {
+        	LOGGER.error(e.getMessage());
+            return null;
+        }
+        catch (IOException e)
+        {
+        	LOGGER.error(e.getMessage());
+            return null;
+        }
+        catch (Exception e)
+        {
+        	LOGGER.error(e.getMessage());
+            return null;
+        }
+        finally
+        {
+            if (is != null)
+            {
+                try
+                {
+                    is.close();
+                }
+                catch (IOException e)
+                {
+                	LOGGER.error(e.getMessage());
+                }
+            }
+        }
+        return rs;
+    }
+    
 https://github.com/shuzheng/zheng
