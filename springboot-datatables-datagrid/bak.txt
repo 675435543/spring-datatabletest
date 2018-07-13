@@ -12,5 +12,512 @@ https://blog.csdn.net/m0_37885618/article/details/77196691
 
 联想功能添加div
 导入导出功能
+text:'导入',
+action:function(){
+  importData(accessToken);
+}
+
+function importData(accessToken){
+	$("#importMessageModal").modal('show');
+	
+	$("#submitImportMessage").unbind("click").click(function(){
+		submitImportData(accessToken);
+	});
+}
+
+function submitImportData(accessToken)
+{
+	var pathFile = $("#upfile").val();
+	var type = pathFile.substring(pathFile.lastIndexOf('.')+1,pathFile.length);
+	if(type!="xlsx"){
+		$("#Message").html("请上传.xlsx文件!");
+		$('#messageModal').modal('show');
+		$("#submitMessage").unbind("click").bind("click",function(){
+			$("#importMessageModal").modal('show');
+		});
+		return false;
+	}
+	else{
+		loading();
+		var form=new FormData(document.getElementById("fileForm"));
+		$.ajax({
+			url:basePath + "/versionmanage/versionmanage/importVersionList?access_token="+accessToken+"&userName="+currentUser.userName,
+			type:"POST",
+			data:form,
+			processData:false,
+			contentType:false,
+			success:function(data){
+				loadingClose();
+				json = eval("("+data+")");
+				var status = json.status;
+				if(status=="fail")
+				{
+					//$(".modal-title").html("导入失败");
+					$("#alertPrompt").modal("show");
+					if(json.path){
+						$("#alertBody").html(json.reason);
+						$("#downloadErrorFile").show();
+					}else{
+						$("#alertBody").html(json.reason);
+						$("#downloadErrorFile").hide();
+					}
+					$("#alertPromptSubmit").unbind("click").bind("click",function(){
+						$("#importMessageModal").modal('show');
+					});
+					$("#downloadErrorFile").unbind("click").bind("click",function(){
+						downloadErrorFile(json.path);
+					});
+				}
+				else
+				{
+					//creatModal('messegeDialog','messageModal222',420,'messageBody','submitMessage','提示',json.reason);
+					$("#Message").html(json.reason);
+					$('#messageModal').modal('show');
+					$("#upfile").val("");
+					$("input[name=file]").val("");
+					displayVersionList(accessToken);//导入成功,刷新列表
+				}
+			}
+		});
+	}
+}
+
+	<!-- 导入数据 -->
+	<div class="modal fade" id="importMessageModal" role="dialog"
+		aria-labelledby="importMessageModal" aria-hidden="true"
+		data-backdrop="static">
+		<div class="modal-dialog" style="width: 460px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="close closeDg" data-dismiss="modal" aria-hidden="false">
+						<span class="close-top"></span> <span class="close-bottom"></span>
+					</div>
+					<h4>导入数据</h4>
+				</div>
+				<div class="modal-bady">
+					<div class="inputCon" style="margin-bottom: 0px;">
+						<form role="form" enctype="multipart/form-data" method="POST"
+							id="fileForm">
+							<label style="margin-left: 25px; margin-right: 0px; width: 70px;">文件导入</label>
+							<input type="text" size="30"
+								style="width: 160px; height: 30px !important; border: 1px dotted #ccc"
+								name="upfile" id="upfile" placeholder="选择文件" readonly="readonly">
+							<input type="button" value="浏览" id="choose"
+								onclick="path.click()" class="btn btn-default"
+								style="width: 60px;"> <input class="file"
+								style="display: none;" type="file" id="path" name="file"
+								onchange="upfile.value=this.value">
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer" style="text-align: center;">
+					<button type="button" id="downloadExcelModel"
+						class="btn btn-default">下载模板</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						id="submitImportMessage">导入</button>
+					<button type="button" id="exitCurrentModal" class="btn btn-default"
+						data-dismiss="modal">退出</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 导入数据模态框提示 -->
+	<div class="modal fade" id="alertPrompt" role="dialog"
+		aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog" style="width: 470px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="close closeDg" data-dismiss="modal" aria-hidden="true">
+						<span class="close-top"></span> <span class="close-bottom"></span>
+					</div>
+					<h4>导入失败</h4>
+				</div>
+				<div class="modal-body">
+					<div class="msCon">
+						<i class="icon-notification"></i> <label id="alertBody"></label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default"
+						id="downloadErrorFile" style="display: none">下载错误数据</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						id="alertPromptSubmit">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 提示模态框 -->
+	<div class="modal fade" id="messageModal" role="dialog"
+		aria-labelledby="messageModalLabel" aria-hidden="true"
+		data-backdrop="static">
+		<div class="modal-dialog" style="width: 400px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="close closeDg" data-dismiss="modal" aria-hidden="true">
+						<span class="close-top"></span> <span class="close-bottom"></span>
+					</div>
+					<h4>提示</h4>
+				</div>
+				<div class="modal-bady">
+					<div class="msCon">
+						<i class="icon-notification"></i><label id="Message"></label>
+					</div>
+				</div>
+				<div class="modal-footer" style="text-align: center;">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						id="submitMessage">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class='msCon' id="versionListExportMessage" style="display:none;">
+		<i class='icon-notification'></i><label style='padding-left: 0px;'>
+			确认导出版本列表信息?
+		</label>
+	</div>
+	
+    /**
+     * 导入版本列表
+     * @param request
+     * @return [参数说明]
+     * 
+     * @return JSONObject [返回类型说明]
+     * @exception throws [违例类型] [违例说明]
+     * @see [类、类#方法、类#成员]
+     */
+	@URLDescription(url = "/versionmanage/importVersionList", description = "导入版本详情")
+    @RequestMapping(value = "/versionmanage/importVersionList")
+    public String importVersionList(HttpServletRequest request,@RequestParam("userName") String userName)
+    {
+       
+        JSONObject resultJson = new JSONObject();
+        String pathFile = null;
+        boolean res = false;
+        List<String> userNameList = null;
+        long size = Integer.parseInt(sizeLimitCheckOut);
+        boolean administrator = false;//判断是否是管理员用户
+        userNameList = versionListService.getVersionListUsers(ADMINISTRATOR, VERSIONLIST);//获取管理员工号列表
+        if(!CollectionUtils.isEmpty(userNameList))
+        {
+            for(int i = 0; i<userNameList.size() ; i++)
+            {
+                if(userNameList.get(i).toLowerCase().equals(userName.toLowerCase()))
+                {
+                    administrator = true;
+                    break;
+                }                
+            }
+        }
+        try
+        {
+            //上传文件
+            //第一步,先导入文件
+            pathFile = UploadFileUtils.uploadFile(request,resourceHandler,resourceLocations,userName,versionListService);
+            //校验并导入数据到数据库
+            resultJson = versionListService.matchAndImportVersionListInfo(pathFile);
+            res = SoaAuth.checkFilePass(pathFile,"pro");//扫描导入文件,如果扫描不通过,则删除文件
+            if(res != true) {
+                versionListService.updateAttachHistory(pathFile, NOTPASS, DELETE);//修改附件历史记录状态
+                FolderOperate.deleteFile(new File(pathFile));//删除扫描不通过的附件
+            }
+            else
+            {
+                if(administrator == true)
+                {
+                    versionListService.updateAttachHistory(pathFile, PASS, PASS);
+                }
+                else
+                {
+                    if(FolderOperate.getFileSize(new File(pathFile)) >= size) 
+                    {
+                        versionListService.updateAttachHistory(pathFile, PASS, NOTPASS);//大于1MB的文件需要管理员审核
+                    }
+                    else
+                    {
+                        versionListService.updateAttachHistory(pathFile, PASS, PASS);//小于1MB的文件不需要管理员审核
+                    }
+                }
+                
+            }
+            return resultJson.toString();
+        }
+        catch (Exception e)
+        {
+        	LOGGER.error(e.getMessage());
+            resultJson.put("status", "fail");
+            resultJson.put("reason", "导入文件失败");
+            return resultJson.toString();
+        }
+    }
+	
+UploadFileUtils.java
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.huawei.authplatform.versionmanage.bean.AttachHistory;
+import com.huawei.authplatform.versionmanage.service.VersionListService;
+
+/**
+ * 保存导入文件
+ * @author  lWX458995
+ * @version  [版本号, 2018年4月25日]
+ * @see  [相关类/方法]
+ * @since  [产品/模块版本]
+ */
+public class UploadFileUtils
+{
+    private static final Logger LOGGER = LoggerFactory.getLogger(UploadFileUtils.class);
+    private static final String VERSION_ATTACH = "versionAttach";
+    private static final String ATTACH_DESC = "excel导入的附件";
+    private static final String ADD = "add";
+    private static final String PASS = "pass";
+    
+    public static synchronized String uploadFile(HttpServletRequest request, String resourceHandler, String resourceLocations,String userName,VersionListService versionListService)
+    {
+         int result = 0;
+         String filePath = null;
+         AttachHistory attachHistory = new AttachHistory();
+    	 String attachType = VERSION_ATTACH;//版本附件
+         String attachName = "";
+         String fileType = "";
+         String attachPath = "";
+         String attachDesc = ATTACH_DESC;
+         String dataType = ADD;
+         String creator = userName;
+         String operateDesc = "";
+         try
+         {
+             MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
+             List<MultipartFile> fileList = multipartRequest.getFiles("file");  
+             for (MultipartFile file : fileList) {
+                 String fileName = file.getOriginalFilename();
+                 String fileNameAutoGenerate = DateUtil.dateFormatter(new Date(), DateUtil.DATAYMD)+"-"+new Date().getTime()+fileName.substring(fileName.lastIndexOf("."));
+                 attachName += fileNameAutoGenerate + ",";
+                 fileType += fileName.substring(fileName.lastIndexOf(".")) + ",";
+                 String savePath = resourceLocations + "/versionList/" + DateUtil.dateFormatter(new Date(), DateUtil.DATAYMD) + "/" + fileNameAutoGenerate;
+                 filePath = savePath;
+                 String accessPath = resourceHandler.substring(0, resourceHandler.lastIndexOf("/")) + "/versionList/"
+                     + DateUtil.dateFormatter(new Date(), DateUtil.DATAYMD) + "/" + fileNameAutoGenerate;
+                 attachPath += accessPath + ",";
+                 File dest = new File(savePath);
+                 // 检测是否存在目录
+                 if (!dest.getParentFile().exists())
+                 {
+                     dest.getParentFile().mkdirs();
+                 }
+                 try
+                 {
+                     file.transferTo(dest);
+                 }
+                 catch (IllegalStateException e)
+                 {
+                     LOGGER.error(e.getMessage());
+                 }
+                 catch (IOException e)
+                 {
+                     LOGGER.error(e.getMessage());
+                 }
+                 catch (Exception e)
+                 {
+                     LOGGER.error(e.getMessage());
+                 }
+             }
+             
+             if("add".equals(dataType))
+             {
+                 if("versionAttach".equals(attachType))
+                 {
+                     operateDesc = creator+"导入了版本附件:"+attachName.substring(0, attachName.length() - 1);
+                 }
+                 else
+                 {
+                     operateDesc = creator+"导入了其他附件:"+attachName.substring(0, attachName.length() - 1);
+                 }
+             }
+             attachHistory.setAttachType(attachType);
+             attachHistory.setAttachName(attachName.substring(0, attachName.length() - 1));
+             attachHistory.setFileType(fileType.substring(0, fileType.length() - 1));
+             attachHistory.setAttachPath(attachPath.substring(0, attachPath.length() - 1));
+             attachHistory.setAttachDesc(attachDesc);
+             attachHistory.setDataType(dataType);
+             attachHistory.setCreator(creator);
+             attachHistory.setOperateDesc(operateDesc);
+             attachHistory.setCheckFilePass(PASS);//默认是通过检测
+             result = versionListService.addAttachHistory(attachHistory);
+         }
+         catch (Exception e)
+         {
+        	 LOGGER.error(e.getMessage());
+         }
+         
+         return filePath;
+    }
+    
+}
+
+VersionListServiceImpl.java
+    @Override
+    public JSONObject matchAndImportVersionListInfo(String pathFile)
+    {
+        JSONObject rsJson = new JSONObject();
+        JSONObject rsJsonSheet1 = new JSONObject();
+        JSONObject rsJsonSheet3 = new JSONObject();
+        JSONObject rsJsonSheet4 = new JSONObject();
+        rsJsonSheet1 = matchAndImportVersionListInfoSheet1(pathFile, SHEET_NUMBER0);
+        rsJsonSheet3 = matchAndImportVersionListInfoSheet3(pathFile, SHEET_NUMBER2);
+        rsJsonSheet4 = matchAndImportVersionListInfoSheet4(pathFile, SHEET_NUMBER3);
+        
+        if (rsJsonSheet1.getString(STATUS).equals(FAIL) && rsJsonSheet3.getString(STATUS).equals(FAIL)
+            && rsJsonSheet4.getString(STATUS).equals(FAIL))
+        {
+            rsJson.put(STATUS, FAIL);
+            rsJson.put(REASON,
+                rsJsonSheet1.getString(REASON) + rsJsonSheet3.getString(REASON) + rsJsonSheet4.getString(REASON));
+            return rsJson;
+        }
+        else
+        {
+            rsJson.put(STATUS, SUCCESS);
+            rsJson.put(REASON,
+                rsJsonSheet1.getString(REASON) + rsJsonSheet3.getString(REASON) + rsJsonSheet4.getString(REASON));
+            return rsJson;
+        }
+    }
+	
+   /**
+     * 导入第1个sheet页数据
+     * @param pathFile
+     * @return [参数说明]
+     * 
+     * @return JSONObject [返回类型说明]
+     * @exception throws [违例类型] [违例说明]
+     * @see [类、类#方法、类#成员]
+     */
+    private JSONObject matchAndImportVersionListInfoSheet1(String pathFile, int sheetNumber)
+    {
+        JSONObject rsJson = new JSONObject();
+        try
+        {
+            //读取文件返回二维数组
+            String[][] arr = ExcelDataUtils.getArrFromFileXlsx(pathFile, sheetNumber);
+            if (arr != null)
+            {
+                String[] regular = {};//匹配正则表达式
+                String[] errMsg = {};//错误信息
+                // 创建map集合存储不合法的单元格所在位置及其提示信息
+                Map<String, Map<String, String>> errorMap = new HashMap<>();
+                rsJson = matchVersionListInfo(arr, regular, errMsg, errorMap);//校验导入信息
+                if (errorMap != null && errorMap.size() > 0)
+                {
+                    rsJson.put(STATUS, FAIL);
+                    rsJson.put(REASON, "第" + (sheetNumber + 1) + "个sheet页导入数据不合法，请修改正确，并重新导入");
+                    return rsJson;
+                }
+                else
+                {
+                    try
+                    {
+                        //校验成功,没有错误
+                        //将值传入对象
+                        VersionList versionList = null;
+                        int listSize = 50;//list的容量
+                        if (arr.length > 50)
+                        {
+                            listSize = 1000;//扩大初始化容量
+                        }
+                        List<VersionList> versionLists = new ArrayList<VersionList>(listSize);
+                        for (int i = 0; i < arr.length; i++)
+                        {
+                            versionList = new VersionList();
+                            versionList.setProBelongBmt(arr[i][0]);
+                            versionList.setRegion(arr[i][1]);
+                            versionList.setOrNumber(arr[i][2]);
+                            versionList.setProduct(arr[i][3]);
+                            versionList.setNation(arr[i][4]);
+                            versionList.setOperators(arr[i][5]);
+                            versionList.setTarget(arr[i][1] + "/" + arr[i][4] + "/" + arr[i][5]);
+                            versionList.setEmuiAndAndroidVersion(arr[i][6]);
+                            versionList.setProjectType(arr[i][7]);
+                            versionList.setProjectStatus(arr[i][8]);
+                            versionList.setProjectProgress(arr[i][9]);
+                            versionList.setVersionProvideTimeFirst(arr[i][10]);
+                            versionList
+                                .setVersionProvideTimeFirstDateFormat(filterDateFormat(arr[i][10].split("\n|\r")[0]));
+                            versionList.setVersionNumber(arr[i][11]);
+                            versionList.setVersionSendTimePlan(arr[i][12]);
+                            versionList
+                                .setVersionSendTimePlanDateFormat(filterDateFormat(arr[i][12].split("\n|\r")[0]));
+                            versionList.setVersionSendTimeActual(arr[i][13]);
+                            versionList
+                                .setVersionSendTimeActualDateFormat(filterDateFormat(arr[i][13].split("\n|\r")[0]));
+                            versionList.setVersionSendTimePlanAndActual(filterDateDisplay(arr[i][12].split("\n|\r")[0])
+                                + "||" + filterDateDisplay(arr[i][13].split("\n|\r")[0]));
+                            versionList.setFeedbackTimePlan(arr[i][14]);
+                            versionList.setFeedbackTimePlanDateFormat(filterDateFormat(arr[i][14].split("\n|\r")[0]));
+                            versionList.setFeedbackTimeActual(arr[i][15]);
+                            versionList.setFeedbackTimeActualDateFormat(filterDateFormat(arr[i][15].split("\n|\r")[0]));
+                            versionList.setFeedbackTimePlanAndActual(filterDateDisplay(arr[i][14].split("\n|\r")[0])
+                                + "||" + filterDateDisplay(arr[i][15].split("\n|\r")[0]));
+                            versionList.setFilingTimePlan(arr[i][16]);
+                            versionList.setFilingTimePlanDateFormat(filterDateFormat(arr[i][16].split("\n|\r")[0]));
+                            versionList.setFilingTimeActual(arr[i][17]);
+                            versionList.setFilingTimeActualDateFormat(filterDateFormat(arr[i][17].split("\n|\r")[0]));
+                            versionList.setFilingTimePlanAndActual(filterDateDisplay(arr[i][16].split("\n|\r")[0])
+                                + "||" + filterDateDisplay(arr[i][17].split("\n|\r")[0]));
+                            versionList.setProvideVersionNumber(arr[i][19]);
+                            versionList.setDelayOrNot(arr[i][22]);
+                            versionList.setDelayResponsibilityField(arr[i][23]);
+                            versionList.setDelayReason(arr[i][24]);//备注
+                            versionList.setVersionListType(NEWPRODUCT);
+                            versionLists.add(versionList);
+                            if ((i % 1000 == 0 && i != 0) || i == (arr.length - 1)) //当数量为1000或遍历完到末尾的时候执行保存数据操作,缓存条数最大为1000
+                            {
+                                importVersionListInfo(versionLists);//
+                            }
+                        }
+                        rsJson.put(STATUS, SUCCESS);
+                        rsJson.put(REASON, "第" + (sheetNumber + 1) + "个sheet页导入数据成功,导入数据" + arr.length + "条");
+                    }
+                    catch (Exception e)
+                    {
+                        LOGGER.error(e.getMessage(), e);
+                        rsJson.put(STATUS, FAIL);
+                        rsJson.put(REASON, "第" + (sheetNumber + 1) + "个sheet页数据保存数据库失败,请重试");
+                    }
+                }
+                
+            }
+            else
+            {
+                rsJson.put(STATUS, FAIL);
+                rsJson.put(REASON, "上传的Excel表第" + (sheetNumber + 1) + "个sheet页没有数据");
+                return rsJson;
+            }
+        }
+        catch (Exception e)
+        {
+            LOGGER.error(e.getMessage());
+            rsJson.put(STATUS, FAIL);
+            rsJson.put(REASON, "请检查第" + (sheetNumber + 1) + "个sheet页模板是否正确");
+            return rsJson;
+        }
+        return rsJson;
+    }
+	
 
 https://github.com/shuzheng/zheng
