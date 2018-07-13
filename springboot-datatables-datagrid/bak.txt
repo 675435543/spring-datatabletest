@@ -1514,6 +1514,77 @@ public class ExcelDataUtils<T>
 }
 
 
+导出
+text:'导出',
+action:function(){
+  exportData(accessToken);
+}
 
+function exportData(accessToken){
+	creatModal('modalDialog','versionListExportMessageModal',420,'versionListExportMessage','submitVersionListExportMessage','提示','');
+	//绑定删除操作
+	$("#submitVersionListExportMessage").unbind("click").click(function(){
+		window.location.href= basePath + "/versionmanage/versionmanage/ExportVersionList?access_token="+accessToken;
+		$('#versionListExportMessageModal').modal('hide');
+	});
+}
+
+    @URLDescription(url = "/versionmanage/ExportVersionList", description = "导出版本详情")
+    @RequestMapping(value = "/versionmanage/ExportVersionList")
+    public void ExportVersionList(HttpServletRequest req, HttpServletResponse response, String fileName)
+    {
+        versionListService.ExportVersionListInfo(response);
+    }
+    
+	
+	    @Override
+    public void ExportVersionListInfo(HttpServletResponse response)
+    {
+        //表头
+        String[] headers = HEADERS;
+        
+        //数据键名或者MODEL类字段名
+        String[] Col = COL;
+        
+        String[] sheetNames = SHEETNAMES;
+        
+        ExcelDataUtils<VersionList> ex = new ExcelDataUtils<VersionList>();
+        
+        //这是model类型的数据  
+        List<VersionList> excelList1 = null;
+        List<VersionList> excelList2 = null;
+        List<VersionList> excelList3 = null;
+        VersionList versionListSearchParam = new VersionList();
+        versionListSearchParam.setVersionListType("newProduct");
+        excelList1 = findVersionList(versionListSearchParam);
+        versionListSearchParam.setVersionListType("mr");
+        excelList2 = findVersionList(versionListSearchParam);
+        versionListSearchParam.setVersionListType("rom");
+        excelList3 = findVersionList(versionListSearchParam);
+        
+        try
+        {
+            //生成Excel
+            // 声明一个工作薄
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            ex.exportExcelXlsxThreeSheets(workbook, sheetNames, headers, Col, excelList1, excelList2, excelList3, null);
+            //下载
+            response.setContentType("application/x-excel");
+            response.setCharacterEncoding("UTF-8");
+            String fileName = "新产品MR版本ROM版本汇总.xlsx";
+            response.setHeader("Content-disposition",
+                "attachment;filename=" + new String(fileName.getBytes("gbk"), "iso-8859-1"));
+            OutputStream ouputStream;
+            
+            ouputStream = response.getOutputStream();
+            workbook.write(ouputStream);
+            ouputStream.flush();
+            ouputStream.close();
+        }
+        catch (IOException e)
+        {
+        	LOGGER.error(e.getMessage());
+        }
+    }
 
 https://github.com/shuzheng/zheng
