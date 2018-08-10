@@ -1,14 +1,87 @@
 https://blog.csdn.net/jlh912008548/article/details/72782241
 
 CREATE TABLE `sys_user_log` (
-  `log_id` varchar(32) NOT NULL COMMENT '��־��id��uuid',
-  `user_id` varchar(32) DEFAULT NULL COMMENT '�û�id,��¼�����û�',
-  `module_name` varchar(225) NOT NULL COMMENT 'ģ������',
-  `operate` varchar(225) NOT NULL COMMENT '��������',
-  `time` datetime NOT NULL COMMENT '����ʱ��',
-  `class_name` varchar(225) NOT NULL COMMENT '������',
-  `method_name` varchar(225) NOT NULL COMMENT '��������',
-  `params` longtext COMMENT '�������',
-  `ip` varchar(225) NOT NULL COMMENT '����ip',
+  `log_id` varchar(32) NOT NULL COMMENT '日志表id，uuid',
+  `user_id` varchar(32) DEFAULT NULL COMMENT '用户id,记录操作用户',
+  `module_name` varchar(225) NOT NULL COMMENT '模块名称',
+  `operate` varchar(225) NOT NULL COMMENT '操作名称',
+  `time` datetime NOT NULL COMMENT '操作时间',
+  `class_name` varchar(225) NOT NULL COMMENT '类名称',
+  `method_name` varchar(225) NOT NULL COMMENT '方法名称',
+  `params` longtext COMMENT '传入参数',
+  `ip` varchar(225) NOT NULL COMMENT '操作ip',
   PRIMARY KEY (`log_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+教你一步步搞定win7环境下RobotFramework的环境搭建
+https://blog.csdn.net/lanroness/article/details/71374727
+1,安装Python
+python-2.7.12.amd64.msi安装完成后
+添加 C:\Python27;C:\Python27\Scripts;  到path路径 
+cmd输入 python验证是否安装成功
+2，安装Setuptools
+解压setuptools-40.0.0.zip
+在目录setuptools-40.0.0  运行python setup.py install
+3，安装Pip
+解压pip-18.0.tar.gz
+在目录pip-18.0  运行python setup.py install
+4，安装robot framework
+两种安装方式
+1）robotframework-2.8.7.win-amd64.exe  双击安装
+2）解压robotframework-2.8.7.tar.gz，在目录robotframework-2.8.7运行python setup.py install
+5,安装wxPython
+双击运行wxPython2.8-win64-unicode-2.8.12.1-py27.exe
+6，安装RIDE
+解压robotframework-ride-1.5.2.1.tar.gz
+在目录robotframework-ride-1.5.2.1运行python setup.py install
+7,创建桌面快捷方式
+1）在桌面上右键新建快捷方式
+2）在“请键入对象”的位置上输入命令：C:\Python27\pythonw.exe -c “from robotide import main; main()”，D:\为Python的安装路径
+3）单击下一步
+
+Test1
+//testcase.txt
+*** Settings ***
+Resource          公共函数.txt
+Library           Selenium2Library
+Library           OperatingSystem
+Library           Collections
+
+*** Test Cases ***
+使用人数分析
+    [Setup]    登陆
+    click element    xpath=//*[@id="Div1"]/ul[1]/li[1]/a
+    sleep    5
+    click element    xpath=//*[@id="Div1"]/ul[1]/li[2]/a
+    sleep    5
+    click element    xpath=//*[@id="Div1"]/ul[1]/li[3]/a
+    sleep    5
+    click element    xpath=//*[@id="Div1"]/ul[1]/li[4]/a
+    sleep    5
+    [Teardown]    清除环境
+
+//公共函数.txt
+*** Settings ***
+Library           Selenium2Library
+Library           OperatingSystem
+
+*** Keywords ***
+登陆
+    [Documentation]    登陆
+    Open Browser    http://localhost:8098/rsearch-analysis-web/login?redirectUrl=/rsearch-analysis-web/    chrome
+    Maximize Browser Window
+    sleep    5
+    Input Text    xpath=//*[@id="uid"]    lwx458995
+    Input Text    xpath=//*[@id="password"]    @liu123456
+    Click Element    xpath=//*[@id="page-input-holder"]/input[2]
+    sleep    5
+
+清除环境
+    [Documentation]    清除环境
+    close browser
+    OperatingSystem.Run    taskkill /f /im \ chromedriver.exe
+
+//ride-run.bat
+python -c "from robotide import main;main()"
+
+chromedriver.exe  6.16 MB
