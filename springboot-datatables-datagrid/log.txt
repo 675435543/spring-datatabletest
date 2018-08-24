@@ -271,3 +271,15 @@ https://download.csdn.net/download/believe__dream/10146850
 如何安装
 https://www.cnblogs.com/-mrl/p/8990671.html
 https://blog.csdn.net/believe__dream/article/details/78723288
+
+（4）xsd配置无网络配置
+https://blog.csdn.net/AZHELL/article/details/69808591
+打开 Windows-->preferences-XML-XML catalog
+然后在右边的User specified Entries 中Add一项：
+Location：xsd文件的位置（在下载的Spring文件夹中的schema文件夹）
+KeyType：Schema Location
+Key： http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+配置完成后在无网络状态下测试是否成功！
+当然，以上方法对于任何的schema的配置都有效。
+
+
