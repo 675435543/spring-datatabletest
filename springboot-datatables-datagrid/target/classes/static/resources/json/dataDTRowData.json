@@ -1,23 +1,23 @@
-﻿{
+锘縶
     "data":[
         {
             "id":341,
-            "name":"Datatables中文网",
-            "content":"Datatables是一个基于jQuery的表格插件",
+            "name":"Datatables涓枃缃�",
+            "content":"Datatables鏄竴涓熀浜巎Query鐨勮〃鏍兼彃浠�",
             "DT_RowData":{
                 "id":341,
-                "name":"Datatables中文网",
-                "content":"Datatables是一个基于jQuery的表格插件"
+                "name":"Datatables涓枃缃�",
+                "content":"Datatables鏄竴涓熀浜巎Query鐨勮〃鏍兼彃浠�"
             }
         },
         {
             "id":342,
-            "name":"Bootstrap中文网",
-            "content":"Bootstrap是一个基于jQuery的表格插件",
+            "name":"Bootstrap涓枃缃�",
+            "content":"Bootstrap鏄竴涓熀浜巎Query鐨勮〃鏍兼彃浠�",
             "DT_RowData":{
                 "id":342,
-                "name":"Bootstrap中文网",
-                "content":"Bootstrap是一个基于jQuery的表格插件"
+                "name":"Bootstrap涓枃缃�",
+                "content":"Bootstrap鏄竴涓熀浜巎Query鐨勮〃鏍兼彃浠�"
             }
         }
     ]
