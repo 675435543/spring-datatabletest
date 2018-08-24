@@ -282,4 +282,10 @@ Key： http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 配置完成后在无网络状态下测试是否成功！
 当然，以上方法对于任何的schema的配置都有效。
 
-
+(5)
+https://zhidao.baidu.com/question/1754000515437150668.html
+java.lang.ClassNotFoundException: org.springframework.web.context.ContextLoad
+解决方案：其实是你的jar文件没有同步发布到自己项目的lib目录中
+(如果你是用Maven进行构建的话) 可以试试 下面的办法
+--rebuild下project就可以了
+项目点击右键 点击 Properties 选择Deployment Assembly 再点击右边的Add按钮 选择Java Build Path Entries后点击Next按钮 然后选择你的Maven Dependencies 确定即可 
