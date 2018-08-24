@@ -289,3 +289,37 @@ java.lang.ClassNotFoundException: org.springframework.web.context.ContextLoad
 (如果你是用Maven进行构建的话) 可以试试 下面的办法
 --rebuild下project就可以了
 项目点击右键 点击 Properties 选择Deployment Assembly 再点击右边的Add按钮 选择Java Build Path Entries后点击Next按钮 然后选择你的Maven Dependencies 确定即可 
+
+（6）工具类
+AppExpertareaUtil.java
+AsyncUtil.java
+CfgHistoryProcessUtil.java
+Constants.java
+ConvertUtil.java
+DownloadUtil.java
+ExcelUtil.java
+FileUtils.java
+GalaxyUtil.java
+LIST.TXT
+ListUtils.java
+MailUtil.java
+MongodbUtil.java
+MyMultipartResolver.java
+NumConstants.java
+PathUtil.java
+PoiUtil.java
+read.bat
+RowValueClassType.java
+ShortMsgUtil.java
+SolrUpdateUtil.java
+SourceUnionInitUtil.java
+StatInfoProcessUtil.java
+SynonymsUtil.java
+SysConfig.java
+TimeUtils.java
+UniomLabelInitUtil.java
+UserPermissionUtil.java
+UserSearchStatProcessUtil.java
+Util.java
+ValidatorUtil.java
+
