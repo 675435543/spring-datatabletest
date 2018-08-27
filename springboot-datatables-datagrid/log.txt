@@ -52,3 +52,93 @@ https://blog.csdn.net/u011134399/article/details/79034296
 
 （8）fileupload插件调用upload.parseRequest(request)解析得到空值问题
 https://blog.csdn.net/u013248535/article/details/55823364
+
+(9)公司版本，这个版本不要用的太高，会出问题哦
+<!-- 	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.12.RELEASE</version>
+		<relativePath/>
+	</parent> -->
+
+（10）spring mvc和spring boot下文件上传方式的方法
+上传文件开始的代码
+    public static void uploadFile(HttpServletRequest request, String filePath, String fileName)
+    {
+        // TODO Auto-generated method stub
+        BufferedInputStream in = null;
+        BufferedOutputStream out = null;
+        try {
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            List<FileItem> list = upload.parseRequest(request);
+            for(FileItem item : list)
+            {
+                if(item.isFormField())
+                {
+                    String inputName = item.getFieldName();
+                    String inputValue = item.getString();
+                    LOGGER.info(inputName + "=" + inputValue);
+                }
+                else
+                {
+                    in = new BufferedInputStream(item.getInputStream());
+                    out = new BufferedOutputStream(new FileOutputStream(filePath+fileName));
+                    byte buffer[] = new byte[1024];
+                    int len = 0;
+                    while (-1 != (len = in.read(buffer, 0, buffer.length)))
+                    {
+                        out.write(buffer, 0, len);
+                    }
+                }
+            }
+        }
+        catch (IllegalStateException e)
+        {
+            LOGGER.error(e.getMessage());
+        }
+        catch(Exception e) {
+            LOGGER.error(e.getMessage());
+        }finally {
+            IOUtils.closeQuietly(in);
+            IOUtils.closeQuietly(out);
+        }
+        
+    }
+
+
+    public static void uploadFile(HttpServletRequest request, String filePath, String fileName)
+    {
+        // TODO Auto-generated method stub
+        BufferedInputStream in = null;
+        BufferedOutputStream out = null;
+        try {
+            StandardMultipartHttpServletRequest req = (StandardMultipartHttpServletRequest) request;
+            Iterator<String> iterator = req.getFileNames();
+            while (iterator.hasNext()) {
+                MultipartFile file = req.getFile(iterator.next());          
+                in = new BufferedInputStream(file.getInputStream());
+                out = new BufferedOutputStream(new FileOutputStream(filePath+fileName));
+                byte buffer[] = new byte[1024];
+                int len = 0;
+                while (-1 != (len = in.read(buffer, 0, buffer.length)))
+                {
+                    out.write(buffer, 0, len);
+                }
+            }
+        }
+        catch (IllegalStateException e)
+        {
+            LOGGER.error(e.getMessage());
+        }
+        catch(Exception e) {
+            LOGGER.error(e.getMessage());
+        }finally {
+            IOUtils.closeQuietly(in);
+            IOUtils.closeQuietly(out);
+        }
+        
+    }
+
+
+  
