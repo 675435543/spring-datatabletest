@@ -47,4 +47,8 @@ UserSearchStatProcessUtil.java
 Util.java
 ValidatorUtil.java
 
+（7）oracle的依赖包找不到
 https://blog.csdn.net/u011134399/article/details/79034296
+
+（8）fileupload插件调用upload.parseRequest(request)解析得到空值问题
+https://blog.csdn.net/u013248535/article/details/55823364
