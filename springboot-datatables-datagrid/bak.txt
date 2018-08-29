@@ -11,3 +11,13 @@ Spring Boot配置定时任务（实例）
 https://blog.csdn.net/m0_37885618/article/details/77196691
 
 联想功能添加div
+
+自动化测试工具
+https://blog.csdn.net/jlh912008548/article/details/72782241
+
+无注解的官方样例
+https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
+
+小马哥的lesson
+https://github.com/mercyblitz/segmentfault-lessons
+
