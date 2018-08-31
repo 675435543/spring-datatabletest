@@ -44,4 +44,6 @@ UserSearchStatProcessUtil.java
 Util.java
 ValidatorUtil.java
 
-
+（3）
+Git Extensions安装
+http://www.opdown.com/soft/79790.html#download
