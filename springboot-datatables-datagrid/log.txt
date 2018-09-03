@@ -47,3 +47,7 @@ ValidatorUtil.java
 （3）
 Git Extensions安装
 http://www.opdown.com/soft/79790.html#download
+
+(4)AtomicInteger
+https://blog.csdn.net/u013803262/article/details/72452932
+
