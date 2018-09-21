@@ -77,3 +77,6 @@ public enum SearchType
 
 2，https://www.cnblogs.com/downmoon/p/3158800.html
 锁定表回话
+
+3,https://www.cnblogs.com/taony/p/5290798.html
+clob 和 blob字段如何设置
