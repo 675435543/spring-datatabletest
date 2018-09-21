@@ -80,3 +80,6 @@ public enum SearchType
 
 3,https://www.cnblogs.com/taony/p/5290798.html
 clob 和 blob字段如何设置
+
+4，// 重构前后功能启用开关，可做成动态配置，便于测试
+String turn = ObjectUtils.defaultIfNull(request.getParameter("turn"), "off");
