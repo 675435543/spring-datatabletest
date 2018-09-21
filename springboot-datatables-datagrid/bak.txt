@@ -20,4 +20,57 @@ https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
 
 小马哥的lesson
 https://github.com/mercyblitz/segmentfault-lessons
+1 枚举类型的定义
+public enum SearchType
+{
 
+    GLOBAL_SEARCH("search", "全局搜索"),
+    SIMILAR_SEARCH("similar", "相似文章"),
+    RECOMMEND_SEARCH("recommend_search", "推荐搜索"),
+    API_SUGGEST("api_suggest", "api联想搜索"),
+    API_PLUGIN("api_plugin", "api联想搜索"),
+    API_DOC_SUGGEST("api_doc_suggest", "文档联想搜索");
+
+    private String value;
+
+    private String desc;
+
+    private SearchType(String value, String desc)
+    {
+        this.value = value;
+        this.desc = desc;
+    }
+
+    public String getValue()
+    {
+        return value;
+    }
+
+    public void setValue(String value)
+    {
+        this.value = value;
+    }
+
+    public String getDesc()
+    {
+        return desc;
+    }
+
+    public void setDesc(String desc)
+    {
+        this.desc = desc;
+    }
+
+    public static SearchType find(String value)
+    {
+        for (SearchType type : SearchType.values())
+        {
+            if (type.value.equals(value))
+            {
+                return type;
+            }
+        }
+        return null;
+    }
+
+}
