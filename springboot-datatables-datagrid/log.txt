@@ -303,3 +303,181 @@ public class TimerTest
 
     }
 }
+
+（1）定时任务实际例子
+    static
+    {
+        long initialDelay = 0;
+        long period = 24 * 60 * 60 * 1000;
+        try
+        {
+            String startTimeDefault = null;
+            String timeSpacingDefault = null;
+            startTimeDefault = SysConfig.getIndexConfig("startTimeDefaultParam");
+            timeSpacingDefault = SysConfig.getIndexConfig("timeSpacingDefaultParam");
+            if(!filterTime(startTimeDefault))
+            {
+                LOG.error("配置文件开始时间格式错误,取默认配置,默认每天02:00:00刷新缓存!");
+                startTimeDefault = START_TIME_DEFAULT;
+            }
+            if(!filterNumberHour(timeSpacingDefault))
+            {
+                LOG.error("配置文件时间间隔格式错误,取默认配置,默认刷新缓存时间间隔24小时!");
+                timeSpacingDefault = TIME_SPACING_DEFAULT;
+            }
+            //timeSpacingDefault对应天数,period对应相应的毫秒数
+            period = Integer.parseInt(timeSpacingDefault)* 24 * 60 * 60 * 1000;
+            final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd "+startTimeDefault);
+            Date startTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateFormatter.format(new Date()));
+            if(System.currentTimeMillis() > startTime.getTime())
+            {
+                startTime = new Date(startTime.getTime()+period);
+                initialDelay = startTime.getTime()-System.currentTimeMillis();
+            }
+            else
+            {
+                initialDelay = startTime.getTime()-System.currentTimeMillis();
+            }
+        }
+        catch (ParseException e)
+        {
+            LOG.error("定时任务在日期转换时出现错误!");
+            LOG.error(e.getMessage());
+        }
+        catch (Exception e)
+        {
+            LOG.error(e.getMessage());
+        }
+        POOL.scheduleAtFixedRate(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                loadParamConfig();
+            }
+        }, initialDelay, period, TimeUnit.MILLISECONDS);
+    }
+    对应正则表达式
+        /**
+     * 检测字符串是否为单个数值
+     * @param str
+     * @return [参数说明]
+     * 
+     * @return boolean [返回类型说明]
+     * @exception throws [违例类型] [违例说明]
+     * @see [类、类#方法、类#成员]
+     */
+    public static boolean filterNumberHour(String str)
+    {
+        String regEx = "[1-9]{1}[0-9]{0,}";//匹配含有1个或是多个数字的字符串,字符串不能是0或是以0开头
+        Pattern pattern = Pattern.compile(regEx);
+        Matcher matcher = pattern.matcher(str.trim());
+        boolean rs = matcher.matches();
+        return rs;
+    }
+    
+    /**
+     * 检测字符串是否为时间格式xx:xx:xx
+     * @param str
+     * @return [参数说明]
+     * 
+     * @return boolean [返回类型说明]
+     * @exception throws [违例类型] [违例说明]
+     * @see [类、类#方法、类#成员]
+     */
+    public static boolean filterTime(String str)
+    {
+        String regEx = "([01]\\d|2[0-3]):([0-5]\\d):([0-5]\\d)";//匹配时间格式的字符串
+        Pattern pattern = Pattern.compile(regEx);
+        Matcher matcher = pattern.matcher(str.trim());
+        boolean rs = matcher.matches();
+        return rs;
+    }
+    
+    （2）正则表达式类
+    
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexUtils
+{
+    public static String mergeBlank(String str)
+    {
+        //表示一个或多个空格的正则表达式
+        String regex = "\\s+"; 
+        
+        String strMergeBlank = str.trim().replaceAll(regex, " ");
+        
+        return strMergeBlank;
+    }
+    
+    public static boolean filterChineseBlankNumber(String str)
+    {
+        String regEx = "[\u4E00-\u9FA5]{1,}[\\s]{1,}[a-zA-Z0-9]{1,}[\\s\\S]*";//匹配中文汉字+空格+工号,如李颖姝 00426092
+        Pattern pattern = Pattern.compile(regEx);
+        Matcher matcher = pattern.matcher(str.trim());
+        boolean rs = matcher.matches();
+        return rs;
+    }
+    
+    public static boolean filterPinyinBlankNumber(String str)
+    {
+        String regEx = "[a-zA-Z]{1,}[\\s]{1,}[a-zA-Z0-9]{1,}[\\s\\S]*";//匹配拼音+空格+工号,如liuxuan WX458995
+        Pattern pattern = Pattern.compile(regEx);
+        Matcher matcher = pattern.matcher(str.trim());
+        boolean rs = matcher.matches();
+        return rs;
+    }
+
+    public static boolean filterAnyCharacterAndComma(String str)
+    {
+        String regEx = "[\\s\\S]*[,]$";//匹配以逗号结尾的字符串
+        Pattern pattern = Pattern.compile(regEx);
+        Matcher matcher = pattern.matcher(str.trim());
+        boolean rs = matcher.matches();
+        return rs;
+    }
+    
+    public static boolean filterHasComma(String str)
+    {
+        String regEx = "[\\s\\S]*[,][\\s\\S]*";//匹配含有逗号的字符串
+        Pattern pattern = Pattern.compile(regEx);
+        Matcher matcher = pattern.matcher(str.trim());
+        boolean rs = matcher.matches();
+        return rs;
+    }
+   
+    public static boolean filterNumber(String str)
+    {
+        String regEx = "[0-9]{1,}";//匹配含有1个或是多个数字的字符串
+        Pattern pattern = Pattern.compile(regEx);
+        Matcher matcher = pattern.matcher(str.trim());
+        boolean rs = matcher.matches();
+        return rs;
+    }
+    
+    public static boolean filterNumber2(String str)
+    {
+        String regEx = "[1-9]{1}[0-9]{0,}";//匹配含有1个或是多个数字的字符串
+        Pattern pattern = Pattern.compile(regEx);
+        Matcher matcher = pattern.matcher(str.trim());
+        boolean rs = matcher.matches();
+        return rs;
+    }
+    
+    public static boolean filterTime(String str)
+    {
+        String regEx = "([01]\\d|2[0-3]):([0-5]\\d):([0-5]\\d)";//匹配时间格式的字符串
+        Pattern pattern = Pattern.compile(regEx);
+        Matcher matcher = pattern.matcher(str.trim());
+        boolean rs = matcher.matches();
+        return rs;
+    }
+    
+    public static void main(String[] args)
+    {
+        boolean str = RegexUtils.filterTime("00:59:30");
+        System.out.println("str:"+str);
+    }
+    
+}
