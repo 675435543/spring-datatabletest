@@ -217,3 +217,89 @@ public class TestZinvAndPengyou extends Test
         public int c;
         int d;  朋友
         */
+2）定时任务周期执行
+public class TimerTest
+{
+    /**
+     * 周期执行
+     */
+    private static final ScheduledExecutorService POOL = Executors.newScheduledThreadPool(1);
+    
+    
+    static
+    {
+
+        long initialDelay = 0;
+        long dayMilliseconds = 24 * 60 * 60 * 1000;
+        try
+        {
+            String startTimeDefault = "10:41:00";
+            String timeSpacingDefault = "1";
+            //timeSpacingDefault天对应的毫秒数
+            dayMilliseconds = Integer.parseInt(timeSpacingDefault)* 24 * 60 * 60 * 1000;
+            System.out.println("dayMilliseconds:"+dayMilliseconds);
+            final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd "+startTimeDefault);
+            System.out.println("日期:"+dateFormatter.format(new Date()));
+            Date startTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateFormatter.format(new Date()));
+            long time1 = startTime.getTime();
+            
+            System.out.println("time1:"+time1);
+            
+            if(System.currentTimeMillis() > startTime.getTime())
+            {
+                System.out.println("System.currentTimeMillis() > startTime.getTime()");
+                startTime = new Date(startTime.getTime()+dayMilliseconds);
+                initialDelay = startTime.getTime()-System.currentTimeMillis();
+            }
+            else
+            {
+                initialDelay = startTime.getTime()-System.currentTimeMillis();
+            }
+            long time2 = startTime.getTime();
+            System.out.println("time2:"+time2);
+            System.out.println("time2-time1:"+(time2-time1));
+            System.out.println("System.currentTimeMillis:"+System.currentTimeMillis());
+            
+            System.out.println("initialDelay:"+initialDelay);
+            System.out.println("initialDelayhour:"+initialDelay/1000/60/60);
+        }
+        catch (ParseException e)
+        {
+            System.out.println("定时任务在日期转换时出现错误!");
+            e.printStackTrace();
+        }
+        dayMilliseconds = 1 * 1000;
+        POOL.scheduleAtFixedRate(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                System.out.println("我跑了一次");
+            }
+        }, initialDelay, dayMilliseconds, TimeUnit.MILLISECONDS);
+    }
+    public static void main(String[] args)
+    {
+/*        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");  
+        Date startDate;
+        try
+        {
+            startDate = dateFormatter.parse("2018/09/03 10:47:00");
+            Timer timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask(){
+            @Override
+            public void run()  
+            {  
+                System.out.println("execute task!" + this.scheduledExecutionTime());  
+            }  
+            },startDate,1*60*1000);  
+        }
+        catch (ParseException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }  */
+
+
+    }
+}
