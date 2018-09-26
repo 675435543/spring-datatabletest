@@ -83,3 +83,24 @@ clob 和 blob字段如何设置
 
 4，// 重构前后功能启用开关，可做成动态配置，便于测试
 String turn = ObjectUtils.defaultIfNull(request.getParameter("turn"), "off");
+5，系统
+智慧云搜素平台  操作系统Linux  redhat
+智慧云搜索平台是一款给研发部门使用的智能搜索平台。可搜索设计桌面、开发桌面和设计桌面、DTS、Dbox、OMSYS等系统上的研发资料，也可以搜QCC、持续改进、Hi3MS、weknow等平台上的经典案例
+搜索平台子系统:    GSLB对公司域名统一托管，ngnix提供请求代理负载均衡服务（tomcat1，tomcat2）
+搜索引擎服务系统:  分布式统一配置管理与节点同步（zookeeper1，zookeeper2,zookeeper3），Solrcloud搜索引擎核心1(solr1~solr21),ES集群搜索引擎核心2（ES1~ES3）
+数据采集子系统：多节点采集与定时器应用(tomcat1，tomcat2)  kafka分布式消息队列（kafka1，kafka2）  storm分布式消息流处理（storm1，storm2,storm3）
+数据运营子系统: 分析用户行为生成报表与模型（tomcat1，tomcat2）,tableau提供报表服务。
+大数据服务（部门galaxy平台） Hadoop集群 hdfs  hlive sqoop mr hbase，spark集群 Spark-sql Spark-core SparkStreaming
+文件服务子系统：文件预览、下载、解析、KIA检查等（tomcat1，tomcat2）
+数据存储服务系统：oracle存储重要业务数据，Mongo集群(索引数据冷备/中间计算件),Redis集群（分布式应用缓存）
+各子系统都以多节点集群的方式部署在不同地域的计算云上，支持异地容灾以及热发布。高可用
+各功能集群支持横向扩展，随着用户量与数据量的增加，只需在各集群中增加应用服务结点与索引结点即可。规模可扩展。
+子系统之间以服务集成，功能变更不需要发布整个平台，只需单独发布涉及的子系统。服务化。
+
+
+搜索平台子系统  <=>  数据运营子系统
+	^					向下
+搜索引擎服务系统  < 	大数据服务
+	^
+数据采集子系统 >右边3个 文件服务子系统
+						数据存储服务系统
