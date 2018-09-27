@@ -481,3 +481,48 @@ public class RegexUtils
     }
     
 }
+
+（1）mybatis查询clob数据
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.searchevaluate.dao.UserParamConfigDao">
+	<resultMap type="UserParamConfig" id="UserParamConfig">
+		<id property="id" column="ID" />
+		<result property="type" column="TYPE" />
+		<result property="rndCollection" column="RNDCOLLECTION" />
+		<result property="param" column="PARAM" javaType="java.lang.String" jdbcType="CLOB"/>
+	</resultMap>
+	
+	<select id="queryUserParamConfig" resultMap="UserParamConfig" >
+		SELECT
+		u.ID,
+		u.TYPE,
+		u.RNDCOLLECTION,
+		u.PARAM
+		FROM USER_PARAM_CONFIG u
+		where 1 = 1
+		<if test="type != null and type != ''">
+			and u.TYPE = #{type}
+		</if>
+	</select>
+</mapper>
+
+import java.util.List;
+import java.util.Map;
+
+import com.huawei.searchevaluate.entity.UserParamConfig;
+
+
+public interface UserParamConfigDao
+{
+    /**
+     * 可配置查询框架参数配置
+     * @param type
+     * @return [参数说明]
+     * 
+     * @return List<UserParamConfig> [返回类型说明]
+     * @exception throws [违例类型] [违例说明]
+     * @see [类、类#方法、类#成员]
+     */
+    List<UserParamConfig> queryUserParamConfig(Map<String, Object> map);
+}
