@@ -526,3 +526,18 @@ public interface UserParamConfigDao
      */
     List<UserParamConfig> queryUserParamConfig(Map<String, Object> map);
 }
+
+(2)在springboot里面获取bean对象的工具类
+@Component
+public class ApplicationContextUtil implements ApplicationContextAware {
+    private static ApplicationContext context;
+
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        context = applicationContext;
+    }
+    
+    public static ApplicationContext getApplicationContext() {
+        return context;
+    }
+}
+
