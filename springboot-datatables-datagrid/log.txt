@@ -541,3 +541,57 @@ public class ApplicationContextUtil implements ApplicationContextAware {
     }
 }
 
+(3)jar工程该war工程
+https://blog.csdn.net/lakelise/article/details/79299233
+https://blog.csdn.net/weixin_38312502/article/details/81026961
+主要参考第上面第2篇博文
+1，<packaging>war</packaging>
+2，添加sevlet-api
+		<dependency>  
+		    <groupId>javax.servlet</groupId>  
+		    <artifactId>javax.servlet-api</artifactId>  
+		    <scope>provided</scope>  
+		</dependency>
+3.修改内置tomcat为外置
+	<dependency>
+               <groupId>org.springframework.boot</groupId>
+               <artifactId>spring-boot-starter-tomcat</artifactId>
+               <scope>provided</scope>
+        </dependency>
+4.修改启动类继承SpringBootServletInitializer并重写其中的configure方法
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
+
+@SpringBootApplication
+@MapperScan("com.huawei.searchevaluate.dao")
+public class SearchEvaluateApplication extends SpringBootServletInitializer{
+
+	public static void main(String[] args) {
+		SpringApplication.run(SearchEvaluateApplication.class, args);
+	}
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder)
+    {
+        // TODO Auto-generated method stub
+        return builder.sources(SearchEvaluateApplication.class);
+    }
+	
+	
+}
+
+访问方式
+1，直接在工程运行java类SearchEvaluateApplication启动，不需要加工程名称
+http://localhost:8089/queryForParam/queryForSearchPlatformParam/000027
+
+2，在eclipse里面的server添加工程之后启动，端口HTTP/1.1  8098+工程目录
+http://localhost:8098/search-evaluate/queryForParam/queryForSearchPlatformParam/000027
+
+3，在tomcat启动，端口+解压之后的文件夹名称即工程名
+http://localhost:8083/search-evaluate-0.0.1-SNAPSHOT/queryForParam/queryForSearchPlatformParam/000027
+
+
