@@ -53,3 +53,6 @@ ValidatorUtil.java
 
 （4）使用spring+quartz配置多个定时任务 
 https://www.cnblogs.com/shizhijie/p/8243934.html
+
+(5)集合工具类CollectionUtils、ListUtils、SetUtils、MapUtils的使用 
+https://www.cnblogs.com/fengli9998/p/7868299.html
