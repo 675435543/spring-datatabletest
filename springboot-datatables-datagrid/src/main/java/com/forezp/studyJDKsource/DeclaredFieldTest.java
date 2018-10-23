@@ -1,4 +1,4 @@
-package com.forezp.test;
+package com.forezp.studyJDKsource;
 
 import java.lang.reflect.Field;
 
@@ -17,7 +17,7 @@ public class DeclaredFieldTest {
 		System.out.printf("e = %s\n", e);
 		
 	}
-	
+	//a=1 b=2
 	public static void swap(Integer a, Integer b) {
 		int temp = a.intValue();
 		try {
