@@ -21,8 +21,30 @@ https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
 小马哥的lesson
 https://github.com/mercyblitz/segmentfault-lessons
 
+（2）面试第一个
+第一个：
+1225：给出alipay_tz_invoke_command会调用到的所有TEE的标准接口。便于严寅辉在所有调用到的TEE标准接口入口和出口加打印，排除TEE标准接口导致data_abort。
+1226：从汇编的角度定位导致data_abort的指令地址。
+1227：应移动要求画出alipay_tz_invoke_command接口里面所有调用到的标准TEE接口的顺序。
+1228、1229：用阿里提供的修改后libalipay.a，以及各种不同的libalipay.a调试指纹注册部分，依然会报出data_abort错误。第一条命令正确返回，第二条命令不能返回。
+描述1：要实现指纹注册需要实现阿里提供的alipay_tz_invoke_command这个接口，这个接口会调用TEE的一系列标准接口。
+指纹注册的时候alipay_tz_invoke_command会被调用两次，第一次正确返回了，第二次会报data_abort错误
+当时为了定位是不是我们提供的tee的标准接口有问题，在TEE标准接口里面进出的地方都加了打印。可以看到成对的打印。看来我们这边是没有问题的
+指纹注册也会用到指纹芯片厂商 汇顶提供库文件，和阿里的库文件libalipay.a，我们无法看到他们的代码是如何实现的
+对libalipay.a做了反汇编
+同时把日志都打开看dump文件，分析堆栈信息，最后死机的时候pc指针是指到了libalipay的一个方法里面的某一条语句
+精简描述1：
+指纹注册在飞马的几款手机上适配过了。但是在中兴的一款手机上注册总是出问题。后来我这边负责定位这个问题。因为我被派到了客户现场。
+指纹注册会调用TEE提供的接口，汇顶提供的接口，和ali提供我们的接口。集成到手机里面汇顶和ali的是以.a的文件提供，我们是已点so的文件提供。最终会被编译成trustzone.bin文件提供给手机。
+可能互相会用对方的接口，但都看不到对方的实现
+当时先是在在TEE标准接口里面进出的地方都加了打印。可以看到成对的打印。看来我们这边是没有问题的
+又相别的版本，把手机里面的日志清空了，同时编译了一个带日志的版本，不停重试注册功能，最后手机死机了生成了一个dump文件，里面打印了一句data_abort 同时附带了堆栈信息pc是指向了一个地址
+对ali的.a文件做了反汇编  nm libxxx.a
 
-2，git操作
+
+
+（3），git操作
+git操作
 Git日常三板斧- 分支操作
 查看本地分支 git branch
 查看所有分支(本地以及远程) git branch –a 
@@ -62,6 +84,68 @@ master
 feature
 release
 任务开发在feature分支上，开发完毕，从master分支创建release分支，将feature分支合并至release分支，然后发布release分支，完成后，将release分支合并至master分支，同时删除feature分支
+
+有两个分支uat_bjc_1025(合并的分支)  configurablev2_bjc_1024(自己的分支)
+uat_bjc_1025是集合了其他代码的分支，一起测试，分开上主干
+configurablev2_bjc_1024是我方修改的分支，待提交到主干
+正常情况应该先修改configurablev2_bjc_1024,上库之后，merge到uat_bjc_1025
+
+git co和git ci
+1），使用场景
+在uat_bjc_1025分支上做了修改，还没有提交，想把修改移动到configurablev2_bjc_1024
+1，git stash先缓存本地uat_bjc_1025的修改
+2，切分支 git checkout configurablev2_bjc_1024,下面缩写
+git co configurablev2_bjc_1024
+3，拿出之前的缓存数据
+git stash pop stash@{0}
+4，按照步骤提交该修改到configurablev2_bjc_1024版本
+git add -u
+git commit -m '混排bug'    //  git ci -m '混排bug'
+git pull origin configurablev2_bjc_1024
+git push origin configurablev2_bjc_1024
+5，切分之再merge 别的分支的代码
+git co  uat_bjc_1025
+git merge --squash configurablev2_bjc_1024
+git add -u
+git ci -m '混排bug修复'
+git pull origin uat_bjc_1025
+git push origin uat_bjc_1025
+
+ 906  git st
+  907  git stash
+  908  git co configurablev2_bjc_1024
+  909  git stash pop stash@{0}
+  910  git diff
+  911  git add -u
+  912  git st
+  913  git ci -m '混排bug'
+  914  git pull origin configurablev2_bjc_1024
+  915  gi tst
+  916  git st
+  917  git push origin configurablev2_bjc_1024
+  918  git co  uat_bjc_1025
+  919  git merge --squash configurablev2_bjc_1024
+  920  git add -u
+  921  git st
+  922  git ci -m '混排bug修复'
+  923  git push origin uat_bjc_1025
+  924  git pull origin uat_bjc_1025
+  925  git push origin uat_bjc_1025
+  926  git st
+  927  git co configurablev2_bjc_1024
+  928  git add -u
+  929  git st
+  930  git ci -m  '分页bug修复'
+  931  git pull origin configurablev2_bjc_1024
+  932  git push origin configurablev2_bjc_1024
+  933  git co uat_bjc_1025
+  934  git merge --squash configurablev2_bjc_1024
+  935  git add -u
+  936  git st
+  937  git ci -m '分页bug'
+  938  给他
+  939  his
+  940  history
 
 
 
