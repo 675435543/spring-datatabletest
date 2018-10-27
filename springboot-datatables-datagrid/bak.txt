@@ -21,6 +21,10 @@ https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
 小马哥的lesson
 https://github.com/mercyblitz/segmentfault-lessons
 
+（1）数组转换为list的方法
+com.google.common.collect.Lists
+List<String> userSelectedList = Lists.newArrayList(selectedFrom);
+
 （2）面试第一个
 第一个：
 1225：给出alipay_tz_invoke_command会调用到的所有TEE的标准接口。便于严寅辉在所有调用到的TEE标准接口入口和出口加打印，排除TEE标准接口导致data_abort。
