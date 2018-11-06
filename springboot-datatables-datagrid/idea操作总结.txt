@@ -1,72 +1,72 @@
---´°¿ÚÏÔÊ¾Êı×Ö
-File->settings->Appearance & Behavior->AppearancelÀïÃæwindow optionsÏÂÕÒµ½show tool window barsÑ¡Ïî£¬¹´Ñ¡¾Í¿ÉÒÔÁË
-»¹ÓĞshow tool numbersÑ¡ÏîÒ²Òª¹´Ñ¡
+ï»¿--çª—å£æ˜¾ç¤ºæ•°å­—
+File->settings->Appearance & Behavior->Appearancelé‡Œé¢window optionsä¸‹æ‰¾åˆ°show tool window barsé€‰é¡¹ï¼Œå‹¾é€‰å°±å¯ä»¥äº†
+è¿˜æœ‰show tool numbersé€‰é¡¹ä¹Ÿè¦å‹¾é€‰
 
---ĞÂ´°¿Ú´ò¿ªÏîÄ¿
-Intellij ÈçºÎÔÚĞÂ´°¿ÚÖĞ´ò¿ªÏîÄ¿
+--æ–°çª—å£æ‰“å¼€é¡¹ç›®
+Intellij å¦‚ä½•åœ¨æ–°çª—å£ä¸­æ‰“å¼€é¡¹ç›®
 https://blog.csdn.net/yuanbingze/article/details/48529247
 
---Ìø×ª+¾«×¼ËÑË÷
-ÕÒactionµÄ·½·¨ctrl+shift+a£¬ÍË³öESC¼ü
-È»ºóÊäÈë¼ÇµÃµÄµ¥´Ê£¬ÕÒµ½¿ì½İ²Ù×÷ÌáÊ¾,ÓĞĞ©¿ì½İ¼üÃ»ÓĞÓÃÊÇÒòÎª¸úËÑ¹·Æ´Òô×²ÉÀÁË£¬¹Øµô¼´¿É
+--è·³è½¬+ç²¾å‡†æœç´¢
+æ‰¾actionçš„æ–¹æ³•ctrl+shift+aï¼Œé€€å‡ºESCé”®
+ç„¶åè¾“å…¥è®°å¾—çš„å•è¯ï¼Œæ‰¾åˆ°å¿«æ·æ“ä½œæç¤º,æœ‰äº›å¿«æ·é”®æ²¡æœ‰ç”¨æ˜¯å› ä¸ºè·Ÿæœç‹—æ‹¼éŸ³æ’è¡«äº†ï¼Œå…³æ‰å³å¯
 
-ÂèßäÂèßäºå ¸øÌáÊ¾ctrl+shift+a
-ÎŞ´¦²»ÔÚµÄÌø×ª
-(1) ÏîÄ¿Ìø×ª,ÏÈ¿ª¶à¸ö´°¿Úsettings->system settings->open project in new window
+å¦ˆå’ªå¦ˆå’ªå“„ ç»™æç¤ºctrl+shift+a
+æ— å¤„ä¸åœ¨çš„è·³è½¬
+(1) é¡¹ç›®è·³è½¬,å…ˆå¼€å¤šä¸ªçª—å£settings->system settings->open project in new window
 ctrl+alt+[]  
-(2) ÎÄ¼şÖ®¼äµÄÌø×ª£¬Õ»µÄĞÎÊ½½«ÎÄ¼şÑ¹Èë£¬×îºó¹â±êËùÔÚµÄÎÄ¼ş²»½øÕ»
-     1,ä¯ÀÀÁËÄÄĞ©ÎÄ¼ş  recent files ctrl+e
-     2,ä¯ÀÀÎ»ÖÃÌø×ª alt+×óÓÒ·½Ïò¼ü  ctrl+alt+×óÓÒ·½Ïò¼ü£¨¸úalt+×óÓÒ·½Ïò¼üÏà·´²»Òª¾À½áÁË£¬²»ÓÃËü¾ÍÍêÁË£©
-     3,±à¼­ÁËÄÄĞ©ÎÄ¼ş  recently changed files ctrl+shift+e
-     4,Ö±½ÓÌøµ½ÉÏÒ»´Î±à¼­  navigate ->last edit /next edit ctrl+q ,´óÌåË³ĞòÊÇ´ÓÕ»¶¥µÄÎÄ¼şÏòÏÂ·ÃÎÊ
+(2) æ–‡ä»¶ä¹‹é—´çš„è·³è½¬ï¼Œæ ˆçš„å½¢å¼å°†æ–‡ä»¶å‹å…¥ï¼Œæœ€åå…‰æ ‡æ‰€åœ¨çš„æ–‡ä»¶ä¸è¿›æ ˆ
+     1,æµè§ˆäº†å“ªäº›æ–‡ä»¶  recent files ctrl+e
+     2,æµè§ˆä½ç½®è·³è½¬ alt+å·¦å³æ–¹å‘é”®  ctrl+alt+å·¦å³æ–¹å‘é”®ï¼ˆè·Ÿalt+å·¦å³æ–¹å‘é”®ç›¸åä¸è¦çº ç»“äº†ï¼Œä¸ç”¨å®ƒå°±å®Œäº†ï¼‰
+     3,ç¼–è¾‘äº†å“ªäº›æ–‡ä»¶  recently changed files ctrl+shift+e
+     4,ç›´æ¥è·³åˆ°ä¸Šä¸€æ¬¡ç¼–è¾‘  navigate ->last edit /next edit ctrl+q ,å¤§ä½“é¡ºåºæ˜¯ä»æ ˆé¡¶çš„æ–‡ä»¶å‘ä¸‹è®¿é—®
 
-(3)ÊéÇ©Ìø×ª
+(3)ä¹¦ç­¾è·³è½¬
 bookmark
-1, Ìí¼Ó/É¾³ıÊéÇ©  ctrl+shift+F11 
-2, Ìí¼Ó/É¾³ıÊéÇ©(´øÊı×Ö)  ctrl+shift+alt+F11  
-±ê¼ÇºÃÊéÇ©Ö®ºóctrl+ÊéÇ©±àºÅ£¬¼´¿ÉÌø×ª¹ıÈ¥
-3, ²é¿´ÊéÇ©  shift+F11
+1, æ·»åŠ /åˆ é™¤ä¹¦ç­¾  ctrl+shift+F11 
+2, æ·»åŠ /åˆ é™¤ä¹¦ç­¾(å¸¦æ•°å­—)  ctrl+shift+alt+F11  
+æ ‡è®°å¥½ä¹¦ç­¾ä¹‹åctrl+ä¹¦ç­¾ç¼–å·ï¼Œå³å¯è·³è½¬è¿‡å»
+3, æŸ¥çœ‹ä¹¦ç­¾  shift+F11
 
-£¨4£©ÊÕ²Ø¼Ğ alt + 2¿ÉÒÔ´ò¿ªºÍ¹Ø±Õ²à±ßÀ¸µÄÊÕ²Ø¼Ğ
+ï¼ˆ4ï¼‰æ”¶è—å¤¹ alt + 2å¯ä»¥æ‰“å¼€å’Œå…³é—­ä¾§è¾¹æ çš„æ”¶è—å¤¹
 add to
-1, ĞÂ½¨ÊÕ²Ø¼Ğ / Ìí¼Óµ½ÊÕ²Ø¼Ğ alt + shift +f  ¿ÉÒÔÊÕ²ØÀàºÍ·½·¨
+1, æ–°å»ºæ”¶è—å¤¹ / æ·»åŠ åˆ°æ”¶è—å¤¹ alt + shift +f  å¯ä»¥æ”¶è—ç±»å’Œæ–¹æ³•
 
-£¨5£©Ìø×ªµ½Ä³¸öµ¥´ÊµÄÊ××ÖÄ¸
-×Ö·ûÌø×ª²å¼şemacsIdeaÌø×ª  ĞŞ¸Ä¿ì½İ¼üÎªalt+j
-×¢:  ĞŞ¸Ä¹ıµÄ¿ì½İ¼üÎªÀ¶É«£¬Ã»ÓĞĞŞ¸Ä¹ıµÄ¿ì½İ¼üÎª»ÒÉ«
-²Ù×÷²½Öè£º
-alt+j×ª»»Îª¸ÃÄ£Ê½£¬Ëø¶¨ÏëÒªÌø×ªµÄµØ·½µ¥´ÊµÄÊ××ÖÄ¸ ²¢°´Ò»ÏÂ£¬¸ßÁÁÖ®ºó°´Ò»ÏÂ³öÀ´µÄ×ÖÄ¸¼´¿ÉÊµÏÖÌø×ª¹¦ÄÜ
+ï¼ˆ5ï¼‰è·³è½¬åˆ°æŸä¸ªå•è¯çš„é¦–å­—æ¯
+å­—ç¬¦è·³è½¬æ’ä»¶emacsIdeaè·³è½¬  ä¿®æ”¹å¿«æ·é”®ä¸ºalt+j
+æ³¨:  ä¿®æ”¹è¿‡çš„å¿«æ·é”®ä¸ºè“è‰²ï¼Œæ²¡æœ‰ä¿®æ”¹è¿‡çš„å¿«æ·é”®ä¸ºç°è‰²
+æ“ä½œæ­¥éª¤ï¼š
+alt+jè½¬æ¢ä¸ºè¯¥æ¨¡å¼ï¼Œé”å®šæƒ³è¦è·³è½¬çš„åœ°æ–¹å•è¯çš„é¦–å­—æ¯ å¹¶æŒ‰ä¸€ä¸‹ï¼Œé«˜äº®ä¹‹åæŒ‰ä¸€ä¸‹å‡ºæ¥çš„å­—æ¯å³å¯å®ç°è·³è½¬åŠŸèƒ½
 
-£¨6£©±à¼­ÇøºÍÎÄ¼şÇøÀ´»ØÌø×ª  alt+1  ESC
-£¨7£©vim½øĞĞ¶à±à¼­ÇøÌø×ª
-ºóÃæÔÙÑ§vim
+ï¼ˆ6ï¼‰ç¼–è¾‘åŒºå’Œæ–‡ä»¶åŒºæ¥å›è·³è½¬  alt+1  ESC
+ï¼ˆ7ï¼‰vimè¿›è¡Œå¤šç¼–è¾‘åŒºè·³è½¬
+åé¢å†å­¦vim
 
-£¨8£©¾«×¼ËÑË÷ 
-1£¬ÀàÃûËÑË÷, Navigate ->class  ¿ì½İ¼ü£ºctrl+shift+t
-2£¬ÎÄ¼şËÑË÷, Navigate ->file     ¿ì½İ¼ü£ºctrl+shift+r
-3£¬º¯ÊıËÑË÷£¬Navigate ->symbol ¿ì½İ¼ü£ºctrl+shift+alt+n
-4£¬×Ö·û´®ËÑË÷£¬edit->find->find in path ¿ì½İ¼ü£ºctrl+h  ,ctrl+f
+ï¼ˆ8ï¼‰ç²¾å‡†æœç´¢ 
+1ï¼Œç±»åæœç´¢, Navigate ->class  å¿«æ·é”®ï¼šctrl+shift+t
+2ï¼Œæ–‡ä»¶æœç´¢, Navigate ->file     å¿«æ·é”®ï¼šctrl+shift+r
+3ï¼Œå‡½æ•°æœç´¢ï¼ŒNavigate ->symbol å¿«æ·é”®ï¼šctrl+shift+alt+n
+4ï¼Œå­—ç¬¦ä¸²æœç´¢ï¼Œedit->find->find in path å¿«æ·é”®ï¼šctrl+h  ,ctrl+f
 
-Ëø¶¨Ä³¸öµ¥´Ê  edit ->find ->Find Word at Caret   ctrl+f12
-ÏòÏÂËÑË÷edit ->find ->find next occurrence    ctrl+k
-ÏòÉÏËÑË÷edit ->find ->find previous occurrence ctrl+shift+k  ÏÖÔÚ
-ctrl+o¿´ÀàµÄËõÂÔÍ¼£¬ctrl+shift+ÉÏÏÂ¼üÔÚÀàÀïÃæµÄ·½·¨¼äÌøÔ¾
+é”å®šæŸä¸ªå•è¯  edit ->find ->Find Word at Caret   ctrl+f12
+å‘ä¸‹æœç´¢edit ->find ->find next occurrence    ctrl+k
+å‘ä¸Šæœç´¢edit ->find ->find previous occurrence ctrl+shift+k  ç°åœ¨
+ctrl+oçœ‹ç±»çš„ç¼©ç•¥å›¾ï¼Œctrl+shift+ä¸Šä¸‹é”®åœ¨ç±»é‡Œé¢çš„æ–¹æ³•é—´è·³è·ƒ
 
 hierarchy
-type hierarchy f4²»ÓÃ¼Ç
+type hierarchy f4ä¸ç”¨è®°
 method hierarchy ctrl+shift+h
 call hierarchy  ctrl+alt+h
 
---´úÂëÖúÊÖ+ÖØ¹¹+³éÈ¡
-alt+insertÊÇget set constructµÈµÈ
-(1)ÁĞ²Ù×÷
-1,¹â±êÒÆ¶¯¼¼ÇÉ
-move caret to next  ctrl+ ×óÓÒ¼ıÍ· ¹â±êÒÆµ½µ¥´Ê¿ªÍ·ºÍ½áÎ²
-move caret to line start/end  home/end¼ü ¹â±êÒÆµ½ĞĞ¿ªÍ·ºÍ½áÎ²
-ctrl+home/end ¹â±êÒÆ¶¯µ½ÎÄ±¾µÄ¿ªÍ·ºÍ½áÎ²
-edit ->find ->select all occurrences  ÅúÁ¿Ñ¡ÖĞctrl+alt+y
+--ä»£ç åŠ©æ‰‹+é‡æ„+æŠ½å–
+alt+insertæ˜¯get set constructç­‰ç­‰
+(1)åˆ—æ“ä½œ
+1,å…‰æ ‡ç§»åŠ¨æŠ€å·§
+move caret to next  ctrl+ å·¦å³ç®­å¤´ å…‰æ ‡ç§»åˆ°å•è¯å¼€å¤´å’Œç»“å°¾
+move caret to line start/end  home/endé”® å…‰æ ‡ç§»åˆ°è¡Œå¼€å¤´å’Œç»“å°¾
+ctrl+home/end å…‰æ ‡ç§»åŠ¨åˆ°æ–‡æœ¬çš„å¼€å¤´å’Œç»“å°¾
+edit ->find ->select all occurrences  æ‰¹é‡é€‰ä¸­ctrl+alt+y
 
-2,µ¥´Ê´óĞ´Ğ¡Ğ´ÇĞ»»
+2,å•è¯å¤§å†™å°å†™åˆ‡æ¢
 ctrl + shift + u
 
 (2)live templates
@@ -75,7 +75,7 @@ psfi
 psfs
 pi/pic
 ps/psc
-¶ÔÓ¦->
+å¯¹åº”->
 public static void main(String[] args) {
     $END$
 }
@@ -96,13 +96,13 @@ private String $var1$;
 private String $var2$;
 
 (3)postfix
-1£¬for
-2£¬sout
-3£¬field
-4£¬return
-5£¬nn
+1ï¼Œfor
+2ï¼Œsout
+3ï¼Œfield
+4ï¼Œreturn
+5ï¼Œnn
 
-ÈçÏÂ
+å¦‚ä¸‹
 100.for
 for (int i = 0; i < 100; i++) {
 }
@@ -116,26 +116,26 @@ public class Status
         this.name = name;
     }
 }
-name.field//  »Ø³µ¾ÍÄÜ×Ô¶¯Éú³Éprivate final String name;
+name.field//  å›è½¦å°±èƒ½è‡ªåŠ¨ç”Ÿæˆprivate final String name;
 
 public Status foo(){
     Status status = new Status("hello");
     return status;
 }
-status.return  //×Ô¶¯Éú³Éreturn status;
+status.return  //è‡ªåŠ¨ç”Ÿæˆreturn status;
 
 if (status != null) {
 }
-status.nn  //×Ô¶¯Éú³Éif (status != null)
+status.nn  //è‡ªåŠ¨ç”Ÿæˆif (status != null)
 
-£¨4£©alt + enter
-1£¬×Ô¶¯´´½¨º¯Êı
+ï¼ˆ4ï¼‰alt + enter
+1ï¼Œè‡ªåŠ¨åˆ›å»ºå‡½æ•°
     public Status foo(Status status){
         f1();
     }
     private void f1() {
     }
-2£¬list replace£¬×Ô¶¯Ìæ»»³Éforeach
+2ï¼Œlist replaceï¼Œè‡ªåŠ¨æ›¿æ¢æˆforeach
     private static void f(List<String> list) {
         for (int i = 0; i < list.size(); i++) {
             String item = list.get(i);
@@ -145,15 +145,15 @@ status.nn  //×Ô¶¯Éú³Éif (status != null)
         for (String item : list) {
         }
     }
-3£¬×Ö·û´®format »òÕßbuild£¬String.format StringBuilder.append
+3ï¼Œå­—ç¬¦ä¸²format æˆ–è€…buildï¼ŒString.format StringBuilder.append
         String name = "zhangsan";
         int age = 24;
         String x = "name : " + name + ",age : " + age;
         System.out.println(x);
-Ñ¡Ôñ±äÁ¿name, String x = "name : " + name + ",age : " + age;
+é€‰æ‹©å˜é‡name, String x = "name : " + name + ",age : " + age;
 String x = String.format("name : %s,age : %d", name, age);
 
-4£¬ÊµÏÖ½Ó¿Ú£¬implement interface
+4ï¼Œå®ç°æ¥å£ï¼Œimplement interface
 public interface Helloworld {
     void findSelf();
 }
@@ -163,34 +163,34 @@ public class HelloworldImpl implements Helloworld {
 
     }
 }
-5£¬µ¥´ÊÆ´Ğ´£¬change to
-6£¬µ¼°ü
+5ï¼Œå•è¯æ‹¼å†™ï¼Œchange to
+6ï¼Œå¯¼åŒ…
 
-(5£©ÖØ¹¹£¬rename  alt + shift + r  / ÎÒÌí¼ÓÁËalt + f6
-ÖØ¹¹ÊôĞÔ
-ÖØ¹¹·½·¨,Õâ¸öÒ²¿ÉÒÔÓÃalt+enter
-£¨ĞŞ¸Ä±äÁ¿Ãû£¬ĞŞ¸Äº¯ÊıÃû£©
+(5ï¼‰é‡æ„ï¼Œrename  alt + shift + r  / æˆ‘æ·»åŠ äº†alt + f6
+é‡æ„å±æ€§
+é‡æ„æ–¹æ³•,è¿™ä¸ªä¹Ÿå¯ä»¥ç”¨alt+enter
+ï¼ˆä¿®æ”¹å˜é‡åï¼Œä¿®æ”¹å‡½æ•°åï¼‰
 
-(6)³éÈ¡ 
-±äÁ¿  refactor->extract->variable  alt+shift+l
-º¯Êı refactor->extract->method  alt+shift+M
-£¨¶¨Òå±äÁ¿Ãû£¬¶¨Òåº¯ÊıÃû£©
+(6)æŠ½å– 
+å˜é‡  refactor->extract->variable  alt+shift+l
+å‡½æ•° refactor->extract->method  alt+shift+M
+ï¼ˆå®šä¹‰å˜é‡åï¼Œå®šä¹‰å‡½æ•°åï¼‰
 
---ĞŞ¸Ä¹ì¼£git¼¯³É+¹ØÁªÒ»ÇĞ
-£¨1£©git¼¯³É£º
+--ä¿®æ”¹è½¨è¿¹gité›†æˆ+å…³è”ä¸€åˆ‡
+ï¼ˆ1ï¼‰gité›†æˆï¼š
 annotate
-previous change  ÒÆ¶¯ËùÓĞ¸Ä¶¯Ö®´¦    ctrl+shift+alt+ÏòÉÏ¼ü
-revert  ³·Ïú£¬°üÀ¨µ¥¸öºÍÏîÄ¿¸Ä¶¯Ö®´¦  ctrl+alt+zÊÊÓÃÓÚÎÄ¼şÄÚÈİ£¬ÉõÖÁÊÇÕû¸ö¹¤³ÌÄ¿Â¼
-£¨2£©local history
+previous change  ç§»åŠ¨æ‰€æœ‰æ”¹åŠ¨ä¹‹å¤„    ctrl+shift+alt+å‘ä¸Šé”®
+revert  æ’¤é”€ï¼ŒåŒ…æ‹¬å•ä¸ªå’Œé¡¹ç›®æ”¹åŠ¨ä¹‹å¤„  ctrl+alt+zé€‚ç”¨äºæ–‡ä»¶å†…å®¹ï¼Œç”šè‡³æ˜¯æ•´ä¸ªå·¥ç¨‹ç›®å½•
+ï¼ˆ2ï¼‰local history
 1, show history
 2, put label
 
-£¨3£©¹ØÁªÒ»ÇĞ
-1, spring ¹ØÁª
-file->project structure   ctrl+alt+shift+s / alt+¶ººÅ
+ï¼ˆ3ï¼‰å…³è”ä¸€åˆ‡
+1, spring å…³è”
+file->project structure   ctrl+alt+shift+s / alt+é€—å·
 facets +spring  
 
-2£¬Êı¾İ¿â¹ØÁª
+2ï¼Œæ•°æ®åº“å…³è”
 database
-ĞŞ¸ÄmapÊ±£¬ÌáÊ¾±íµÄ×Ö¶Î
-ĞŞ¸Ä±íµÄ×Ö¶ÎÊ±£¬ÌáÊ¾map
+ä¿®æ”¹mapæ—¶ï¼Œæç¤ºè¡¨çš„å­—æ®µ
+ä¿®æ”¹è¡¨çš„å­—æ®µæ—¶ï¼Œæç¤ºmap
