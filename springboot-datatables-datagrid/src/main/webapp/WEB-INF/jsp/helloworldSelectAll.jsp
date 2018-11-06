@@ -8,8 +8,8 @@
 
 </head>
 <body>
-<jsp:include page="./header.jsp"></jsp:include>
-<jsp:include page="./left.jsp"></jsp:include>
+<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="left.jsp"></jsp:include>
 <script src="${pageContext.request.contextPath}/static/resources/js/account/accountSelectAll.js?0.0.19"></script>
 <script src="${pageContext.request.contextPath}/static/resources/js/test/test.js?0.0.0"></script>
 

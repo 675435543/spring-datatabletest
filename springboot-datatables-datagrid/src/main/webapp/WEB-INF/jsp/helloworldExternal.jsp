@@ -11,8 +11,8 @@
 <script>
 </script>
 
-<jsp:include page="./header.jsp"></jsp:include>
-<jsp:include page="./left.jsp"></jsp:include>
+<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="left.jsp"></jsp:include>
 <%-- <jsp:include page="./body.jsp"></jsp:include> --%>
 <%-- <%@ include file="./header.jsp" %>
 <%@ include file="./left.jsp" %>

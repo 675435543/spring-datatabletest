@@ -1,11 +1,11 @@
-package com.forezp.studyJDKsource;
+package com.forezp.jdksource;
 
 import java.lang.reflect.Field;
 
 public class DeclaredFieldTest {
 
 	public static void main(String[] args) {
-		Integer a = 1;
+			Integer a = 1;
 		Integer b = 2;
 		System.out.printf("a = %s, b = %s\n", a, b);
 		swap(a, b);

@@ -19,7 +19,7 @@ public class TestClassLoader {
             //printing ClassLoader of this class
 			System.out.println("ClassLoaderTest.getClass().getClassLoader() : "
 			                     + TestClassLoader.class.getClassLoader());
- 
+
 			//trying to explicitly load this class again using Extension class loader
 /*                Class.forName("Test.ClassLoaderTest", true
 			                ,  Test.class.getClassLoader().getParent());*/
@@ -28,7 +28,7 @@ public class TestClassLoader {
 		   String test =new String();
 		    test = "测试";    
 		    System.out.println(test);
-		    System.out.println("test.getClass().getClassLoader()"+test.getClass().getClassLoader());
+		    System.out.println("testidea.getClass().getClassLoader()"+test.getClass().getClassLoader());
 		    
 	}
 }

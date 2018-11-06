@@ -3,6 +3,7 @@ package com.forezp.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.forezp.service.AccountService2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.forezp.dao.UserInfoDao;
-import com.forezp.email.SimpleMailSender;
 import com.forezp.entity.Account;
 import com.forezp.entity.ProblemList;
 import com.forezp.entity.UserInfo;
-import com.forezp.service.AccountService2;
 import com.forezp.service.SendEmailService;
 
 import net.sf.json.JSONArray;
@@ -36,7 +35,7 @@ public class AccountController2 {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AccountController2.class);
 	
     @Autowired
-    AccountService2 accountService;
+	AccountService2 accountService;
     
     @Autowired
     UserInfoDao userInfoDao;

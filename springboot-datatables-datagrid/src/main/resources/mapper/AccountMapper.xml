@@ -16,4 +16,5 @@
 	<select id="findAccountInfo"  resultMap="Account">
 		select * from account
 	</select>
+
 </mapper>

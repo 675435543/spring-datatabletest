@@ -1,0 +1,196 @@
+--窗口显示数字
+File->settings->Appearance & Behavior->Appearancel里面window options下找到show tool window bars选项，勾选就可以了
+还有show tool numbers选项也要勾选
+
+--新窗口打开项目
+Intellij 如何在新窗口中打开项目
+https://blog.csdn.net/yuanbingze/article/details/48529247
+
+--跳转+精准搜索
+找action的方法ctrl+shift+a，退出ESC键
+然后输入记得的单词，找到快捷操作提示,有些快捷键没有用是因为跟搜狗拼音撞衫了，关掉即可
+
+妈咪妈咪哄 给提示ctrl+shift+a
+无处不在的跳转
+(1) 项目跳转,先开多个窗口settings->system settings->open project in new window
+ctrl+alt+[]  
+(2) 文件之间的跳转，栈的形式将文件压入，最后光标所在的文件不进栈
+     1,浏览了哪些文件  recent files ctrl+e
+     2,浏览位置跳转 alt+左右方向键  ctrl+alt+左右方向键（跟alt+左右方向键相反不要纠结了，不用它就完了）
+     3,编辑了哪些文件  recently changed files ctrl+shift+e
+     4,直接跳到上一次编辑  navigate ->last edit /next edit ctrl+q ,大体顺序是从栈顶的文件向下访问
+
+(3)书签跳转
+bookmark
+1, 添加/删除书签  ctrl+shift+F11 
+2, 添加/删除书签(带数字)  ctrl+shift+alt+F11  
+标记好书签之后ctrl+书签编号，即可跳转过去
+3, 查看书签  shift+F11
+
+（4）收藏夹 alt + 2可以打开和关闭侧边栏的收藏夹
+add to
+1, 新建收藏夹 / 添加到收藏夹 alt + shift +f  可以收藏类和方法
+
+（5）跳转到某个单词的首字母
+字符跳转插件emacsIdea跳转  修改快捷键为alt+j
+注:  修改过的快捷键为蓝色，没有修改过的快捷键为灰色
+操作步骤：
+alt+j转换为该模式，锁定想要跳转的地方单词的首字母 并按一下，高亮之后按一下出来的字母即可实现跳转功能
+
+（6）编辑区和文件区来回跳转  alt+1  ESC
+（7）vim进行多编辑区跳转
+后面再学vim
+
+（8）精准搜索 
+1，类名搜索, Navigate ->class  快捷键：ctrl+shift+t
+2，文件搜索, Navigate ->file     快捷键：ctrl+shift+r
+3，函数搜索，Navigate ->symbol 快捷键：ctrl+shift+alt+n
+4，字符串搜索，edit->find->find in path 快捷键：ctrl+h  ,ctrl+f
+
+锁定某个单词  edit ->find ->Find Word at Caret   ctrl+f12
+向下搜索edit ->find ->find next occurrence    ctrl+k
+向上搜索edit ->find ->find previous occurrence ctrl+shift+k  现在
+ctrl+o看类的缩略图，ctrl+shift+上下键在类里面的方法间跳跃
+
+hierarchy
+type hierarchy f4不用记
+method hierarchy ctrl+shift+h
+call hierarchy  ctrl+alt+h
+
+--代码助手+重构+抽取
+alt+insert是get set construct等等
+(1)列操作
+1,光标移动技巧
+move caret to next  ctrl+ 左右箭头 光标移到单词开头和结尾
+move caret to line start/end  home/end键 光标移到行开头和结尾
+ctrl+home/end 光标移动到文本的开头和结尾
+edit ->find ->select all occurrences  批量选中ctrl+alt+y
+
+2,单词大写小写切换
+ctrl + shift + u
+
+(2)live templates
+main
+psfi
+psfs
+pi/pic
+ps/psc
+对应->
+public static void main(String[] args) {
+    $END$
+}
+public static final int $var1$=$var2$;
+public static final String $var1$=$var2$;
+private int $var1$;
+/**
+ * $var1$
+ */
+private int $var2$;
+
+$END$
+
+private String $var1$;
+/**
+ * $var1$
+ */
+private String $var2$;
+
+(3)postfix
+1，for
+2，sout
+3，field
+4，return
+5，nn
+
+如下
+100.for
+for (int i = 0; i < 100; i++) {
+}
+
+new Date().sout
+System.out.println(new Date());
+public class Status
+{
+    private final String name;
+    public Status(String name){
+        this.name = name;
+    }
+}
+name.field//  回车就能自动生成private final String name;
+
+public Status foo(){
+    Status status = new Status("hello");
+    return status;
+}
+status.return  //自动生成return status;
+
+if (status != null) {
+}
+status.nn  //自动生成if (status != null)
+
+（4）alt + enter
+1，自动创建函数
+    public Status foo(Status status){
+        f1();
+    }
+    private void f1() {
+    }
+2，list replace，自动替换成foreach
+    private static void f(List<String> list) {
+        for (int i = 0; i < list.size(); i++) {
+            String item = list.get(i);
+        }
+    }
+    private static void f(List<String> list) {
+        for (String item : list) {
+        }
+    }
+3，字符串format 或者build，String.format StringBuilder.append
+        String name = "zhangsan";
+        int age = 24;
+        String x = "name : " + name + ",age : " + age;
+        System.out.println(x);
+选择变量name, String x = "name : " + name + ",age : " + age;
+String x = String.format("name : %s,age : %d", name, age);
+
+4，实现接口，implement interface
+public interface Helloworld {
+    void findSelf();
+}
+public class HelloworldImpl implements Helloworld {
+    @Override
+    public void findSelf() {
+
+    }
+}
+5，单词拼写，change to
+6，导包
+
+(5）重构，rename  alt + shift + r  / 我添加了alt + f6
+重构属性
+重构方法,这个也可以用alt+enter
+（修改变量名，修改函数名）
+
+(6)抽取 
+变量  refactor->extract->variable  alt+shift+l
+函数 refactor->extract->method  alt+shift+M
+（定义变量名，定义函数名）
+
+--修改轨迹git集成+关联一切
+（1）git集成：
+annotate
+previous change  移动所有改动之处    ctrl+shift+alt+向上键
+revert  撤销，包括单个和项目改动之处  ctrl+alt+z适用于文件内容，甚至是整个工程目录
+（2）local history
+1, show history
+2, put label
+
+（3）关联一切
+1, spring 关联
+file->project structure   ctrl+alt+shift+s / alt+逗号
+facets +spring  
+
+2，数据库关联
+database
+修改map时，提示表的字段
+修改表的字段时，提示map

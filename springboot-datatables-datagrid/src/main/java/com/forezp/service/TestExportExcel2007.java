@@ -16,7 +16,7 @@ public class TestExportExcel2007 {
 					+ System.currentTimeMillis() + ".xlsx");
 			// 工作区
 			XSSFWorkbook wb = new XSSFWorkbook();
-			XSSFSheet sheet = wb.createSheet("test");
+			XSSFSheet sheet = wb.createSheet("testidea");
 			for (int i = 0; i < 1000; i++) {
 				// 创建第一个sheet
 				// 生成第一行

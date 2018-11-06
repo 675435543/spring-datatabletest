@@ -56,36 +56,31 @@
 		</dependency>
 		
 		<!-- 添加 tomcat 的支持 -->  
-		<dependency>  
+		<dependency>
 		    <groupId>org.springframework.boot</groupId>  
 		    <artifactId>spring-boot-starter-tomcat</artifactId>  
-		    <scope>provided</scope>  
-		</dependency>  
-		  
+		    <!--<scope>provided</scope>  -->
+		</dependency>
+
 		<dependency>  
 		    <groupId>org.apache.tomcat.embed</groupId>  
 		    <artifactId>tomcat-embed-jasper</artifactId>  
-		    <scope>provided</scope>  
-		</dependency>  
+		    <!--<scope>provided</scope>  -->
+		</dependency>
 		  
 		<!-- servlet 依赖 -->  
-		<dependency>  
+		<dependency>
 		    <groupId>javax.servlet</groupId>  
 		    <artifactId>javax.servlet-api</artifactId>  
-		    <scope>provided</scope>  
-		</dependency>  
-		  
+		    <!--<scope>provided</scope>-->
+		</dependency>
+
+
 		<!-- 添加 JSTL 支持 -->  
 		<dependency>  
 		    <groupId>javax.servlet</groupId>  
 		    <artifactId>jstl</artifactId>  
 		</dependency>
-		<dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib</artifactId>
@@ -178,8 +173,8 @@
 		</dependency> -->
 <!-- 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-testidea</artifactId>
+			<scope>testidea</scope>
 		</dependency> -->
 		
 <!-- 		<dependency>

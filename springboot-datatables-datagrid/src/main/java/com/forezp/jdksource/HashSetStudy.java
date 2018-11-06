@@ -1,4 +1,4 @@
-package com.forezp.studyJDKsource;
+package com.forezp.jdksource;
 
 import java.util.HashSet;
 
