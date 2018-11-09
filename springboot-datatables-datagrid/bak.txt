@@ -21,6 +21,9 @@ https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
 小马哥的lesson
 https://github.com/mercyblitz/segmentfault-lessons
 
+Git Extensions安装
+http://www.opdown.com/soft/79790.html#download
+
 （1）数组转换为list的方法
 com.google.common.collect.Lists
 List<String> userSelectedList = Lists.newArrayList(selectedFrom);
