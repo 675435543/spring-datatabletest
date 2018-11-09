@@ -13,7 +13,7 @@ https://blog.csdn.net/yuanbingze/article/details/48529247
 妈咪妈咪哄 给提示ctrl+shift+a
 无处不在的跳转
 (1) 项目跳转,先开多个窗口settings->system settings->open project in new window
-ctrl+alt+[]  
+ctrl+alt+[]
 (2) 文件之间的跳转，栈的形式将文件压入，最后光标所在的文件不进栈
      1,浏览了哪些文件  recent files ctrl+e
      2,浏览位置跳转 alt+左右方向键  ctrl+alt+左右方向键（跟alt+左右方向键相反不要纠结了，不用它就完了）
@@ -22,8 +22,8 @@ ctrl+alt+[]
 
 (3)书签跳转
 bookmark
-1, 添加/删除书签  ctrl+shift+F11 
-2, 添加/删除书签(带数字)  ctrl+shift+alt+F11  
+1, 添加/删除书签  ctrl+shift+F11
+2, 添加/删除书签(带数字)  ctrl+shift+alt+F11
 标记好书签之后ctrl+书签编号，即可跳转过去
 3, 查看书签  shift+F11
 
@@ -41,21 +41,16 @@ alt+j转换为该模式，锁定想要跳转的地方单词的首字母 并按�
 （7）vim进行多编辑区跳转
 后面再学vim
 
-（8）精准搜索 
+（8）精准搜索
 1，类名搜索, Navigate ->class  快捷键：ctrl+shift+t
 2，文件搜索, Navigate ->file     快捷键：ctrl+shift+r
-3，函数搜索，Navigate ->symbol 快捷键：ctrl+shift+alt+n
+3，字段或函数搜索，Navigate ->symbol 快捷键：ctrl+shift+alt+n
 4，字符串搜索，edit->find->find in path 快捷键：ctrl+h  ,ctrl+f
 
 锁定某个单词  edit ->find ->Find Word at Caret   ctrl+f12
 向下搜索edit ->find ->find next occurrence    ctrl+k
 向上搜索edit ->find ->find previous occurrence ctrl+shift+k  现在
 ctrl+o看类的缩略图，ctrl+shift+上下键在类里面的方法间跳跃
-
-hierarchy
-type hierarchy f4不用记
-method hierarchy ctrl+shift+h
-call hierarchy  ctrl+alt+h
 
 --代码助手+重构+抽取
 alt+insert是get set construct等等
@@ -171,7 +166,7 @@ public class HelloworldImpl implements Helloworld {
 重构方法,这个也可以用alt+enter
 （修改变量名，修改函数名）
 
-(6)抽取 
+(6)抽取
 变量  refactor->extract->variable  alt+shift+l
 函数 refactor->extract->method  alt+shift+M
 （定义变量名，定义函数名）
@@ -188,9 +183,43 @@ revert  撤销，包括单个和项目改动之处  ctrl+alt+z适用于文件内
 （3）关联一切
 1, spring 关联
 file->project structure   ctrl+alt+shift+s / alt+逗号
-facets +spring  
+facets +spring
 
 2，数据库关联
 database
 修改map时，提示表的字段
 修改表的字段时，提示map
+
+--断点调试+ 文件操作
+（1）断点调试
+调试程序：f8
+单步运行：f6走一格，f5走到方法里面去
+resume：f8走到下一个断点或是完结
+
+查看所有断点：ctrl + shift+f8
+添加断点：ctrl+shift+b
+条件断点：ctrl + shift + f8
+禁止所有断点：mute breakpoints
+
+表达式求值 ctrl + u
+运行到指定行 ctrl + r
+setvalue是 f2
+
+run anywhere if you can
+运行当前上下文 debug context configuration:  alt + f9
+在当前可运行列表中选择一个运行:  alt + shift+f9
+编辑当前运行：alt+[
+
+（2）文本操作
+复制粘贴文件名： ctrl+c
+复制粘贴整个文件路径： ctrl + shift +c
+单次粘贴：ctrl+v
+调出粘贴板子：ctrl+shift+v
+
+（3）结构图，alt调出放大镜
+查看当前field 和method大纲：ctrl+o
+maven 依赖，类图 ctrl + shift + alt+u
+类继承结构，ctrl + shift + alt+u,  type hierarchy f4不用记
+方法调用层次(左边那个被谁调用，右边那个调用谁) call hierarchy ：ctll+alt+h
+
+method hierarchy ctrl+shift+h 还没有体会到跟上面有啥区别
