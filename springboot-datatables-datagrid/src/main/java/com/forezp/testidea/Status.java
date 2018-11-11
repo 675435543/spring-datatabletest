@@ -14,8 +14,7 @@ public class Status {
 
     }
     public static void main(String[] args) {
-        Status status = new Status();
-        status.foo();
+        System.out.println(args[0]);
     }
 
 }

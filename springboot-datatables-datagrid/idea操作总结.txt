@@ -1,4 +1,10 @@
-﻿--窗口显示数字
+﻿--我的快捷键修改
+project structrue alt+ 逗号
+emacsIDEAs  AceJumpWord  alt+j
+edit configurations alt+[
+Debug contect configuration alt+f9
+
+--窗口显示数字
 File->settings->Appearance & Behavior->Appearancel里面window options下找到show tool window bars选项，勾选就可以了
 还有show tool numbers选项也要勾选
 
@@ -64,7 +70,7 @@ edit ->find ->select all occurrences  批量选中ctrl+alt+y
 2,单词大写小写切换
 ctrl + shift + u
 
-(2)live templates
+(2)live templates : ctrl+shift+alt+j 打开所有的templates
 main
 psfi
 psfs
@@ -223,3 +229,5 @@ maven 依赖，类图 ctrl + shift + alt+u
 方法调用层次(左边那个被谁调用，右边那个调用谁) call hierarchy ：ctll+alt+h
 
 method hierarchy ctrl+shift+h 还没有体会到跟上面有啥区别
+
+

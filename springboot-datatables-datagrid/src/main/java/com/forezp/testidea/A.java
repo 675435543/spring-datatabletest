@@ -16,7 +16,7 @@ public class A {
 
     public void fa() {
         if (1 > 0) {
-            
+
         }
         System.out.println("hello");
         System.out.println("hello12345");
