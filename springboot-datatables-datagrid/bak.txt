@@ -24,6 +24,47 @@ https://github.com/mercyblitz/segmentfault-lessons
 Git Extensions安装
 http://www.opdown.com/soft/79790.html#download
 
+（0）
+elasticsearch
+ES环境和文档
+测试环境head插件：http://10.21.188.108:8080/elasticsearch-head-master/   主要用于集群管理
+插件用法：http://mobz.github.io/elasticsearch-head/       https://www.cnblogs.com/xing901022/p/5469338.html
+测试环境kibana：http://100.101.238.159:5601/app/kibana#/dev_tools/console?_g=()  主要用于数据管理
+插件用法：https://www.elastic.co/guide/cn/kibana/current/getting-started.html
+
+常用ES语法
+ES权威指南:       https://www.elastic.co/guide/cn/elasticsearch/guide/current/foreword_id.html
+JAVA API：https://endymecy.gitbooks.io/elasticsearch-guide-chinese/content/java-api/README.html 
+                  https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html 
+
+遍历
+https://www.elastic.co/guide/cn/elasticsearch/guide/current/scroll.html
+
+查询id、标题等指定内容精确查询
+https://www.elastic.co/guide/cn/elasticsearch/guide/current/_finding_exact_values.html 
+
+建立索引 参考文档
+https://www.elastic.co/guide/cn/elasticsearch/guide/current/_creating_an_index.html 
+
+修改文档
+https://www.elastic.co/guide/cn/elasticsearch/guide/current/update-doc.html 
+覆盖更新，url要包括索引，类型，id
+https://www.elastic.co/guide/cn/elasticsearch/guide/current/partial-updates.html 
+部分更新
+
+创建/删除文档
+https://www.elastic.co/guide/cn/elasticsearch/guide/current/create-doc.html 
+https://www.elastic.co/guide/cn/elasticsearch/guide/current/delete-doc.html 
+
+查看分析器结果
+https://www.elastic.co/guide/cn/elasticsearch/guide/current/analysis-intro.html 
+
+
+
+（0）远程调测
+setenv.sh
+export CATALINA_OPTS="-server -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8899"
+
 （1）数组转换为list的方法
 com.google.common.collect.Lists
 List<String> userSelectedList = Lists.newArrayList(selectedFrom);
