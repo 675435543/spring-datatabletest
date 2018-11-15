@@ -25,6 +25,8 @@ Git Extensions安装
 http://www.opdown.com/soft/79790.html#download
 
 （0）
+远程连接神器：MobaXterm
+（0）
 elasticsearch
 ES环境和文档
 测试环境head插件：http://10.21.188.108:8080/elasticsearch-head-master/   主要用于集群管理
