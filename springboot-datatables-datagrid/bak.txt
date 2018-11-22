@@ -23,6 +23,11 @@ https://github.com/mercyblitz/segmentfault-lessons
 
 Git Extensions安装
 http://www.opdown.com/soft/79790.html#download
+（0）
+无法运行main方法解决方案
+project structure-> libraries->+号 java->select library files
+D:\work\apache-tomcat-8.0.46\lib\servlet-api.jar
+即可正常运行main方法
 
 （0）
 远程连接神器：MobaXterm
