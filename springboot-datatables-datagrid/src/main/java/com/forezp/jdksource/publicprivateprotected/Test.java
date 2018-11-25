@@ -23,7 +23,7 @@ public class Test
         this.d = d;
     }
 
-    public static void main(String[] args){
+/*    public static void main(String[] args){
     Test demo=new Test(0, 1, 2, 3);
     int test1=demo.a;
     int test2=demo.b;
@@ -33,6 +33,6 @@ public class Test
     System.out.println("test2"+test2);
     System.out.println("test3"+test3);
     System.out.println("test4"+test4);
-    }
+    }*/
 }
 

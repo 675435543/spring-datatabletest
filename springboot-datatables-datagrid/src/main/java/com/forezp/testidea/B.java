@@ -8,7 +8,7 @@ public class B {
 
 
 
-    public static void main(String[] args) {
+ /*   public static void main(String[] args) {
 
         List<String> list = new ArrayList<>(4);
         list.add("123");list.add("456");list.add("789");
@@ -29,6 +29,6 @@ public class B {
             int a = 1;
 
         }
-    }
+    }*/
 
 }

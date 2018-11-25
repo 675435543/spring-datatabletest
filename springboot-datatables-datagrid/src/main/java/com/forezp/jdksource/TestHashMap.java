@@ -29,7 +29,7 @@ class Student{
 	}
 }
 public class TestHashMap {
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Map<String,String> hashMap= new HashMap<String,String>();
 		Hashtable<String, Student> hashtable=new Hashtable<String,Student>();
 		hashtable.put("1号", new Student("1号",13));
@@ -46,5 +46,5 @@ public class TestHashMap {
 			String m=s.next();
 			System.out.println(hashtable.get(m).getName()+hashtable.get(m).getAge()+"岁");
 		}
-	}
+	}*/
 }

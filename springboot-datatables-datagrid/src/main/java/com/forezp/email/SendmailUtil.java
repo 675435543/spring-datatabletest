@@ -12,7 +12,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class SendmailUtil {
-	public static void main(String[] args) throws AddressException, MessagingException {
+	/*public static void main(String[] args) throws AddressException, MessagingException {
 		Properties properties = new Properties();
 		properties.put("mail.transport.protocol", "smtp");// 连接协议
 		properties.put("mail.smtp.host", "smtp.qq.com");// 主机名
@@ -37,5 +37,5 @@ public class SendmailUtil {
 		transport.connect("675435543@qq.com", "ncncfvjrdxojbdjf");
 		//发送邮件
 		transport.sendMessage(message, message.getAllRecipients());
-	}
+	}*/
 }

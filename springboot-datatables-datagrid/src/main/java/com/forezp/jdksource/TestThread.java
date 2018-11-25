@@ -12,11 +12,11 @@ public class TestThread implements Runnable{
 		}
 	}
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		TestThread demo1=new TestThread();
 		new Thread(demo1, "张三").start();
 		new Thread(demo1, "李四").start();
 		new Thread(demo1, "王五").start();
-	}
+	}*/
 
 }

@@ -1,8 +1,8 @@
 package com.forezp.jdksource;
 
 public class TestClassLoader {
-	public static void main(String[] args) {
-/*		List<String> strList = new ArrayList<String>();
+/*	public static void main(String[] args) {
+		List<String> strList = new ArrayList<String>();
 		System.out.println("String.class.getComponentType()"+String.class.getComponentType());
 		Object[] newType= new Object[] {"123","234"};
 		String[] array1 = new String[] {"1","2","3","4","5","6","7"};
@@ -13,7 +13,7 @@ public class TestClassLoader {
 		System.out.println("array1:"+array1.length);
 		System.out.println("array2:"+array2.length);
 		System.out.println("array1:"+array1.toString());
-		System.out.println("array2:"+array2.toString());*/
+		System.out.println("array2:"+array2.toString());
 		//System.out.println("String.class.getClassLoader():"+String.class.getClassLoader());
         
             //printing ClassLoader of this class
@@ -21,8 +21,8 @@ public class TestClassLoader {
 			                     + TestClassLoader.class.getClassLoader());
 
 			//trying to explicitly load this class again using Extension class loader
-/*                Class.forName("Test.ClassLoaderTest", true
-			                ,  Test.class.getClassLoader().getParent());*/
+                Class.forName("Test.ClassLoaderTest", true
+			                ,  Test.class.getClassLoader().getParent());
 //			System.out.println("new java.lang.Object().getClass().getClassLoader()"+new java.lang.Object().getClass().getClassLoader());
        
 		   String test =new String();
@@ -30,5 +30,5 @@ public class TestClassLoader {
 		    System.out.println(test);
 		    System.out.println("testidea.getClass().getClassLoader()"+test.getClass().getClassLoader());
 		    
-	}
+	}*/
 }

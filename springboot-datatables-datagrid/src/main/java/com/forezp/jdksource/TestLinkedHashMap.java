@@ -19,9 +19,9 @@ public class TestLinkedHashMap extends A
 
     }
 
-    public static void main(String[] args){
+/*    public static void main(String[] args){
     Map<String,String>demo=new LinkedHashMap<String,String>();
 
-    }
+    }*/
 }
 

@@ -20,43 +20,43 @@ public class DateSelect {
 
         return dateType;    
     } 
-	public static void main(String[] args) {
-        /**  
-         * 日期格式正确  
-         */    
-        String date1 = "2014-01-03";    
-        /**  
-         * 日期范围不正确---平年二月没有29号  
-         */    
-        String date2 = "2014-02-29";    
-        /**  
-         * 日期月份范围不正确---月份没有13月  
-         */    
-        String date3 = "2014-13-03";    
-        /**  
-         * 日期范围不正确---六月没有31号  
-         */    
-        String date4 = "2014-06-31";    
-        /**  
-         * 日期范围不正确 ----1月超过31天  
-         */    
-        String date5 = "2014-01-32";    
-        /**  
-         * 这个测试年份  
-         */    
-        String date6 = "0014-01-03";    
-            
-        DateSelect date = new DateSelect();    
-            
-        /**  
-         * 输出结果 
-         */    
-        System.out.println(date.isDate(date1));    
-        System.out.println(date.isDate(date2));    
-        System.out.println(date.isDate(date3));    
-        System.out.println(date.isDate(date4));    
-        System.out.println(date.isDate(date5));    
-        System.out.println(date.isDate(date6));   
-	}
+//	public static void main(String[] args) {
+        /**
+         * 日期格式正确
+         */
+//        String date1 = "2014-01-03";
+        /**
+         * 日期范围不正确---平年二月没有29号
+         */
+//        String date2 = "2014-02-29";
+        /**
+         * 日期月份范围不正确---月份没有13月
+         */
+//        String date3 = "2014-13-03";
+        /**
+         * 日期范围不正确---六月没有31号
+         */
+//        String date4 = "2014-06-31";
+        /**
+         * 日期范围不正确 ----1月超过31天
+         */
+//        String date5 = "2014-01-32";
+        /**
+         * 这个测试年份
+         */
+//        String date6 = "0014-01-03";
+
+//        DateSelect date = new DateSelect();
+
+        /**
+         * 输出结果
+         */
+/*        System.out.println(date.isDate(date1));
+        System.out.println(date.isDate(date2));
+        System.out.println(date.isDate(date3));
+        System.out.println(date.isDate(date4));
+        System.out.println(date.isDate(date5));
+        System.out.println(date.isDate(date6));   */
+//	}
 
 }

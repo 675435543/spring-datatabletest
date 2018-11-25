@@ -2,6 +2,7 @@ package com.forezp.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.forezp.service.AccountService2;
 import org.slf4j.Logger;
@@ -129,8 +130,28 @@ public class AccountController2 {
     	return jsonObject;
     }
     
-    
-/*    
+    private void selectDB(){
+		LOGGER.info("begin select db");
+		try{
+			TimeUnit.MILLISECONDS.sleep(100);
+		}catch (InterruptedException e)
+		{
+			LOGGER.error("InterruptedException",e);
+		}
+		LOGGER.info("end select db");
+	}
+
+    private void insertDB(){
+		LOGGER.info("begin insert db");
+		try{
+			TimeUnit.MILLISECONDS.sleep(200);
+		}catch (InterruptedException e)
+		{
+			LOGGER.error("InterruptedException",e);
+		}
+		LOGGER.info("end insert db");
+	}
+/*
     @RequestMapping(value = "sendWeeklyTemplet", method = RequestMethod.POST)
     public ResultData<String> sendWeeklyTemplet(@Validated ProblemList problemList, BindingResult bindingResult,
     	@RequestParam("problemScreenshot") List<MultipartFile> problemScreenshot, @RequestParam("mailTo") String mailTo,

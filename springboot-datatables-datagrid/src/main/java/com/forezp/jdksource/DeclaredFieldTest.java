@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 
 public class DeclaredFieldTest {
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 			Integer a = 1;
 		Integer b = 2;
 		System.out.printf("a = %s, b = %s\n", a, b);
@@ -16,7 +16,7 @@ public class DeclaredFieldTest {
 		System.out.printf("c = %s, d = %s\n", c, d);
 		System.out.printf("e = %s\n", e);
 		
-	}
+	}*/
 	//a=1 b=2
 	public static void swap(Integer a, Integer b) {
 		int temp = a.intValue();

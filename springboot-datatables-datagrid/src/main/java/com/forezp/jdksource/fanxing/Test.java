@@ -6,10 +6,10 @@ public class Test {
 		a.print();
 	}
 	
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		Demo<Dog> dog=new Demo<Dog>(new Dog());
 		take(dog);
 		Demo<Cat> cat=new Demo<Cat>(new Cat());
 		take(cat);
-	}
+	}*/
 }

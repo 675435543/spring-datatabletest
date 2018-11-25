@@ -3,7 +3,7 @@ package com.forezp.testidea;
 public class A {
     private int he1234;
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         //789123
         //123256
         //4544
@@ -12,7 +12,7 @@ public class A {
         System.out.println("hello");
         System.out.println("hello");
         System.out.println("hello");
-    }
+    }*/
 
     public void fa() {
         if (1 > 0) {

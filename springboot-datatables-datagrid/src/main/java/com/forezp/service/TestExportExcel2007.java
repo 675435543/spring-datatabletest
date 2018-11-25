@@ -36,8 +36,8 @@ public class TestExportExcel2007 {
 		}
 	}
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		TestExportExcel2007.createEXCEL();
-	}
+	}*/
 }
 
