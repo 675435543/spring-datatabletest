@@ -23,6 +23,18 @@ https://github.com/mercyblitz/segmentfault-lessons
 
 Git Extensions安装
 http://www.opdown.com/soft/79790.html#download
+
+(0)
+idea设置tomcat启动工程
+clean package -Dmaven.test.skip=true -Psit
+edit configurations->+>tomcat server->local->+->Run Maven Goal->Command line -> clean package -Dmaven.test.skip=true -Psit
+Deployment->rd-search:war exploded->Application context: /rd-search
+
+(0)
+idea打开多个工程
+File->New->Project from Existing Sources->Select File or Directory to Import
+D:\work\zhihuiyun_platform_git\rsearch-platform-usegitcommand-zhengshi\pom.xml
+
 （0）
 无法运行main方法解决方案
 project structure-> libraries->+号 java->select library files
