@@ -23,6 +23,346 @@ https://github.com/mercyblitz/segmentfault-lessons
 
 Git Extensions安装
 http://www.opdown.com/soft/79790.html#download
+
+（1）redis service参照
+1）OffsetCacheItemVo.java
+/**
+ * 偏移量缓存Vo
+ *
+ */
+public class OffsetCacheItemVo
+{
+    private int offset;
+
+    private String source;
+
+    /**
+     * xxx
+     * @return String
+     */
+    public String getSource()
+    {
+        return source;
+    }
+
+    /**
+     * xx
+     * @param source String
+     */
+    public void setSource(String source)
+    {
+        this.source = source;
+    }
+
+    /**
+     * xx
+     * @return int
+     */
+    public int getOffset()
+    {
+        return offset;
+    }
+
+    /**
+     * xx
+     * @param offset int
+     */
+    public void setOffset(int offset)
+    {
+        this.offset = offset;
+    }
+}
+
+2) OffsetCacheVo.java
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class OffsetCacheVo {
+
+    private Integer pageIndex;
+
+    private List<String> idList;
+
+    private List<OffsetCacheItemVo> cacheItem = new ArrayList<>();
+
+    /**
+     * 获取IDList
+     * @return List<String>
+     */
+    public List<String> getIdList()
+    {
+        return idList;
+    }
+
+    /**
+     * 设置IDList
+     * @param idList List<String>
+     */
+    public void setIdList(List<String> idList)
+    {
+        this.idList = idList;
+    }
+
+    /**
+     * 获取缓存条目
+     * @return List<OffsetCacheItemVo>
+     */
+    public List<OffsetCacheItemVo> getCacheItem()
+    {
+        return cacheItem;
+    }
+
+    /**
+     * 设置缓存条目
+     * @param cacheItem List<OffsetCacheItemVo>
+     */
+    public void setCacheItem(List<OffsetCacheItemVo> cacheItem)
+    {
+        this.cacheItem = cacheItem;
+    }
+
+    /**
+     * 获取分页页码
+     * @return Integer
+     */
+    public Integer getPageIndex()
+    {
+        return pageIndex;
+    }
+
+    /**
+     * 设置分页页码
+     * @param pageIndex Integer
+     */
+    public void setPageIndex(Integer pageIndex)
+    {
+        this.pageIndex = pageIndex;
+    }
+}
+
+3）RedisService.java
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
+
+
+/**
+ *
+ *
+ */
+@Service("redisService")
+public class RedisService 
+{
+    @SuppressWarnings("rawtypes")
+    @Autowired(required = false)
+    RedisTemplate redisTemplate;
+    
+    /**
+     * redis写入
+     * @param key String
+     * @param value String
+     */
+    @SuppressWarnings("unchecked")
+    public void set(String key, String value)
+    {
+        redisTemplate.execute(new RedisCallback<Object>()
+        {
+
+            @Override
+            public Object doInRedis(RedisConnection connection) throws DataAccessException
+            {
+                connection.set(redisTemplate.getStringSerializer().serialize(key),
+                        redisTemplate.getStringSerializer().serialize(value));
+                return null;
+            }
+            
+            
+        });
+    }
+
+    /**
+     * 带过期时间的键值设置
+     * @param key String
+     * @param value Object
+     * @param second Long
+     */
+    public void set(String key, Object value, Long second) 
+    {
+        redisTemplate.execute(new RedisCallback<Object>()
+        {
+            @Override
+            public Object doInRedis(RedisConnection connection) throws DataAccessException
+            {
+                byte[] serializeKey = redisTemplate.getStringSerializer().serialize(key);
+                connection.set(serializeKey, redisTemplate.getStringSerializer().serialize(value));
+                connection.expire(serializeKey, second);
+                return null;
+            }
+        });
+    }
+
+
+
+    /**
+     * 通过key获取value
+     * @param key String
+     * @return value
+     */
+    @SuppressWarnings("unchecked")
+    public String get(String key)
+    {
+        return (String) redisTemplate.execute(new RedisCallback<Object>()
+        {
+
+            @Override
+            public Object doInRedis(RedisConnection connection) throws DataAccessException
+            {
+                byte[] byteKey = redisTemplate.getStringSerializer().serialize(key);
+                if (connection.exists(byteKey))
+                {
+                    byte[] byteValue = connection.get(byteKey);
+                    String value = (String) redisTemplate.getStringSerializer().deserialize(byteValue);
+                    return value;
+                }
+                return null;
+            }
+            
+        });
+    }
+    
+    /**
+     * 按照key执行删除操作
+     * @param key string
+     */
+    @SuppressWarnings("unchecked")
+    public void delete(String key)
+    {
+        redisTemplate.execute(new RedisCallback<Object>()
+        {
+
+            @Override
+            public Object doInRedis(RedisConnection connection) throws DataAccessException
+            {
+                connection.del(redisTemplate.getStringSerializer().serialize(key));
+                return null;
+            }
+        });
+    }
+  
+
+}
+
+4)  CashUtil.java
+
+import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.collections.CollectionUtils;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class CashUtil {
+    /**
+     * 读缓存
+     *
+     * @param key
+     *            String
+     * @return Map<Integer, OffsetCacheVo>
+     */
+    public static Map<Integer, OffsetCacheVo> readCache(String key)
+    {
+        RedisService redisService = (RedisService)ApplicationContextUtil.getApplicationContext().getBean("redisService");
+        String jasonArray = redisService.get(key);
+        List<OffsetCacheVo> resources = JSONObject.parseArray(jasonArray, OffsetCacheVo.class);
+        Map<Integer, OffsetCacheVo> pair = new HashMap<>();
+        if (CollectionUtils.isNotEmpty(resources))
+        {
+            for (OffsetCacheVo resource : resources)
+            {
+                pair.put(resource.getPageIndex(), resource);
+            }
+        }
+        return pair;
+    }
+
+    /**
+     * 写缓存
+     *
+     * @param key
+     *            String
+     * @param data
+     *            List<OffsetCacheVo>
+     */
+    public static void writeCache(String key, List<OffsetCacheVo> data)
+    {
+        Map<Integer, OffsetCacheVo> cache = readCache(key);
+        for (OffsetCacheVo resource : data)
+        {
+            cache.put(resource.getPageIndex(), resource);
+        }
+        RedisService redisService = (RedisService)ApplicationContextUtil.getApplicationContext().getBean("redisService");
+        String continueTime = "30";
+        redisService.set(key, JSONObject.toJSONString(cache.values()), Integer.parseInt(continueTime) * 60L);
+    }
+}
+
+5) ApplicationContextUtil.java
+
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ApplicationContextUtil implements ApplicationContextAware 
+{
+    private static ApplicationContext context;
+
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        context = applicationContext;
+    }
+    
+    public static ApplicationContext getApplicationContext() {
+        return context;
+    }
+}
+
+6) Test.java
+
+import com.google.common.collect.Lists;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class Test {
+    public static void test(){
+        Integer pageIndex = 1;
+        List<String> idList = new ArrayList<>(16);
+        for (int i = 0; i < 5; i++) {
+            idList.add("dbox_"+(i+1));
+        }
+        OffsetCacheItemVo cacheItem = new OffsetCacheItemVo();
+        cacheItem.setOffset(idList.size());
+        cacheItem.setSource("dbox");
+        OffsetCacheVo offsetCache = new OffsetCacheVo();
+
+        offsetCache.setPageIndex(pageIndex);
+        offsetCache.setIdList(idList);
+        offsetCache.getCacheItem().add(cacheItem);
+
+        // 写缓存
+        CashUtil.writeCache("dbox_asdfghijklmn", Lists.newArrayList(offsetCache));
+        Map<Integer, OffsetCacheVo> cash =  CashUtil.readCache("dbox_asdfghijklmn");
+        System.out.println("hello");
+    }
+}
+
 (1) 异步任务
 1) AsyncUtil.java
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
