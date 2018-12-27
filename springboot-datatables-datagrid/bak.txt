@@ -24,6 +24,10 @@ https://github.com/mercyblitz/segmentfault-lessons
 Git Extensions安装
 http://www.opdown.com/soft/79790.html#download
 
+(1)日志组件和选择
+https://blog.csdn.net/duguxiaobiao/article/details/78988409
+
+
 (1)sql根据某一个字段重复只取第一条数据
 https://zhidao.baidu.com/question/1367499739240602099.html
 使用分析函数row_number() over (partiion by ... order by ...)来进行分组编号，然后取分组标号值为1的记录即可。目前主流的数据库都有支持分析函数，很好用。
