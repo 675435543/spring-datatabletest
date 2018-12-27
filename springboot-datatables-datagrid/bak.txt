@@ -23,6 +23,20 @@ https://github.com/mercyblitz/segmentfault-lessons
 
 Git Extensions安装
 http://www.opdown.com/soft/79790.html#download
+
+(1)sql根据某一个字段重复只取第一条数据
+https://zhidao.baidu.com/question/1367499739240602099.html
+使用分析函数row_number() over (partiion by ... order by ...)来进行分组编号，然后取分组标号值为1的记录即可。目前主流的数据库都有支持分析函数，很好用。
+其中，partition by 是指定按哪些字段进行分组，这些字段值相同的记录将在一起编号；order by则是指定在同一组中进行编号时是按照怎样的顺序。
+示例(SQL Server 2005或以上适用)：
+select s.*   
+from (  
+    select *, row_number() over (partition by [手机号] order by [店铺]) as group_idx   
+    from table_name 
+) s 
+where s.group_idx = 1
+
+
 （1）
 tomcat 配置
 clean package -Dmaven.test.skip=true -Psit
