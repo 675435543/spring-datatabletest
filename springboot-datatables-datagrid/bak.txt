@@ -23,6 +23,7 @@ https://github.com/mercyblitz/segmentfault-lessons
 
 Git Extensions安装
 http://www.opdown.com/soft/79790.html#download
+（1）
 
 （1）redis service参照
 1）OffsetCacheItemVo.java
