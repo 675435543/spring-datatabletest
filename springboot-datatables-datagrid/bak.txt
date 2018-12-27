@@ -24,6 +24,10 @@ https://github.com/mercyblitz/segmentfault-lessons
 Git Extensions安装
 http://www.opdown.com/soft/79790.html#download
 （1）
+tomcat 配置
+clean package -Dmaven.test.skip=true -Psit
+edit configurations->+>tomcat server->local->+->Run Maven Goal->Command line -> clean package -Dmaven.test.skip=true -Psit
+Deployment->rd-search:war exploded->Application context: /rd-search
 
 （1）redis service参照
 1）OffsetCacheItemVo.java
