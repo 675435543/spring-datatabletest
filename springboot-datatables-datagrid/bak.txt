@@ -24,6 +24,19 @@ https://github.com/mercyblitz/segmentfault-lessons
 Git Extensions安装
 http://www.opdown.com/soft/79790.html#download
 
+(1)ORACLE TRUNC()函数
+https://www.cnblogs.com/linjiao/p/6394087.html
+
+(1)Oracle数据库 查询时间在当天内的数据sql
+https://blog.csdn.net/weixin_37623470/article/details/78539955
+select *
+from tabname
+where develiverTime>= trunc(sysdate) and develiverTime< trunc(sysdate) + 1
+
+(1)批量杀进程
+ps aux |grep search-evaluate | awk '{print $2}'|xargs kill -9
+
+
 (1)日志组件和选择
 https://blog.csdn.net/duguxiaobiao/article/details/78988409
 
