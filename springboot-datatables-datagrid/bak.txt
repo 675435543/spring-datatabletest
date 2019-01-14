@@ -23,7 +23,44 @@ https://github.com/mercyblitz/segmentfault-lessons
 
 Git Extensions安装
 http://www.opdown.com/soft/79790.html#download
-
+(1)几个maven依赖
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>${commons-collections.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
+		</dependency>
+		
+		<commons-lang3.version>3.3</commons-lang3.version>
+		<commons-collections.version>3.2.1</commons-collections.version>
+		<commons-io.version>2.4</commons-io.version>
+		
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>3.6.10.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.6.10.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>4.1.7.Final</version>
+		</dependency>
+		
 (1)ORACLE TRUNC()函数
 https://www.cnblogs.com/linjiao/p/6394087.html
 
