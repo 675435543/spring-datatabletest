@@ -116,6 +116,62 @@ public final class AsyncUtil
         within(supplier, duration).exceptionally(fn).thenAccept(action);
     }
 }
+BaseSyncTask.java
+package com.lxspace.hello.sync.base;
+import java.time.Duration;
+import java.util.concurrent.CountDownLatch;
+
+/**
+ * 异步任务基础类
+ */
+public abstract class BaseSyncTask
+{
+
+    private Duration timeout;
+
+    private CountDownLatch latch;
+
+    /**
+     *  执行任务
+     */
+    public abstract void process();
+
+    /**
+     * 获取锁
+     * @return CountDownLatch
+     */
+    public CountDownLatch getLatch()
+    {
+        return latch;
+    }
+
+    /**
+     * 设置锁
+     * @param latch
+     */
+    public void setLatch(CountDownLatch latch)
+    {
+        this.latch = latch;
+    }
+
+    /**
+     * 获取超时时间
+     * @return Duration
+     */
+    public Duration getTimeout()
+    {
+        return timeout;
+    }
+
+    /**
+     *  设置超时时间
+     * @param timeout Duration
+     */
+    public void setTimeout(Duration timeout)
+    {
+        this.timeout = timeout;
+    }
+}
 
 (1)几个maven依赖
 		<dependency>
