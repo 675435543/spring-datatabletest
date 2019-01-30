@@ -173,6 +173,58 @@ public abstract class BaseSyncTask
     }
 }
 
+SyncTaskProcessor.java
+package com.lxspace.hello.sync.base;
+import com.lxspace.hello.sync.base.BaseSyncTask;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+
+/**
+ * 异步任务处理器
+ */
+public class SyncTaskProcessor
+{
+    private final List<BaseSyncTask> taskList = new ArrayList<BaseSyncTask>();
+
+    /**
+     * 执行任务
+     */
+    public void process()
+    {
+        int taskSize = taskList.size();
+        final Duration timeout = Duration.ofSeconds(3000);
+        final CountDownLatch countDownLatch = new CountDownLatch(taskSize);
+        for (BaseSyncTask task : taskList)
+        {
+            task.setTimeout(timeout);
+            task.setLatch(countDownLatch);
+            task.process();
+        }
+
+        try
+        {
+            countDownLatch.await();
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 增加任务
+     * @param task BaseSyncTask
+     */
+    public void addTask(BaseSyncTask task)
+    {
+        taskList.add(task);
+    }
+
+}
+
 (1)几个maven依赖
 		<dependency>
 			<groupId>org.apache.commons</groupId>
