@@ -96,6 +96,7 @@ springboot-datatables-datagrid/.idea/uiDesigner.xml
 springboot-datatables-datagrid/.settings/org.eclipse.core.resources.prefs
 *.class
 *.class
+springboot-datatables-datagrid/target/
 springboot-datatables-datagrid/target/classes/com/forezp/jdksource/TestClassLoader.class
 springboot-datatables-datagrid/target/classes/com/forezp/jdksource/TestHashMap.class
 springboot-datatables-datagrid/target/classes/com/forezp/service/AccountService2.class
